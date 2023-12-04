@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="ModeloFilmersGen.Infraestructure"
+		                   namespace="ModeloFilmersGen.Infraestructure.EN.Pruebadeesquemaproyecto">
+		    
+		    
+			
+				<class name="NotificacionesNH" table="Notificaciones"> 
+				  	
+						<id name="Id" column="id" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Contenido" type="string"> 
+						<column name="contenido"  not-null="true"/>
+					</property>
+					<property name="Fecha" type="date"> 
+						<column name="fecha"  not-null="true"/>
+					</property>
+					<property name="Estado" type="boolean"> 
+						<column name="estado"  not-null="true"/>
+					</property>
+					<property name="Destacada" type="boolean"> 
+						<column name="destacada"  not-null="true"/>
+					</property>
+			
+			
+			
+			
+		  			
+						<many-to-one name="Usuario" class="ModeloFilmersGen.Infraestructure.EN.Pruebadeesquemaproyecto.UsuarioNH" >	
+								<column name="FK_email_idUsuario"/> 
+						</many-to-one>
+											 					
+			
+			
+			
+					
+					
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="NotificacionesNHReadAllHQL">from NotificacionesNH</query>
+		</hibernate-mapping>
+	

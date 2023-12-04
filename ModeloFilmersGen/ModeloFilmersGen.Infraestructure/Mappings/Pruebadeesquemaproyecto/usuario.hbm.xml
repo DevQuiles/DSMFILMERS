@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="ModeloFilmersGen.Infraestructure"
+		                   namespace="ModeloFilmersGen.Infraestructure.EN.Pruebadeesquemaproyecto">
+		    
+		    
+			
+				<class name="UsuarioNH" table="Usuario"> 
+						<id name="Email" column="email"/> 
+			
+					
+					<property name="NomUsuario" type="string"> 
+						<column name="nomUsuario"  unique="true" not-null="true"/>
+					</property>
+					<property name="Nombre" type="string"> 
+						<column name="nombre"  not-null="true"/>
+					</property>
+					<property name="FechaNac" type="date"> 
+						<column name="fechaNac"  not-null="true"/>
+					</property>
+					<property name="Localidad" type="string"> 
+						<column name="localidad"  not-null="true"/>
+					</property>
+					<property name="Pais" type="string"> 
+						<column name="pais"  not-null="true"/>
+					</property>
+					<property name="Nivel" > 
+						<column name="nivel"  not-null="true"/>
+					</property>
+					<property name="Pass" type="string"> 
+						<column name="pass"  not-null="true"/>
+					</property>
+					<property name="RecompensaDisponible" type="boolean"> 
+						<column name="recompensaDisponible"  not-null="true"/>
+					</property>
+					<property name="AvatarIcon" > 
+						<column name="avatarIcon"  not-null="true"/>
+					</property>
+			
+			
+			
+			
+			
+			
+			
+			
+		  			
+						<bag name="Deseadas" table="[pelicula_usuario]" inverse="true" >
+							<key>
+								
+									<column name="FK_email_idUsuario"/> 
+							</key>
+      						<many-to-many class="ModeloFilmersGen.Infraestructure.EN.Pruebadeesquemaproyecto.PeliculaNH">
+									<column name="FK_id_idPelicula"/> 
+      						</many-to-many>
+    					</bag>
+			
+		  			
+						<bag name="PeliculasVistas" >
+							<key>
+							
+								
+								<column name="FK_email_idUsuario"/>
+					      	</key>
+							<one-to-many class="ModeloFilmersGen.Infraestructure.EN.Pruebadeesquemaproyecto.PeliculaVistaNH"/>
+					    </bag>
+					
+			
+		  			
+						<bag name="Seguidos" table="[usuario_usuario_0]" inverse="true" >
+							<key>
+								
+									<column name="FK_email_idSeguido"/> 
+							</key>
+      						<many-to-many class="ModeloFilmersGen.Infraestructure.EN.Pruebadeesquemaproyecto.UsuarioNH">
+									<column name="FK_email_idSeguidor"/> 
+      						</many-to-many>
+    					</bag>
+			
+		  			
+						<bag name="Seguidores" table="[usuario_usuario_0]"  >
+							<key>
+								
+									<column name="FK_email_idSeguidor"/> 
+							</key>
+      						<many-to-many class="ModeloFilmersGen.Infraestructure.EN.Pruebadeesquemaproyecto.UsuarioNH">
+									<column name="FK_email_idSeguido"/> 
+      						</many-to-many>
+    					</bag>
+			
+		  			
+						<bag name="Playlistcreadas" >
+							<key>
+							
+								
+								<column name="FK_email_idUsuario"/>
+					      	</key>
+							<one-to-many class="ModeloFilmersGen.Infraestructure.EN.Pruebadeesquemaproyecto.PlaylistNH"/>
+					    </bag>
+					
+			
+		  			
+						<bag name="Playlistguardadas" table="[usuario_playlist_2]"  >
+							<key>
+								
+									<column name="FK_email_idSuscriptor"/> 
+							</key>
+      						<many-to-many class="ModeloFilmersGen.Infraestructure.EN.Pruebadeesquemaproyecto.PlaylistNH">
+									<column name="FK_id_idPlaylistguardadas"/> 
+      						</many-to-many>
+    					</bag>
+			
+		  			
+						<bag name="Recomendaciones_Hechas" >
+							<key>
+							
+								
+								<column name="FK_email_idRecomendador"/>
+					      	</key>
+							<one-to-many class="ModeloFilmersGen.Infraestructure.EN.Pruebadeesquemaproyecto.RecomendacionesNH"/>
+					    </bag>
+					
+			
+		  			
+						<bag name="Recomendaciones_Recibidas" >
+							<key>
+							
+								
+								<column name="FK_email_idRecomendado"/>
+					      	</key>
+							<one-to-many class="ModeloFilmersGen.Infraestructure.EN.Pruebadeesquemaproyecto.RecomendacionesNH"/>
+					    </bag>
+					
+			
+		  			
+						<bag name="Comunidades" >
+							<key>
+							
+								
+								<column name="FK_email_idCreador"/>
+					      	</key>
+							<one-to-many class="ModeloFilmersGen.Infraestructure.EN.Pruebadeesquemaproyecto.ComunidadesNH"/>
+					    </bag>
+					
+			
+		  			
+						<bag name="Comunidades_0" table="[usuario_comunidades_0]"  >
+							<key>
+								
+									<column name="FK_email_idUsuario"/> 
+							</key>
+      						<many-to-many class="ModeloFilmersGen.Infraestructure.EN.Pruebadeesquemaproyecto.ComunidadesNH">
+									<column name="FK_id_idComunidades_0"/> 
+      						</many-to-many>
+    					</bag>
+			
+			
+		  			
+						<bag name="Notificaciones" >
+							<key>
+							
+								
+								<column name="FK_email_idUsuario"/>
+					      	</key>
+							<one-to-many class="ModeloFilmersGen.Infraestructure.EN.Pruebadeesquemaproyecto.NotificacionesNH"/>
+					    </bag>
+					
+			
+			
+			
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="UsuarioNHReadAllHQL">from UsuarioNH</query>
+		  <query name="UsuarioNHdameUsuarioPorNombreHQL"><![CDATA[FROM UsuarioNH as user where user.NomUsuario like '%' + :p_nombre + '%']]></query>
+		</hibernate-mapping>
+	

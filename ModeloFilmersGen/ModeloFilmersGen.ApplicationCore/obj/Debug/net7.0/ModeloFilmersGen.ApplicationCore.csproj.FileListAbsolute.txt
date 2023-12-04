@@ -1,0 +1,12 @@
+C:\OOH4RIA\DSM\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\bin\Debug\net7.0\ModeloFilmersGen.ApplicationCore.deps.json
+C:\OOH4RIA\DSM\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\bin\Debug\net7.0\ModeloFilmersGen.ApplicationCore.dll
+C:\OOH4RIA\DSM\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\bin\Debug\net7.0\ModeloFilmersGen.ApplicationCore.pdb
+C:\OOH4RIA\DSM\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ModeloFilmersGen.ApplicationCore.csproj.AssemblyReference.cache
+C:\OOH4RIA\DSM\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ModeloFilmersGen.ApplicationCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\OOH4RIA\DSM\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ModeloFilmersGen.ApplicationCore.AssemblyInfoInputs.cache
+C:\OOH4RIA\DSM\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ModeloFilmersGen.ApplicationCore.AssemblyInfo.cs
+C:\OOH4RIA\DSM\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ModeloFilmersGen.ApplicationCore.csproj.CoreCompileInputs.cache
+C:\OOH4RIA\DSM\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ModeloFilmersGen.ApplicationCore.dll
+C:\OOH4RIA\DSM\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\refint\ModeloFilmersGen.ApplicationCore.dll
+C:\OOH4RIA\DSM\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ModeloFilmersGen.ApplicationCore.pdb
+C:\OOH4RIA\DSM\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ref\ModeloFilmersGen.ApplicationCore.dll
