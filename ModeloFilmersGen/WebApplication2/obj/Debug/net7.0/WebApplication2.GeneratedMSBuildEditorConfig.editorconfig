@@ -9,57 +9,69 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = WebApplication2
 build_property.RootNamespace = WebApplication2
-build_property.ProjectDir = C:\OOH4RIA\DSM\ModeloFilmersGen\WebApplication2\
+build_property.ProjectDir = C:\Users\oscar\Source\Repos\DSMFILMERS\ModeloFilmersGen\WebApplication2\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\OOH4RIA\DSM\ModeloFilmersGen\WebApplication2
+build_property.MSBuildProjectDirectory = C:\Users\oscar\Source\Repos\DSMFILMERS\ModeloFilmersGen\WebApplication2
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/OOH4RIA/DSM/ModeloFilmersGen/WebApplication2/Views/Comunidades/Index.cshtml]
+[C:/Users/oscar/Source/Repos/DSMFILMERS/ModeloFilmersGen/WebApplication2/Views/Comunidades/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tdW5pZGFkZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/OOH4RIA/DSM/ModeloFilmersGen/WebApplication2/Views/Home/Index.cshtml]
+[C:/Users/oscar/Source/Repos/DSMFILMERS/ModeloFilmersGen/WebApplication2/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/OOH4RIA/DSM/ModeloFilmersGen/WebApplication2/Views/Home/Privacy.cshtml]
+[C:/Users/oscar/Source/Repos/DSMFILMERS/ModeloFilmersGen/WebApplication2/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/OOH4RIA/DSM/ModeloFilmersGen/WebApplication2/Views/Mensaje/Index.cshtml]
+[C:/Users/oscar/Source/Repos/DSMFILMERS/ModeloFilmersGen/WebApplication2/Views/Mensaje/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVuc2FqZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/OOH4RIA/DSM/ModeloFilmersGen/WebApplication2/Views/Notificaciones/Index.cshtml]
+[C:/Users/oscar/Source/Repos/DSMFILMERS/ModeloFilmersGen/WebApplication2/Views/Notificaciones/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2FjaW9uZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/OOH4RIA/DSM/ModeloFilmersGen/WebApplication2/Views/Recomendaciones/Index.cshtml]
+[C:/Users/oscar/Source/Repos/DSMFILMERS/ModeloFilmersGen/WebApplication2/Views/PeliculaVista/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVsaWN1bGFWaXN0YVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/oscar/Source/Repos/DSMFILMERS/ModeloFilmersGen/WebApplication2/Views/Pelicula/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVsaWN1bGFcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/oscar/Source/Repos/DSMFILMERS/ModeloFilmersGen/WebApplication2/Views/Playlist/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWxpc3RcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/oscar/Source/Repos/DSMFILMERS/ModeloFilmersGen/WebApplication2/Views/Recomendaciones/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjb21lbmRhY2lvbmVzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/OOH4RIA/DSM/ModeloFilmersGen/WebApplication2/Views/Shared/Error.cshtml]
+[C:/Users/oscar/Source/Repos/DSMFILMERS/ModeloFilmersGen/WebApplication2/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/OOH4RIA/DSM/ModeloFilmersGen/WebApplication2/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/oscar/Source/Repos/DSMFILMERS/ModeloFilmersGen/WebApplication2/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/OOH4RIA/DSM/ModeloFilmersGen/WebApplication2/Views/Usuario/Index.cshtml]
+[C:/Users/oscar/Source/Repos/DSMFILMERS/ModeloFilmersGen/WebApplication2/Views/Usuario/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/OOH4RIA/DSM/ModeloFilmersGen/WebApplication2/Views/_ViewImports.cshtml]
+[C:/Users/oscar/Source/Repos/DSMFILMERS/ModeloFilmersGen/WebApplication2/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/OOH4RIA/DSM/ModeloFilmersGen/WebApplication2/Views/_ViewStart.cshtml]
+[C:/Users/oscar/Source/Repos/DSMFILMERS/ModeloFilmersGen/WebApplication2/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/OOH4RIA/DSM/ModeloFilmersGen/WebApplication2/Views/Shared/_Layout.cshtml]
+[C:/Users/oscar/Source/Repos/DSMFILMERS/ModeloFilmersGen/WebApplication2/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-amt9qciysm
