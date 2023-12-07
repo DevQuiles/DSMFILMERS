@@ -7,7 +7,6 @@ using ModeloFilmersGen.ApplicationCore.Exceptions;
 using ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto;
 using ModeloFilmersGen.ApplicationCore.IRepository.Pruebadeesquemaproyecto;
 using ModeloFilmersGen.ApplicationCore.CEN.Pruebadeesquemaproyecto;
-using System.Linq;
 
 
 
@@ -42,7 +41,7 @@ public System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Prue
 
                 foreach (var user in listaSeguidos) {
                         var ultimasTresPeliculas = user.PeliculasVistas
-                                                   .OrderByDescending(p => p.Fecha)
+                                                   .OrderByDescending (p => p.Fecha)
                                                    .Take (3)
                                                    .ToList ();
 
@@ -52,7 +51,7 @@ public System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Prue
                 }
 
                 // Ordenar la lista acumulativa por fecha
-                resultado = resultado.OrderByDescending(p => p.Fecha).ToList ();
+                resultado = resultado.OrderByDescending (p => p.Fecha).ToList ();
 
                 CPSession.Commit ();
                 return resultado;

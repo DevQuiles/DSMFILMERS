@@ -13,10 +13,10 @@
 			
 					
 					<property name="Comentario" type="string"> 
-						<column name="comentario" />
+						<column name="comentario"  not-null="true"/>
 					</property>
 					<property name="Valoracion" > 
-						<column name="valoracion" />
+						<column name="valoracion"  not-null="true"/>
 					</property>
 					<property name="Fecha" type="date"> 
 						<column name="fecha"  not-null="true"/>

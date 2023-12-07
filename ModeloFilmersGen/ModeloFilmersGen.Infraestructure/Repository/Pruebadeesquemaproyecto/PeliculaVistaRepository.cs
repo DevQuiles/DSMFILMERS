@@ -177,6 +177,12 @@ public void ModificarPeliculaVista (PeliculaVistaEN peliculaVista)
                 SessionInitializeTransaction ();
                 PeliculaVistaNH peliculaVistaNH = (PeliculaVistaNH)session.Load (typeof(PeliculaVistaNH), peliculaVista.Id);
 
+                peliculaVistaNH.Comentario = peliculaVista.Comentario;
+
+
+                peliculaVistaNH.Valoracion = peliculaVista.Valoracion;
+
+
                 peliculaVistaNH.Fecha = peliculaVista.Fecha;
 
                 session.Update (peliculaVistaNH);
