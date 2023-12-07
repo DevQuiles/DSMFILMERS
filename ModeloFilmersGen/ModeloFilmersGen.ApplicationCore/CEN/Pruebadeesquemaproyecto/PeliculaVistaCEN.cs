@@ -30,13 +30,17 @@ public IPeliculaVistaRepository get_IPeliculaVistaRepository ()
         return this._IPeliculaVistaRepository;
 }
 
-public int CrearPeliculaVista (Nullable<DateTime> p_fecha, int p_pelicula, string p_usuario)
+public int CrearPeliculaVista (string p_comentario, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.EstrellasEnum p_valoracion, Nullable<DateTime> p_fecha, int p_pelicula, string p_usuario)
 {
         PeliculaVistaEN peliculaVistaEN = null;
         int oid;
 
         //Initialized PeliculaVistaEN
         peliculaVistaEN = new PeliculaVistaEN ();
+        peliculaVistaEN.Comentario = p_comentario;
+
+        peliculaVistaEN.Valoracion = p_valoracion;
+
         peliculaVistaEN.Fecha = p_fecha;
 
 
@@ -61,13 +65,15 @@ public int CrearPeliculaVista (Nullable<DateTime> p_fecha, int p_pelicula, strin
         return oid;
 }
 
-public void ModificarPeliculaVista (int p_PeliculaVista_OID, Nullable<DateTime> p_fecha)
+public void ModificarPeliculaVista (int p_PeliculaVista_OID, string p_comentario, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.EstrellasEnum p_valoracion, Nullable<DateTime> p_fecha)
 {
         PeliculaVistaEN peliculaVistaEN = null;
 
         //Initialized PeliculaVistaEN
         peliculaVistaEN = new PeliculaVistaEN ();
         peliculaVistaEN.Id = p_PeliculaVista_OID;
+        peliculaVistaEN.Comentario = p_comentario;
+        peliculaVistaEN.Valoracion = p_valoracion;
         peliculaVistaEN.Fecha = p_fecha;
         //Call to PeliculaVistaRepository
 

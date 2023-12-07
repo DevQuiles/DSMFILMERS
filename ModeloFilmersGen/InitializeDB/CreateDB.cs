@@ -263,7 +263,7 @@ public static void InitializeData ()
                 Console.WriteLine ("++++++++++++++ USUARIO POR OID MODIFICADO: +++++++++++++");
 
                 if (usuarioPorOID != null) {
-                        Console.WriteLine ($"Usuario obtenido: {usuarioPorOID.Email}, {usuarioPorOID.NomUsuario}, {usuarioPorOID.Nombre}");
+                        Console.WriteLine ($ "Usuario obtenido: {usuarioPorOID.Email}, {usuarioPorOID.NomUsuario}, {usuarioPorOID.Nombre}");
                 }
                 else{
                         Console.WriteLine ("Usuario no encontrado");
@@ -285,7 +285,7 @@ public static void InitializeData ()
                 Console.WriteLine ("++++++++++++++ Compruebo que ya no aparece el usuario: +++++++++++++");
 
                 if (usuarioPorOID != null) {
-                        Console.WriteLine ($"Usuario obtenido: {usuarioPorOID.Email}, {usuarioPorOID.NomUsuario}, {usuarioPorOID.Nombre}");
+                        Console.WriteLine ($ "Usuario obtenido: {usuarioPorOID.Email}, {usuarioPorOID.NomUsuario}, {usuarioPorOID.Nombre}");
                 }
                 else{
                         Console.WriteLine ("Usuario no encontrado");
@@ -357,7 +357,7 @@ public static void InitializeData ()
                 ComunidadesEN comunidadObtenida = comunidadescen.DamePorOID (idComunidad1);
 
                 if (comunidadObtenida != null) {
-                        Console.WriteLine ($"Comunidad obtenida: {comunidadObtenida.Id}, {comunidadObtenida.Nombre}, {comunidadObtenida.Descripcion}");
+                        Console.WriteLine ($ "Comunidad obtenida: {comunidadObtenida.Id}, {comunidadObtenida.Nombre}, {comunidadObtenida.Descripcion}");
                 }
                 else{
                         Console.WriteLine ("Comunidad no encontrada");
@@ -369,7 +369,7 @@ public static void InitializeData ()
                 Console.WriteLine ("++++++++++++++ TODAS LAS COMUNIDADES: +++++++++++++");
 
                 foreach (var comunidad in todasLasComunidades) {
-                        Console.WriteLine ($"Comunidad: {comunidad.Id}, {comunidad.Nombre}, {comunidad.Descripcion}");
+                        Console.WriteLine ($ "Comunidad: {comunidad.Id}, {comunidad.Nombre}, {comunidad.Descripcion}");
                 }
 
                 // Borrar una comunidad
@@ -380,7 +380,7 @@ public static void InitializeData ()
                 Console.WriteLine ("++++++++++++++ Compruebo que ya no aparece la comunidad: +++++++++++++");
 
                 if (comunidadObtenida != null) {
-                        Console.WriteLine ($"Comunidad obtenida: {comunidadObtenida.Id}, {comunidadObtenida.Nombre}, {comunidadObtenida.Descripcion}");
+                        Console.WriteLine ($ "Comunidad obtenida: {comunidadObtenida.Id}, {comunidadObtenida.Nombre}, {comunidadObtenida.Descripcion}");
                 }
                 else{
                         Console.WriteLine ("Comunidad no encontrada");
