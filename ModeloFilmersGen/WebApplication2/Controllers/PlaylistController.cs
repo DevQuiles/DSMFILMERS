@@ -34,22 +34,42 @@ namespace WebApplication2.Controllers
         // GET: PlaylistController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            SessionInitialize();
+            PlaylistRepository playlistRepository = new PlaylistRepository();
+            PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);
+
+            PlaylistEN playlistEN = playlistCEN.DamePorOID(id);
+            PlaylistViewModel playlistViewModel = new PlaylistAssembler().ConvertirEnToViewModel(playlistEN);
+
+            SessionClose();
+
+            return View(playlistViewModel);
         }
 
         // GET: PlaylistController/Create
         public ActionResult Create()
         {
-            return View();
+            SessionInitialize();
+            PlaylistRepository playlistRepository = new PlaylistRepository();
+            PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);
+
+            PlaylistEN playlistEN = new PlaylistEN();
+            PlaylistViewModel playlistViewModel = new PlaylistAssembler().ConvertirEnToViewModel(playlistEN);
+            SessionClose();
+
+            return View(playlistViewModel);
         }
 
         // POST: PlaylistController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(PlaylistViewModel play, UsuarioViewModel usu)
         {
             try
             {
+                PlaylistRepository playlistRepository = new PlaylistRepository();
+                PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);
+                playlistCEN.CrearPlaylist(play.nombre, play.Descripcion, usu.Email);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -61,16 +81,28 @@ namespace WebApplication2.Controllers
         // GET: PlaylistController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            SessionInitialize();
+            PlaylistRepository playlistRepository = new PlaylistRepository();
+            PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);
+
+            PlaylistEN playlistEN = playlistCEN.DamePorOID(id);
+            PlaylistViewModel playlistViewModel = new PlaylistAssembler().ConvertirEnToViewModel(playlistEN);
+
+            SessionClose();
+            return View(playlistViewModel);
         }
 
         // POST: PlaylistController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, PlaylistViewModel play)
         {
             try
             {
+                PlaylistRepository playlistRepository = new PlaylistRepository();
+                PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);
+                playlistCEN.ModificarPlaylist(id, play.nombre, play.Descripcion);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -82,7 +114,10 @@ namespace WebApplication2.Controllers
         // GET: PlaylistController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            PlaylistRepository playlistRepository = new PlaylistRepository();
+            PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);
+            playlistCEN.BorrarPlaylist(id);
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: PlaylistController/Delete/5
