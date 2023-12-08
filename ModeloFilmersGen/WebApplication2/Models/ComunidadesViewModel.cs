@@ -19,8 +19,16 @@ namespace WebApplication2.Models
         [StringLength(maximumLength: 50, ErrorMessage = "La descripción no puede tener más de 50 caracteres")]
         public string Nombre { get; set; }
 
+
+        [ScaffoldColumn(false)]
         [Display(Prompt = "Introduce fecha de creación", Description = "Fecha de creacion de la comunidad", Name = "Fecha de creación")]
         [Required(ErrorMessage = "Debe indicar la fecha de creacion")]
         public DateTime FechaCreacion { get; set; }
+
+
+
+        [Display(Prompt = "Introduce el usuario emisor", Description = "Usuario emisor de la comunidad", Name = "Usuario emisor")]
+        [Required(ErrorMessage = "Debe indicar el usuario emisor")]
+        public String Emisor { get; set; }
     }
 }
