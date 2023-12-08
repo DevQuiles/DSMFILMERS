@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\OOH4RIA\\DSM\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj": {}
+    "E:\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj": {}
   },
   "projects": {
-    "C:\\OOH4RIA\\DSM\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj": {
+    "E:\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\OOH4RIA\\DSM\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj",
+        "projectUniqueName": "E:\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj",
         "projectName": "ModeloFilmersGen.ApplicationCore",
-        "projectPath": "C:\\OOH4RIA\\DSM\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj",
-        "packagesPath": "C:\\Users\\Valentino Q\\.nuget\\packages\\",
-        "outputPath": "C:\\OOH4RIA\\DSM\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\obj\\",
+        "projectPath": "E:\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "E:\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Valentino Q\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
