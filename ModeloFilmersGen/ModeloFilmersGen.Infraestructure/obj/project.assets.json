@@ -5465,19 +5465,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Valentino Q\\.nuget\\packages\\": {}
+    "C:\\Users\\user\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\OOH4RIA\\DSM\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\ModeloFilmersGen.Infraestructure.csproj",
+      "projectUniqueName": "E:\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\ModeloFilmersGen.Infraestructure.csproj",
       "projectName": "ModeloFilmersGen.Infraestructure",
-      "projectPath": "C:\\OOH4RIA\\DSM\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\ModeloFilmersGen.Infraestructure.csproj",
-      "packagesPath": "C:\\Users\\Valentino Q\\.nuget\\packages\\",
-      "outputPath": "C:\\OOH4RIA\\DSM\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\obj\\",
+      "projectPath": "E:\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\ModeloFilmersGen.Infraestructure.csproj",
+      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+      "outputPath": "E:\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Valentino Q\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5491,8 +5491,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\OOH4RIA\\DSM\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj": {
-              "projectPath": "C:\\OOH4RIA\\DSM\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj"
+            "E:\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj": {
+              "projectPath": "E:\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj"
             }
           }
         }

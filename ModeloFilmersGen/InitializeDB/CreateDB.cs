@@ -156,7 +156,7 @@ public static void InitializeData ()
 
                 //CREO PELICULAS VISTAS
                 foreach (var item in peliculas) {
-                        int pv = peliculavistacen.CrearPeliculaVista (now2022, item.Id, emailUsuario1);
+                        int pv = peliculavistacen.CrearPeliculaVista ("Comentario de pelicula",ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.EstrellasEnum.Tres,now2022, item.Id, emailUsuario1);
                 }
 
                 int anioActual = now2022.Year;
@@ -182,7 +182,7 @@ public static void InitializeData ()
                 string emailUsuario2 = usuariocen.CrearUsuario ("email2", "usuario2", "nombre1", new DateTime (2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass1", false, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_2);
 
                 foreach (var item in peliculas2) {
-                        int pv = peliculavistacen.CrearPeliculaVista (now, item.Id, emailUsuario2);
+                        int pv = peliculavistacen.CrearPeliculaVista ("Comentario de pelicula324", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.EstrellasEnum.Dos, now, item.Id, emailUsuario2);
                 }
                 IList<PeliculaVistaEN> res2 = peliculavistacen.DameTodosMes (mesActual2, anioActual2);
                 foreach (var item in res2) {
@@ -209,8 +209,8 @@ public static void InitializeData ()
                 //Dame pelicula por nombre para tener 3
 
                 Console.WriteLine ("++++++++++++++ PELICULAS POR NOMBRE: +++++++++++++");
-                IList<PeliculaEN> lista = peliculacen.DamePeliculaPorNombre ("al");
-                Console.WriteLine ("Peliculas que contienen la cadena 'al': " + lista.Count ());
+                IList<PeliculaEN> lista = peliculacen.DamePeliculaPorNombre ("a");
+                Console.WriteLine ("Peliculas que contienen la cadena 'a': " + lista.Count ());
                 foreach (PeliculaEN p in lista) {
                         Console.WriteLine (p.Nombre);
                 }
@@ -525,7 +525,7 @@ public static void InitializeData ()
                 Console.WriteLine (usuar.Nivel);
 
                 foreach (var item in peliculasV) {
-                        int pv = peliculavistacen.CrearPeliculaVista (now2022, item.Id, emailUsuario4);
+                        int pv = peliculavistacen.CrearPeliculaVista ("Comentario de pelicula", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.EstrellasEnum.Tres, now2022, item.Id, emailUsuario4);
                 }
 
                 usCP2.RecompensasPorActividad (emailUsuario4);
@@ -542,15 +542,15 @@ public static void InitializeData ()
 
 
 
-                peliculavistacen.CrearPeliculaVista (new DateTime (2023, 11, 4), peliculas [0].Id, emailUsuario7);
-                peliculavistacen.CrearPeliculaVista (new DateTime (2023, 11, 3), peliculas [1].Id, emailUsuario7);
-                peliculavistacen.CrearPeliculaVista (new DateTime (2023, 11, 2), peliculas [0].Id, emailUsuario7);
-                peliculavistacen.CrearPeliculaVista (new DateTime (2023, 11, 1), peliculas [1].Id, emailUsuario7);
+                peliculavistacen.CrearPeliculaVista ("Comentario de pelicula", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.EstrellasEnum.Tres, new DateTime (2023, 11, 4), peliculas [0].Id, emailUsuario7);
+                peliculavistacen.CrearPeliculaVista ("Comentario de pelicula", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.EstrellasEnum.Uno, new DateTime(2023, 11, 3), peliculas[1].Id, emailUsuario7);
+                peliculavistacen.CrearPeliculaVista ("Comentario de pelicula", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.EstrellasEnum.Cuatro, new DateTime(2023, 11, 2), peliculas[0].Id, emailUsuario7);
+                peliculavistacen.CrearPeliculaVista ("Comentario de pelicula", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.EstrellasEnum.Tres, new DateTime(2023, 11, 1), peliculas[1].Id, emailUsuario7);
 
-                peliculavistacen.CrearPeliculaVista (new DateTime (2023, 11, 4), peliculas [2].Id, emailUsuario8);
-                peliculavistacen.CrearPeliculaVista (new DateTime (2023, 11, 3), peliculas [3].Id, emailUsuario8);
-                peliculavistacen.CrearPeliculaVista (new DateTime (2023, 11, 2), peliculas [2].Id, emailUsuario8);
-                peliculavistacen.CrearPeliculaVista (new DateTime (2023, 11, 1), peliculas [3].Id, emailUsuario8);
+                peliculavistacen.CrearPeliculaVista ("Comentario de pelicula", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.EstrellasEnum.Cuatro, new DateTime(2023, 11, 4), peliculas[2].Id, emailUsuario8);
+                peliculavistacen.CrearPeliculaVista ("Comentario de pelicula", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.EstrellasEnum.Dos, new DateTime(2023, 11, 3), peliculas[3].Id, emailUsuario8);
+                peliculavistacen.CrearPeliculaVista ("Comentario de pelicula", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.EstrellasEnum.Cuatro, new DateTime(2023, 11, 2), peliculas[2].Id, emailUsuario8);
+                peliculavistacen.CrearPeliculaVista ("Comentario de pelicula", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.EstrellasEnum.Tres, new DateTime(2023, 11, 1), peliculas[3].Id, emailUsuario8);
 
                 UsuarioEN usuarioprueba6 = usuariocen.DamePorOID (emailUsuario6);
 

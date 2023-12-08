@@ -34,7 +34,17 @@ namespace WebApplication2.Controllers
         // GET: PeliculaVistaController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            SessionInitialize();
+            PeliculaVistaRepository peliRepository = new PeliculaVistaRepository();
+            PeliculaVistaCEN peliCEN = new PeliculaVistaCEN(peliRepository);
+            PeliculaVistaEN pvEN = peliCEN.DamePorOID(id);
+            Console.WriteLine(pvEN.Id + pvEN.Comentario + pvEN.Fecha + pvEN.Valoracion);
+            Console.WriteLine("---------------------------------------------------------");
+            PeliculaVistaViewModel peliculaVistaViewModel = new PeliculaVistaAssembler().ConvertirEnToViewModel(pvEN);
+            Console.WriteLine(peliculaVistaViewModel.Id + peliculaVistaViewModel.comentario + peliculaVistaViewModel.fecha + peliculaVistaViewModel.valoracion);
+            SessionClose();
+
+            return View(peliculaVistaViewModel);
         }
 
         // GET: PeliculaVistaController/Create
@@ -46,10 +56,15 @@ namespace WebApplication2.Controllers
         // POST: PeliculaVistaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(PeliculaVistaViewModel pv, int idP, string emailUsu)
         {
             try
             {
+                idP = 32768;
+                emailUsu = "email2";
+                PeliculaVistaRepository peliRepository = new PeliculaVistaRepository();
+                PeliculaVistaCEN peliCEN = new PeliculaVistaCEN(peliRepository);
+                int nuevaPeliculaVista = peliCEN.CrearPeliculaVista(pv.comentario,pv.valoracion, pv.fecha, idP, emailUsu);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -61,16 +76,26 @@ namespace WebApplication2.Controllers
         // GET: PeliculaVistaController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            SessionInitialize();
+            PeliculaVistaRepository peliRepository = new PeliculaVistaRepository();
+            PeliculaVistaCEN peliCEN = new PeliculaVistaCEN(peliRepository);
+            PeliculaVistaEN pvEN = peliCEN.DamePorOID(id);
+            PeliculaVistaViewModel peliculaVistaViewModel = new PeliculaVistaAssembler().ConvertirEnToViewModel(pvEN);
+
+            SessionClose();
+            return View(peliculaVistaViewModel);
         }
 
         // POST: PeliculaVistaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, PeliculaVistaViewModel pv)
         {
             try
             {
+                PeliculaVistaRepository peliRepository = new PeliculaVistaRepository();
+                PeliculaVistaCEN peliCEN = new PeliculaVistaCEN(peliRepository);
+                peliCEN.ModificarPeliculaVista(id, pv.comentario, pv.valoracion, (DateTime)pv.fecha);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -82,7 +107,10 @@ namespace WebApplication2.Controllers
         // GET: PeliculaVistaController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            PeliculaVistaRepository peliRepository = new PeliculaVistaRepository();
+            PeliculaVistaCEN peliCEN = new PeliculaVistaCEN(peliRepository);
+            peliCEN.BorrarPeliculaVista(id);
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: PeliculaVistaController/Delete/5

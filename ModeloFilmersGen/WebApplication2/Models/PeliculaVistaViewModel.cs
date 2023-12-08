@@ -17,15 +17,11 @@ namespace WebApplication2.Models
 
         [Display(Prompt = "Valora la película", Description = "Valoración de la película", Name = "Valoración")]
         [Required(ErrorMessage = "Debe indicar una valoración para la película")]
-        [StringLength(maximumLength: 200, ErrorMessage = "La valoración no puede tener más de 200 caracteres")]
 
-        public Enum valoracion { get; set;}
-
+        public ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.EstrellasEnum valoracion{ get; set;}
+        
         [Display(Prompt = "Fecha para la película", Description = "Fecha de la película", Name = "Fecha")]
-        [Required(ErrorMessage = "Debe indicar una fecha para la película")]
-        [StringLength(maximumLength: 200, ErrorMessage = "La Fecha no puede tener más de 200 caracteres")]
         [DataType(DataType.Date, ErrorMessage = "La fecha introducida tiene que tener un formato válido")]
-
-        public DateTime fecha { get; set; }
+        public DateTime? fecha { get; set; }
     }
 }
