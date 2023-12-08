@@ -5933,11 +5933,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\OOH4RIA\\DSM\\ModeloFilmersGen\\InitializeDB\\InitializeDB.csproj",
+      "projectUniqueName": "C:\\OOH4RIA\\a\\ModeloFilmersGen\\InitializeDB\\InitializeDB.csproj",
       "projectName": "InitializeDB",
-      "projectPath": "C:\\OOH4RIA\\DSM\\ModeloFilmersGen\\InitializeDB\\InitializeDB.csproj",
+      "projectPath": "C:\\OOH4RIA\\a\\ModeloFilmersGen\\InitializeDB\\InitializeDB.csproj",
       "packagesPath": "C:\\Users\\Valentino Q\\.nuget\\packages\\",
-      "outputPath": "C:\\OOH4RIA\\DSM\\ModeloFilmersGen\\InitializeDB\\obj\\",
+      "outputPath": "C:\\OOH4RIA\\a\\ModeloFilmersGen\\InitializeDB\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Valentino Q\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5954,11 +5954,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\OOH4RIA\\DSM\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj": {
-              "projectPath": "C:\\OOH4RIA\\DSM\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj"
+            "C:\\OOH4RIA\\a\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj": {
+              "projectPath": "C:\\OOH4RIA\\a\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj"
             },
-            "C:\\OOH4RIA\\DSM\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\ModeloFilmersGen.Infraestructure.csproj": {
-              "projectPath": "C:\\OOH4RIA\\DSM\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\ModeloFilmersGen.Infraestructure.csproj"
+            "C:\\OOH4RIA\\a\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\ModeloFilmersGen.Infraestructure.csproj": {
+              "projectPath": "C:\\OOH4RIA\\a\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\ModeloFilmersGen.Infraestructure.csproj"
             }
           }
         }

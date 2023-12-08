@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZnzkRAYgRPo5LGkDMxwNRTzcUqr0pvwPht0brDsyZOQ+lz/St4f+tPsTqMfOqFRJo8k5P7IlTwU4q5t0n3prtg==",
+  "dgSpecHash": "y2y3gsvBmg9LNI01AMNwY8QpQkLO1H9egXsIXOVky/xrJts0/QvuW3dApZQ8Yk8wzw/DRvIv2PYmKafc2qBAFw==",
   "success": true,
-  "projectFilePath": "C:\\OOH4RIA\\DSM\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj",
+  "projectFilePath": "C:\\OOH4RIA\\a\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Valentino Q\\.nuget\\packages\\jose-jwt-signed\\2.3.0\\jose-jwt-signed.2.3.0.nupkg.sha512",
     "C:\\Users\\Valentino Q\\.nuget\\packages\\microsoft.csharp\\4.3.0\\microsoft.csharp.4.3.0.nupkg.sha512",

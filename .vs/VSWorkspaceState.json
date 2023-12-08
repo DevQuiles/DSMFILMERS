@@ -2,9 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\ModeloFilmersGen",
-    "\\ModeloFilmersGen\\WebApplication2",
-    "\\ModeloFilmersGen\\WebApplication2\\Controllers"
+    "\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\CEN\\manual"
   ],
-  "SelectedNode": "\\ModeloFilmersGen\\WebApplication2\\WebApplication2.csproj",
+  "SelectedNode": "\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore",
   "PreviewInSolutionExplorer": false
 }
