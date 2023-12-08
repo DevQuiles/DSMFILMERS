@@ -28,7 +28,16 @@ namespace WebApplication2.Controllers
         // GET: HomeController1/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            SessionInitialize();
+            ComunidadesRepository comunidadesRepository = new ComunidadesRepository(session);
+            ComunidadesCEN comunidadesCEN = new ComunidadesCEN(comunidadesRepository);
+
+            ComunidadesEN comunidadesEN = comunidadesCEN.DamePorOID(id);
+            ComunidadesViewModel comunidadesVM = new ComunidadesAssembler().ConvertirENToViewModel(comunidadesEN);
+
+
+            SessionClose();
+            return View(comunidadesVM);
         }
 
         // GET: HomeController1/Create
@@ -40,10 +49,15 @@ namespace WebApplication2.Controllers
         // POST: HomeController1/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(ComunidadesViewModel comVM)
         {
             try
             {
+                ComunidadesRepository comRepository = new ComunidadesRepository();
+                ComunidadesCEN comCEN = new ComunidadesCEN(comRepository);
+                //TODO 
+                int com = comCEN.CrearComunidad(comVM.Nombre, System.DateTime.Now, comVM.Descripcion, comVM.Emisor);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -55,16 +69,32 @@ namespace WebApplication2.Controllers
         // GET: HomeController1/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            SessionInitialize();
+            ComunidadesRepository comunidadesRepository = new ComunidadesRepository(session);
+            ComunidadesCEN comunidadesCEN = new ComunidadesCEN(comunidadesRepository);
+
+            ComunidadesEN comunidadesEN = comunidadesCEN.DamePorOID(id);
+            ComunidadesViewModel comunidadesVM = new ComunidadesAssembler().ConvertirENToViewModel(comunidadesEN);
+
+
+            SessionClose();
+            return View(comunidadesVM);
         }
 
         // POST: HomeController1/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, ComunidadesViewModel comVM)
         {
             try
             {
+                ComunidadesRepository comRepository = new ComunidadesRepository();
+                ComunidadesCEN comCEN = new ComunidadesCEN(comRepository);
+                ComunidadesEN comEN = comCEN.DamePorOID(id);
+                //TODO :  FECHA DE CREACION?
+                comCEN.ModificarComunidad(id, comVM.Nombre, comEN.FechaCreacion, comVM.Descripcion);
+
+
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -76,7 +106,11 @@ namespace WebApplication2.Controllers
         // GET: HomeController1/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            ComunidadesRepository comRepository = new ComunidadesRepository();
+            ComunidadesCEN comCEN = new ComunidadesCEN(comRepository);
+
+            comCEN.BorrarComunidad(id);
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: HomeController1/Delete/5
