@@ -12,6 +12,7 @@
           "ModeloFilmersGen.ApplicationCore": "1.0.0",
           "ModeloFilmersGen.Infraestructure": "1.0.0",
           "System.Data.SqlClient": "4.8.5",
+          "bootstrap": "5.3.2",
           "Castle.DynamicProxy2": "2.1.0.0",
           "LinFu.DynamicProxy": "1.0.3.14911",
           "log4net": "1.2.10.0",
@@ -35,6 +36,7 @@
           }
         }
       },
+      "bootstrap/5.3.2": {},
       "Humanizer/2.14.1": {
         "dependencies": {
           "Humanizer.Core.af": "2.14.1",
@@ -2411,6 +2413,13 @@
       "sha512": "sha512-ZwCEpLCLZXkjzf1lYEixp9hgVlYYk33ACHn6xjFyVhGRi2BpoYQez0qtatbetdylASWYTG+cGz0CGR4z66JM4w==",
       "path": "antlr3.runtime/3.5.1",
       "hashPath": "antlr3.runtime.3.5.1.nupkg.sha512"
+    },
+    "bootstrap/5.3.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-m0/GEaLwE35B8P1xScFhwAsQi5o6kWPzOVPdGkoFwv+5YjmbgXFPQai71N5APwRCU52ZO4vHYWJ5DYSqKKgivw==",
+      "path": "bootstrap/5.3.2",
+      "hashPath": "bootstrap.5.3.2.nupkg.sha512"
     },
     "Humanizer/2.14.1": {
       "type": "package",

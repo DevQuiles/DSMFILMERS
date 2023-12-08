@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "SwI47E/tsmfQTWO5iq/6m7NfN/svdbaYNuP/sco08t0RQg/zpeA4kZtjOfDs4AZvI2cwviMWqYFjgZnx3ex9zg==",
+  "dgSpecHash": "r6K4Sn+l54Pp3eHWIYVY2XiGOF0BF2wVfLhDi5J4GqcApCjc00cA1TmmHbjn0Gcqn9dJcvJjr7uMhCKQSNIHiA==",
   "success": true,
   "projectFilePath": "D:\\Universidad\\TERCER\\1_CUATRI\\DSM\\PRACTICAS\\PRACTICA 1\\DSMFILMERS\\ModeloFilmersGen\\WebApplication2\\WebApplication2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Valentino Q\\.nuget\\packages\\antlr3.runtime\\3.5.1\\antlr3.runtime.3.5.1.nupkg.sha512",
+    "C:\\Users\\Valentino Q\\.nuget\\packages\\bootstrap\\5.3.2\\bootstrap.5.3.2.nupkg.sha512",
     "C:\\Users\\Valentino Q\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\Valentino Q\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Valentino Q\\.nuget\\packages\\humanizer.core.af\\2.14.1\\humanizer.core.af.2.14.1.nupkg.sha512",
