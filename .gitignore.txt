@@ -1,0 +1,11 @@
+# Ignorar directorios de node_modules
+node_modules/
+
+# Ignorar archivos de registro
+*.log
+
+# Ignorar carpetas específicas
+ModeloFilmersGen/.vs
+ModeloFilmersGen/InitializeDB/
+ModeloFilmersGen/ModeloFilmersGen.ApplicationCore/
+ModeloFilmersGen/ModeloFilmersGen.Infraestructure/
