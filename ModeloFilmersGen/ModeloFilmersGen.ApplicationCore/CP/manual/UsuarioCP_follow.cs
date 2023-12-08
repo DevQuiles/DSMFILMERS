@@ -17,52 +17,53 @@ using System.Linq;
 
 namespace ModeloFilmersGen.ApplicationCore.CP.Pruebadeesquemaproyecto
 {
-public partial class UsuarioCP : GenericBasicCP
-{
-public void Follow (string p_usuarioSeguidor, string p_usuarioSeguido)
-{
-        /*PROTECTED REGION ID(ModeloFilmersGen.ApplicationCore.CP.Pruebadeesquemaproyecto_Usuario_follow) ENABLED START*/
-
-        UsuarioCEN usuarioCEN = null;
-
-        try
+    public partial class UsuarioCP : GenericBasicCP
+    {
+        public void Follow(string p_usuarioSeguidor, string p_usuarioSeguido)
         {
-                CPSession.SessionInitializeTransaction ();
-                usuarioCEN = new UsuarioCEN (CPSession.UnitRepo.UsuarioRepository);
-                NotificacionesCEN notiCEN = new NotificacionesCEN (CPSession.UnitRepo.NotificacionesRepository);
+            /*PROTECTED REGION ID(ModeloFilmersGen.ApplicationCore.CP.Pruebadeesquemaproyecto_Usuario_follow) ENABLED START*/
+
+            UsuarioCEN usuarioCEN = null;
+
+            try
+            {
+                CPSession.SessionInitializeTransaction();
+                usuarioCEN = new UsuarioCEN(CPSession.UnitRepo.UsuarioRepository);
+                NotificacionesCEN notiCEN = new NotificacionesCEN(CPSession.UnitRepo.NotificacionesRepository);
 
 
-                UsuarioEN usuariosSeguidorEN = usuarioCEN.DamePorOID (p_usuarioSeguidor);
+                UsuarioEN usuariosSeguidorEN = usuarioCEN.DamePorOID(p_usuarioSeguidor);
                 IList<UsuarioEN> seguidos = usuariosSeguidorEN.Seguidos;
 
-                UsuarioEN usuarioSeguidoEN = usuarioCEN.DamePorOID (p_usuarioSeguido);
-                bool repetidos = seguidos.Any (usuario => usuario.Email == usuarioSeguidoEN.Email);
-                if (repetidos) {
-                        Console.WriteLine ("El usuario al que intentas seguir ya los siges");
-                        return;
+                UsuarioEN usuarioSeguidoEN = usuarioCEN.DamePorOID(p_usuarioSeguido);
+                bool repetidos = seguidos.Any(usuario => usuario.Email == usuarioSeguidoEN.Email);
+                if (repetidos)
+                {
+                    Console.WriteLine("El usuario al que intentas seguir ya los siges");
+                    return;
                 }
 
 
 
-                usuarioCEN.AsignarSeguidores (p_usuarioSeguido, new List<string> { p_usuarioSeguidor });
+                usuarioCEN.AsignarSeguidores(p_usuarioSeguido, new List<string> { p_usuarioSeguidor });
 
-                int i = notiCEN.CrearNotificacion ("Te ha seguido  --> " + p_usuarioSeguidor, p_usuarioSeguido, DateTime.Now, false, false);
+                int i = notiCEN.CrearNotificacion("Te ha seguido  --> " + usuariosSeguidorEN.NomUsuario, p_usuarioSeguido, DateTime.Now, false, false);
 
-                Console.WriteLine (notiCEN.DamePorOID (i).Contenido);
+                Console.WriteLine(notiCEN.DamePorOID(i).Contenido);
 
-                CPSession.Commit ();
-        }
-        catch (Exception ex)
-        {
-                CPSession.RollBack ();
+                CPSession.Commit();
+            }
+            catch (Exception ex)
+            {
+                CPSession.RollBack();
                 throw ex;
-        }
-        finally
-        {
-                CPSession.SessionClose ();
-        }
+            }
+            finally
+            {
+                CPSession.SessionClose();
+            }
 
-        /*PROTECTED REGION END*/
-}
-}
+            /*PROTECTED REGION END*/
+        }
+    }
 }

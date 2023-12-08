@@ -4,16 +4,19 @@ namespace WebApplication2.Models
 {
     public class NotificacionesViewModel
     {
-        [ScaffoldColumn(true)]
+        [ScaffoldColumn(false)]
+        public int Id { get; set; }
+
+
         public DateTime Fecha { get; set; }
 
-        [ScaffoldColumn(true)]
+      
         public String Contenido { get; set; }
 
-        [ScaffoldColumn(true)]
+      
         public Boolean Estado { get; set; }
 
-        [ScaffoldColumn(true)]
+       
         public Boolean Destacada { get; set; }
 
         [ScaffoldColumn(false)]
