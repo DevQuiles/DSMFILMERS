@@ -13,6 +13,7 @@ namespace WebApplication2.Assemblers
             com.Nombre = en.Nombre;
             com.Descripcion = en.Descripcion;
             com.FechaCreacion = (DateTime)en.FechaCreacion;
+            com.Emisor = en.Creador_Emisor.NomUsuario;
             return com;
         }
 
