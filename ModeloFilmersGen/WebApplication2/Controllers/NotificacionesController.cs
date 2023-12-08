@@ -20,7 +20,7 @@ namespace WebApplication2.Controllers
             IList<NotificacionesEN> notsEN = notCEN.DameTodos(0, -1);
 
 
-            IEnumerable<NotificacionesViewModel> listNots = new NotificacionesAssembler().ConvertirListENToViewModel(notsEN).ToList();
+            IEnumerable<NotificacionesViewModel> listNots = new NotificacionesAssembler().ConvertirListEnToViewModel(notsEN).ToList();
             SessionClose();
 
             return View(listNots);
@@ -29,7 +29,17 @@ namespace WebApplication2.Controllers
         // GET: NotificacionesController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            SessionInitialize();
+            NotificacionesRepository notRepo = new NotificacionesRepository(session);
+            NotificacionesCEN notCEN = new NotificacionesCEN(notRepo);
+
+            NotificacionesEN notEN = notCEN.DamePorOID(id);
+
+            NotificacionesViewModel notVM = new NotificacionesAssembler().ConvertirEnToViewModel(notEN);
+
+            SessionClose();
+
+            return View(notVM);
         }
 
         // GET: NotificacionesController/Create

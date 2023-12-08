@@ -36,7 +36,7 @@ public void Unfollow (string p_seguidor, string p_seguido)
 
                 usuarioCEN.DesasignarSeguidores (p_seguido, new List<string> { p_seguidor });
 
-                int i = notiCEN.CrearNotificacion ("Te ha dejado seguir --> " + p_seguidor, p_seguido, DateTime.Now, false, false);
+                int i = notiCEN.CrearNotificacion ("Te ha dejado de seguir --> " + usEN.NomUsuario, p_seguido, DateTime.Now, false, false);
 
                 Console.WriteLine (notiCEN.DamePorOID (i).Contenido);
 

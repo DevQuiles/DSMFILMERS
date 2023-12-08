@@ -1,12 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NHibernate;
-using ModeloFilmersGen.Infraestructure.CP;
 using ModeloFilmersGen.Infraestructure.Repository.Pruebadeesquemaproyecto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using ModeloFilmersGen.ApplicationCore.CEN.Pruebadeesquemaproyecto;
 using ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto;
 using WebApplication2.Models;
@@ -35,13 +28,27 @@ namespace WebApplication2.Controllers
         // GET: PeliculaController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            SessionInitialize();
+            PeliculaRepository pelRep = new PeliculaRepository(session);
+            PeliculaCEN pelCEN = new PeliculaCEN(pelRep);
+
+            PeliculaEN pelEN = pelCEN.DamePorOID(id);
+
+            PeliculaViewModel pelVM = new PeliculaAssembler().ConvertirEnToViewModel(pelEN);
+
+            SessionClose();
+
+            return View(pelVM);
+
+           
         }
 
         // GET: PeliculaController/Create
         public ActionResult Create()
         {
+
             return View();
+
         }
 
         // POST: PeliculaController/Create
