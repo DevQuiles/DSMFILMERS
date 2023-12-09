@@ -17,9 +17,9 @@ namespace WebApplication2.Assemblers
             usu.Localidad = en.Localidad;
             usu.Pais = en.Pais;
             usu.Pass=en.Pass;
-            usu.Nivel = en.Nivel.ToString();
+            usu.Nivel = en.Nivel;
             usu.Recompensa = en.RecompensaDisponible;
-            usu.Avatar=en.AvatarIcon.ToString();
+            usu.Avatar = en.AvatarIcon;
             usu.Seguidores = en.Seguidores.Count();
             usu.Seguidos = en.Seguidos.Count();
 
