@@ -5928,19 +5928,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ASUS\\.nuget\\packages\\": {}
+    "C:\\Users\\user\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ASUS\\OOH4RIA_DSM\\GITHUB\\DSMFILMERS\\ModeloFilmersGen\\InitializeDB\\InitializeDB.csproj",
+      "projectUniqueName": "E:\\DSMFILMERS\\ModeloFilmersGen\\InitializeDB\\InitializeDB.csproj",
       "projectName": "InitializeDB",
-      "projectPath": "C:\\Users\\ASUS\\OOH4RIA_DSM\\GITHUB\\DSMFILMERS\\ModeloFilmersGen\\InitializeDB\\InitializeDB.csproj",
-      "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ASUS\\OOH4RIA_DSM\\GITHUB\\DSMFILMERS\\ModeloFilmersGen\\InitializeDB\\obj\\",
+      "projectPath": "E:\\DSMFILMERS\\ModeloFilmersGen\\InitializeDB\\InitializeDB.csproj",
+      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+      "outputPath": "E:\\DSMFILMERS\\ModeloFilmersGen\\InitializeDB\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5954,11 +5954,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\ASUS\\OOH4RIA_DSM\\GITHUB\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj": {
-              "projectPath": "C:\\Users\\ASUS\\OOH4RIA_DSM\\GITHUB\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj"
+            "E:\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj": {
+              "projectPath": "E:\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj"
             },
-            "C:\\Users\\ASUS\\OOH4RIA_DSM\\GITHUB\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\ModeloFilmersGen.Infraestructure.csproj": {
-              "projectPath": "C:\\Users\\ASUS\\OOH4RIA_DSM\\GITHUB\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\ModeloFilmersGen.Infraestructure.csproj"
+            "E:\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\ModeloFilmersGen.Infraestructure.csproj": {
+              "projectPath": "E:\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\ModeloFilmersGen.Infraestructure.csproj"
             }
           }
         }
@@ -5998,7 +5998,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

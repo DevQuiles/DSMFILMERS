@@ -1,12 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ModeloFilmersGen.ApplicationCore.CEN.Pruebadeesquemaproyecto;
 using ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto;
-using ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto;
-using ModeloFilmersGen.ApplicationCore.Utils;
 using ModeloFilmersGen.Infraestructure.Repository.Pruebadeesquemaproyecto;
-using NuGet.LibraryModel;
 using WebApplication2.Assemblers;
 using WebApplication2.Models;
 
