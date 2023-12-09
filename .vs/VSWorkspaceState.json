@@ -1,6 +1,14 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\ModeloFilmersGen",
+    "\\ModeloFilmersGen\\WebApplication2",
+    "\\ModeloFilmersGen\\WebApplication2\\Assemblers",
+    "\\ModeloFilmersGen\\WebApplication2\\Controllers",
+    "\\ModeloFilmersGen\\WebApplication2\\Models",
+    "\\ModeloFilmersGen\\WebApplication2\\Views",
+    "\\ModeloFilmersGen\\WebApplication2\\Views\\Mensaje"
   ],
+  "SelectedNode": "\\ModeloFilmersGen\\WebApplication2\\Assemblers\\NotificacionesAssembler.cs",
   "PreviewInSolutionExplorer": false
 }

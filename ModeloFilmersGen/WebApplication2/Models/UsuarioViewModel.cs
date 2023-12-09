@@ -45,7 +45,7 @@ namespace WebApplication2.Models
         public String Pais { get; set; }
 
         [ScaffoldColumn(false)]
-        public String Nivel { get; set; }
+        public ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum Nivel { get; set; }
 
         [ScaffoldColumn(true)]
         [Display(Prompt = "Introduce una contraseña", Description = "Contraseña", Name = "Contraseña")]
@@ -54,20 +54,19 @@ namespace WebApplication2.Models
 
         public String Pass { get; set; }
 
-        [ScaffoldColumn(true)]
+        [ScaffoldColumn(false)]
 
         public Boolean Recompensa { get; set; }
 
-        [ScaffoldColumn(true)]
+        [ScaffoldColumn(false)]
 
-        public String Avatar { get; set; }
+        public ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum Avatar { get; set; }
 
+        [ScaffoldColumn(false)]
         public int Seguidores { get; set; }
+
+        [ScaffoldColumn(false)]
         public int Seguidos { get; set; }
-
-
-
-
 
     }
 }

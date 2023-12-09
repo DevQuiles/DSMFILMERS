@@ -10,3 +10,15 @@ C:\OOH4RIA\DSM\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.
 C:\OOH4RIA\DSM\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\refint\ModeloFilmersGen.ApplicationCore.dll
 C:\OOH4RIA\DSM\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ModeloFilmersGen.ApplicationCore.pdb
 C:\OOH4RIA\DSM\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ref\ModeloFilmersGen.ApplicationCore.dll
+C:\Users\ASUS\OOH4RIA_DSM\GITHUB\DSMFILMERS\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\bin\Debug\net7.0\ModeloFilmersGen.ApplicationCore.deps.json
+C:\Users\ASUS\OOH4RIA_DSM\GITHUB\DSMFILMERS\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\bin\Debug\net7.0\ModeloFilmersGen.ApplicationCore.dll
+C:\Users\ASUS\OOH4RIA_DSM\GITHUB\DSMFILMERS\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\bin\Debug\net7.0\ModeloFilmersGen.ApplicationCore.pdb
+C:\Users\ASUS\OOH4RIA_DSM\GITHUB\DSMFILMERS\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ModeloFilmersGen.ApplicationCore.csproj.AssemblyReference.cache
+C:\Users\ASUS\OOH4RIA_DSM\GITHUB\DSMFILMERS\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ModeloFilmersGen.ApplicationCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ASUS\OOH4RIA_DSM\GITHUB\DSMFILMERS\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ModeloFilmersGen.ApplicationCore.AssemblyInfoInputs.cache
+C:\Users\ASUS\OOH4RIA_DSM\GITHUB\DSMFILMERS\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ModeloFilmersGen.ApplicationCore.AssemblyInfo.cs
+C:\Users\ASUS\OOH4RIA_DSM\GITHUB\DSMFILMERS\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ModeloFilmersGen.ApplicationCore.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\OOH4RIA_DSM\GITHUB\DSMFILMERS\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ModeloFilmersGen.ApplicationCore.dll
+C:\Users\ASUS\OOH4RIA_DSM\GITHUB\DSMFILMERS\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\refint\ModeloFilmersGen.ApplicationCore.dll
+C:\Users\ASUS\OOH4RIA_DSM\GITHUB\DSMFILMERS\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ModeloFilmersGen.ApplicationCore.pdb
+C:\Users\ASUS\OOH4RIA_DSM\GITHUB\DSMFILMERS\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ref\ModeloFilmersGen.ApplicationCore.dll
