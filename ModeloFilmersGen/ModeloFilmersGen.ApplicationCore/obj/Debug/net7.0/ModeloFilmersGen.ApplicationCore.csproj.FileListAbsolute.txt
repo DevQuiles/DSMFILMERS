@@ -10,15 +10,3 @@ C:\OOH4RIA\DSM\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.
 C:\OOH4RIA\DSM\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\refint\ModeloFilmersGen.ApplicationCore.dll
 C:\OOH4RIA\DSM\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ModeloFilmersGen.ApplicationCore.pdb
 C:\OOH4RIA\DSM\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ref\ModeloFilmersGen.ApplicationCore.dll
-D:\Universidad\TERCER\1_CUATRI\DSM\PRACTICAS\PRACTICA 1\DSMFILMERS\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ModeloFilmersGen.ApplicationCore.csproj.AssemblyReference.cache
-D:\Universidad\TERCER\1_CUATRI\DSM\PRACTICAS\PRACTICA 1\DSMFILMERS\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ModeloFilmersGen.ApplicationCore.GeneratedMSBuildEditorConfig.editorconfig
-D:\Universidad\TERCER\1_CUATRI\DSM\PRACTICAS\PRACTICA 1\DSMFILMERS\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ModeloFilmersGen.ApplicationCore.AssemblyInfoInputs.cache
-D:\Universidad\TERCER\1_CUATRI\DSM\PRACTICAS\PRACTICA 1\DSMFILMERS\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ModeloFilmersGen.ApplicationCore.AssemblyInfo.cs
-D:\Universidad\TERCER\1_CUATRI\DSM\PRACTICAS\PRACTICA 1\DSMFILMERS\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ModeloFilmersGen.ApplicationCore.csproj.CoreCompileInputs.cache
-D:\Universidad\TERCER\1_CUATRI\DSM\PRACTICAS\PRACTICA 1\DSMFILMERS\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ModeloFilmersGen.ApplicationCore.dll
-D:\Universidad\TERCER\1_CUATRI\DSM\PRACTICAS\PRACTICA 1\DSMFILMERS\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\refint\ModeloFilmersGen.ApplicationCore.dll
-D:\Universidad\TERCER\1_CUATRI\DSM\PRACTICAS\PRACTICA 1\DSMFILMERS\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ModeloFilmersGen.ApplicationCore.pdb
-D:\Universidad\TERCER\1_CUATRI\DSM\PRACTICAS\PRACTICA 1\DSMFILMERS\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\bin\Debug\net7.0\ModeloFilmersGen.ApplicationCore.deps.json
-D:\Universidad\TERCER\1_CUATRI\DSM\PRACTICAS\PRACTICA 1\DSMFILMERS\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\bin\Debug\net7.0\ModeloFilmersGen.ApplicationCore.dll
-D:\Universidad\TERCER\1_CUATRI\DSM\PRACTICAS\PRACTICA 1\DSMFILMERS\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\bin\Debug\net7.0\ModeloFilmersGen.ApplicationCore.pdb
-D:\Universidad\TERCER\1_CUATRI\DSM\PRACTICAS\PRACTICA 1\DSMFILMERS\ModeloFilmersGen\ModeloFilmersGen.ApplicationCore\obj\Debug\net7.0\ref\ModeloFilmersGen.ApplicationCore.dll
