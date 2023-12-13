@@ -1,10 +1,21 @@
-# Ignorar directorios de node_modules
-node_modules/
+# Ignorar los directorios de salida de la compilación
+**/bin/
+**/obj/
 
-# Ignorar archivos de registro
-*.log
+# Ignorar archivos de Visual Studio
+**/.vs/
+*.user
+*.suo
+*.userprefs
 
-# Ignorar carpetas específicas
-ModeloFilmersGen/InitializeDB/
-ModeloFilmersGen/ModeloFilmersGen.ApplicationCore/
-ModeloFilmersGen/ModeloFilmersGen.Infraestructure/
+# Ignorar archivos específicos generados por la compilación
+*.assets.cache
+*.csproj.AssemblyReference.cache
+*.GeneratedMSBuildEditorConfig.editorconfig
+project.razor.vs.json
+*.csproj.nuget.dgspec.json
+project.assets.json
+
+# Además, ignora cualquier archivo de configuración local que no debería ser compartido
+**/appsettings.Local.json
+**/appsettings.Development.json

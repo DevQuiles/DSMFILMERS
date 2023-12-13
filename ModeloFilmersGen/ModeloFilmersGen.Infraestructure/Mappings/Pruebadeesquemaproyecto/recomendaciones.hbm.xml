@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="ModeloFilmersGen.Infraestructure"
+		                   namespace="ModeloFilmersGen.Infraestructure.EN.Pruebadeesquemaproyecto">
+		    
+		    
+			
+				<class name="RecomendacionesNH" table="Recomendaciones"> 
+				  	
+						<id name="Id" column="id" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Fecha" type="date"> 
+						<column name="fecha"  not-null="true"/>
+					</property>
+			
+			
+			
+			
+		  			
+						<many-to-one name="Recomendador" class="ModeloFilmersGen.Infraestructure.EN.Pruebadeesquemaproyecto.UsuarioNH" >	
+								<column name="FK_email_idRecomendador"/> 
+						</many-to-one>
+											 					
+			
+		  			
+						<many-to-one name="Recomendado" class="ModeloFilmersGen.Infraestructure.EN.Pruebadeesquemaproyecto.UsuarioNH" >	
+								<column name="FK_email_idRecomendado"/> 
+						</many-to-one>
+											 					
+			
+		  			
+						<many-to-one name="Pelicula" class="ModeloFilmersGen.Infraestructure.EN.Pruebadeesquemaproyecto.PeliculaNH" >	
+								<column name="FK_id_idPelicula"/> 
+						</many-to-one>
+											 					
+					
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="RecomendacionesNHReadAllHQL">from RecomendacionesNH</query>
+		</hibernate-mapping>
+	
