@@ -20,19 +20,32 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public ActionResult Login(LoginUsuarioViewModel login)
         {
-            UsuarioRepository usuarioRepo = new UsuarioRepository();
+            SessionInitialize();
+            UsuarioRepository usuarioRepo = new UsuarioRepository(session);
             UsuarioCEN usuCen = new UsuarioCEN(usuarioRepo);
 
             if (usuCen.Login(login.Email, login.Password) == null)
             {
                 ModelState.AddModelError("", "Error al introducir los datos de EMAIL o password");
+                SessionClose();
                 return View();
             }
             else 
             {
+                //SessionInitialize();
+                UsuarioEN usuEN = usuCen.DamePorOID(login.Email);
+                UsuarioViewModel usuVM = new UsuarioAssembler().ConvertirENToViewModel(usuEN);
+                HttpContext.Session.Set<UsuarioViewModel>("usuario", usuVM);
+                SessionClose();
                 return RedirectToAction("Index", "Home");
             }
             return View();
+        }
+
+        public ActionResult Logout()
+        {
+            HttpContext.Session.Remove("usuario");
+            return RedirectToAction("Login", "Usuario");
         }
 
         // GET: UsuarioController
