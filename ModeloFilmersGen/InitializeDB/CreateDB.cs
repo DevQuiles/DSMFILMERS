@@ -593,6 +593,7 @@ namespace InitializeDB
                 foreach (var item in listactividades)
                 {
                     Console.WriteLine(item.Fecha);
+
                 }
 
 

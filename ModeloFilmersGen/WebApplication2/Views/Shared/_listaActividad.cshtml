@@ -1,0 +1,21 @@
+﻿@model IEnumerable<WebApplication2.Models.PeliculaVistaViewModel>
+
+<h2>Actividad de mis amigos</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Pelicula</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td> @Html.DisplayFor(modelItem => item.fecha)</td>
+                <td> @Html.DisplayFor(modelItem => item.Pelicula.nombre)</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -5928,19 +5928,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Valentino Q\\.nuget\\packages\\": {}
+    "C:\\Users\\user\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Universidad\\TERCER\\1_CUATRI\\DSM\\PRACTICAS\\PRACTICA 1\\DSMFILMERS\\ModeloFilmersGen\\InitializeDB\\InitializeDB.csproj",
+      "projectUniqueName": "E:\\Filmers\\DSMFILMERS\\ModeloFilmersGen\\InitializeDB\\InitializeDB.csproj",
       "projectName": "InitializeDB",
-      "projectPath": "D:\\Universidad\\TERCER\\1_CUATRI\\DSM\\PRACTICAS\\PRACTICA 1\\DSMFILMERS\\ModeloFilmersGen\\InitializeDB\\InitializeDB.csproj",
-      "packagesPath": "C:\\Users\\Valentino Q\\.nuget\\packages\\",
-      "outputPath": "D:\\Universidad\\TERCER\\1_CUATRI\\DSM\\PRACTICAS\\PRACTICA 1\\DSMFILMERS\\ModeloFilmersGen\\InitializeDB\\obj\\",
+      "projectPath": "E:\\Filmers\\DSMFILMERS\\ModeloFilmersGen\\InitializeDB\\InitializeDB.csproj",
+      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+      "outputPath": "E:\\Filmers\\DSMFILMERS\\ModeloFilmersGen\\InitializeDB\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Valentino Q\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5954,11 +5954,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\Universidad\\TERCER\\1_CUATRI\\DSM\\PRACTICAS\\PRACTICA 1\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj": {
-              "projectPath": "D:\\Universidad\\TERCER\\1_CUATRI\\DSM\\PRACTICAS\\PRACTICA 1\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj"
+            "E:\\Filmers\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj": {
+              "projectPath": "E:\\Filmers\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj"
             },
-            "D:\\Universidad\\TERCER\\1_CUATRI\\DSM\\PRACTICAS\\PRACTICA 1\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\ModeloFilmersGen.Infraestructure.csproj": {
-              "projectPath": "D:\\Universidad\\TERCER\\1_CUATRI\\DSM\\PRACTICAS\\PRACTICA 1\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\ModeloFilmersGen.Infraestructure.csproj"
+            "E:\\Filmers\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\ModeloFilmersGen.Infraestructure.csproj": {
+              "projectPath": "E:\\Filmers\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\ModeloFilmersGen.Infraestructure.csproj"
             }
           }
         }
