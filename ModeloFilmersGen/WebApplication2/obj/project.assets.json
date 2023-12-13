@@ -10788,19 +10788,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Valentino Q\\.nuget\\packages\\": {}
+    "C:\\Users\\ASUS\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Universidad\\TERCER\\1_CUATRI\\DSM\\PRACTICAS\\PRACTICA 1\\DSMFILMERS\\ModeloFilmersGen\\WebApplication2\\WebApplication2.csproj",
+      "projectUniqueName": "C:\\Users\\ASUS\\OOH4RIA_DSM\\GIT\\DSMFILMERS\\ModeloFilmersGen\\WebApplication2\\WebApplication2.csproj",
       "projectName": "WebApplication2",
-      "projectPath": "D:\\Universidad\\TERCER\\1_CUATRI\\DSM\\PRACTICAS\\PRACTICA 1\\DSMFILMERS\\ModeloFilmersGen\\WebApplication2\\WebApplication2.csproj",
-      "packagesPath": "C:\\Users\\Valentino Q\\.nuget\\packages\\",
-      "outputPath": "D:\\Universidad\\TERCER\\1_CUATRI\\DSM\\PRACTICAS\\PRACTICA 1\\DSMFILMERS\\ModeloFilmersGen\\WebApplication2\\obj\\",
+      "projectPath": "C:\\Users\\ASUS\\OOH4RIA_DSM\\GIT\\DSMFILMERS\\ModeloFilmersGen\\WebApplication2\\WebApplication2.csproj",
+      "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ASUS\\OOH4RIA_DSM\\GIT\\DSMFILMERS\\ModeloFilmersGen\\WebApplication2\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Valentino Q\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10814,11 +10814,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\Universidad\\TERCER\\1_CUATRI\\DSM\\PRACTICAS\\PRACTICA 1\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj": {
-              "projectPath": "D:\\Universidad\\TERCER\\1_CUATRI\\DSM\\PRACTICAS\\PRACTICA 1\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj"
+            "C:\\Users\\ASUS\\OOH4RIA_DSM\\GIT\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj": {
+              "projectPath": "C:\\Users\\ASUS\\OOH4RIA_DSM\\GIT\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj"
             },
-            "D:\\Universidad\\TERCER\\1_CUATRI\\DSM\\PRACTICAS\\PRACTICA 1\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\ModeloFilmersGen.Infraestructure.csproj": {
-              "projectPath": "D:\\Universidad\\TERCER\\1_CUATRI\\DSM\\PRACTICAS\\PRACTICA 1\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\ModeloFilmersGen.Infraestructure.csproj"
+            "C:\\Users\\ASUS\\OOH4RIA_DSM\\GIT\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\ModeloFilmersGen.Infraestructure.csproj": {
+              "projectPath": "C:\\Users\\ASUS\\OOH4RIA_DSM\\GIT\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\ModeloFilmersGen.Infraestructure.csproj"
             }
           }
         }
@@ -10865,7 +10865,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

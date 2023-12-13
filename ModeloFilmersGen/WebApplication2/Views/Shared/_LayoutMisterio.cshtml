@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+@using Microsoft.AspNetCore.Http
+
+@{
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    string nombre = "";
+    string email = "";
+    if(usuario != null)
+    {
+        nombre = usuario.Nombre;
+        email = usuario.Email;
+    }
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebApplication2</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebApplication2.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+
+
+   @*  @if (usuario == null)
+    {
+        <script type="text/javascript">
+            var url = "@Url.Action("Login","Usuario")";
+            location.href = url;
+        </script>
+    } *@
+
+</head>
+<body class = "grey lighten-3">
+    <header>
+
+        <nav id="sidebarMenu" class="d-block sidebar bg-white">
+            <div class="position-sticky">
+                <div class="list-group list-group-flush mx-3 mt-4">
+                    <a class="list-group-item list-group-item-action py-2 ripple" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                    <a class="list-group-item list-group-item-action py-2 ripple" asp-area="" asp-controller="Home" asp-action="Index">Búsqueda</a>
+                    <a class="list-group-item list-group-item-action py-2 ripple" asp-area="" asp-controller="Playlist" asp-action="Index">Playlist</a>
+                    <a class="list-group-item list-group-item-action py-2 ripple" asp-area="" asp-controller="Usuario" asp-action="Login">Iniciar Sesión</a>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+    <!--Main Navigation-->
+    <br />
+    <main class="pt-5 mx-lg-5">
+        <div class="container-fluid mt-5">
+            @RenderBody()
+        </div>
+    </main>
+   
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - WebApplication2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
