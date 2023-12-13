@@ -1,5 +1,6 @@
 ﻿using ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto;
 using ModeloFilmersGen.Infraestructure.CP;
+using NHibernate;
 using WebApplication2.Models;
 
 namespace WebApplication2.Assemblers

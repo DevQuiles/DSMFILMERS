@@ -1,3 +1,13 @@
 ﻿@{
-    Layout = "_Layout";
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    string nombre = "";
+    string email = "";
+    if (usuario != null)
+    {
+        Layout = "_Layout";
+    }
+    else
+    {
+        Layout = "_LayoutMisterio";
+    }
 }
