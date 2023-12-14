@@ -25,7 +25,7 @@ namespace WebApplication2.Controllers
             IList<PeliculaVistaEN> listactividades = usCP.ActividadAmigos(email);
             IEnumerable<PeliculaVistaViewModel> viewModelList = new PeliculaVistaAssembler().ConvertirListEnToViewModel(listactividades).ToList();
             SessionClose();
-            return View(viewModelList);
+            return PartialView(viewModelList);
         }
 
         // GET: PeliculaVistaController

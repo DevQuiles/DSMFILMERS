@@ -16,18 +16,20 @@ namespace WebApplication2.Assemblers
             peli.comentario = en.Comentario;
             peli.valoracion = en.Valoracion;
             peli.fecha = (DateTime)en.Fecha;
-            peli.Pelicula = new PeliculaViewModel
-            {
-                Id = en.Pelicula.Id,
-                nombre = en.Pelicula.Nombre,
-                caratula = en.Pelicula.Caratula,
-                Descripcion = en.Pelicula.Descripcion,
-                fecha = (DateTime)en.Pelicula.Fecha,
-                genero = en.Pelicula.Genero,
-                duracion = en.Pelicula.Duracion,
-                puntuacion = en.Pelicula.Puntuacion,
-                estado = en.Pelicula.Estado,  
-            };
+            peli.idPelicula = en.Pelicula.Id;
+            
+            //peli.Pelicula = new PeliculaViewModel
+            //{
+            //    Id = en.Pelicula.Id,
+            //    nombre = en.Pelicula.Nombre,
+            //    caratula = en.Pelicula.Caratula,
+            //    Descripcion = en.Pelicula.Descripcion,
+            //    fecha = (DateTime)en.Pelicula.Fecha,
+            //    genero = en.Pelicula.Genero,
+            //    duracion = en.Pelicula.Duracion,
+            //    puntuacion = en.Pelicula.Puntuacion,
+            //    estado = en.Pelicula.Estado,  
+            //};
 
             return peli;
         }

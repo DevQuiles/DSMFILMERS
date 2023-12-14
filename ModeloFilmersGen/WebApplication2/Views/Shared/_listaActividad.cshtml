@@ -1,21 +1,42 @@
 ﻿@model IEnumerable<WebApplication2.Models.PeliculaVistaViewModel>
 
-<h2>Actividad de mis amigos</h2>
+<h2>Actividad de tus amigos</h2>
+
 
 <table class="table">
     <thead>
         <tr>
-            <th>Fecha</th>
-            <th>Pelicula</th>
+            <th>
+                @Html.DisplayNameFor(model => model.comentario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.valoracion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idPelicula)
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td> @Html.DisplayFor(modelItem => item.fecha)</td>
-                <td> @Html.DisplayFor(modelItem => item.Pelicula.nombre)</td>
-            </tr>
-        }
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.comentario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.valoracion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.idPelicula)
+            </td>
+        </tr>
+}
     </tbody>
 </table>

@@ -40,6 +40,13 @@ namespace WebApplication2.Controllers
             return View(comunidadesVM);
         }
 
+
+        // GET: HomeController1/Create ---> PARCIAL
+        public ActionResult _CreateComunidadPartial()
+        {
+            return PartialView();
+        }
+
         // GET: HomeController1/Create
         public ActionResult Create()
         {
@@ -58,7 +65,7 @@ namespace WebApplication2.Controllers
                 //TODO 
                 int com = comCEN.CrearComunidad(comVM.Nombre, System.DateTime.Now, comVM.Descripcion, comVM.Emisor);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             catch
             {
