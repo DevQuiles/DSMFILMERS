@@ -23,5 +23,7 @@ namespace WebApplication2.Models
         [Display(Prompt = "Fecha para la película", Description = "Fecha de la película", Name = "Fecha")]
         [DataType(DataType.Date, ErrorMessage = "La fecha introducida tiene que tener un formato válido")]
         public DateTime? fecha { get; set; }
+
+        public int idPelicula { get; set; }
     }
 }
