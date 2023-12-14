@@ -10788,19 +10788,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Valentino Q\\.nuget\\packages\\": {}
+    "C:\\Users\\oscar\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Universidad\\TERCER\\1_CUATRI\\DSM\\PRACTICAS\\PRACTICA 1\\DSMFILMERS\\ModeloFilmersGen\\WebApplication2\\WebApplication2.csproj",
+      "projectUniqueName": "C:\\Users\\oscar\\source\\repos\\DSMFILMERS\\ModeloFilmersGen\\WebApplication2\\WebApplication2.csproj",
       "projectName": "WebApplication2",
-      "projectPath": "D:\\Universidad\\TERCER\\1_CUATRI\\DSM\\PRACTICAS\\PRACTICA 1\\DSMFILMERS\\ModeloFilmersGen\\WebApplication2\\WebApplication2.csproj",
-      "packagesPath": "C:\\Users\\Valentino Q\\.nuget\\packages\\",
-      "outputPath": "D:\\Universidad\\TERCER\\1_CUATRI\\DSM\\PRACTICAS\\PRACTICA 1\\DSMFILMERS\\ModeloFilmersGen\\WebApplication2\\obj\\",
+      "projectPath": "C:\\Users\\oscar\\source\\repos\\DSMFILMERS\\ModeloFilmersGen\\WebApplication2\\WebApplication2.csproj",
+      "packagesPath": "C:\\Users\\oscar\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\oscar\\source\\repos\\DSMFILMERS\\ModeloFilmersGen\\WebApplication2\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Valentino Q\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\oscar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10808,17 +10813,18 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\Universidad\\TERCER\\1_CUATRI\\DSM\\PRACTICAS\\PRACTICA 1\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj": {
-              "projectPath": "D:\\Universidad\\TERCER\\1_CUATRI\\DSM\\PRACTICAS\\PRACTICA 1\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj"
+            "C:\\Users\\oscar\\source\\repos\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj": {
+              "projectPath": "C:\\Users\\oscar\\source\\repos\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.ApplicationCore\\ModeloFilmersGen.ApplicationCore.csproj"
             },
-            "D:\\Universidad\\TERCER\\1_CUATRI\\DSM\\PRACTICAS\\PRACTICA 1\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\ModeloFilmersGen.Infraestructure.csproj": {
-              "projectPath": "D:\\Universidad\\TERCER\\1_CUATRI\\DSM\\PRACTICAS\\PRACTICA 1\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\ModeloFilmersGen.Infraestructure.csproj"
+            "C:\\Users\\oscar\\source\\repos\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\ModeloFilmersGen.Infraestructure.csproj": {
+              "projectPath": "C:\\Users\\oscar\\source\\repos\\DSMFILMERS\\ModeloFilmersGen\\ModeloFilmersGen.Infraestructure\\ModeloFilmersGen.Infraestructure.csproj"
             }
           }
         }
@@ -10865,7 +10871,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }
