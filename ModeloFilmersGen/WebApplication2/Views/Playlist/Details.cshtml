@@ -13,34 +13,29 @@
         <a class="btn btn-primary" href="@Url.Action("Index", "Pelicula")">Añadir Película</a>
     </div>
 
-    <div>
+    <div class="row mt-4">
         @if (Model.Pelicula.Any())
         {
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Caratula</th>
-                        <!-- Agrega más encabezados según las propiedades de tu modelo de Película -->
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var movie in Model.Pelicula)
-                    {
-                        <tr>
-                            <td>@movie.nombre</td>
-                            <td>@movie.caratula</td>
-                            <!-- Agrega más celdas según las propiedades de tu modelo de Película -->
-                        </tr>
-                    }
-                </tbody>
-            </table>
+            @foreach (var movie in Model.Pelicula)
+            {
+                <div class="col-md-3 mb-4">
+                    <a href="@Url.Action("Details", "Pelicula", new { id = movie.Id })" class="card-link">
+                        <div class="card">
+                            <img src="@movie.caratula" class="card-img-top" alt="Carátula de la película">
+                            <div class="card-body">
+                                <h5 class="card-title">@movie.nombre</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
         }
         else
         {
-            <p>¡No has añadido ninguna película a tu playlist todavia!</p>
+            <p>¡No has añadido ninguna película a tu playlist todavía!</p>
         }
     </div>
+
 </div>
 
 <div>

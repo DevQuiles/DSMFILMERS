@@ -16,7 +16,6 @@ public class PeliculaApiService
     {
         this.apiKey = apiKey;
     }
-
     public List<int> crearPeliculasApi(List<JObject> peliculas)
     {
         PeliculaRepository pelicularepository = new PeliculaRepository();
@@ -44,7 +43,20 @@ public class PeliculaApiService
 
             DateTime releaseDate = DateTime.Parse($"{movie2["release_date"]}");
 
-            int idPE = peliculacen.CrearPelicula($"{movie2["title"]}", $"{movie2["poster_path"]}", $"{movie2["overview"]}", releaseDate, genero, runtime, votoagregar, $"{movie2["status"]}");
+            string posterPath = $"{movie2["poster_path"]}";
+            string baseUrl = "https://image.tmdb.org/t/p/w500"; // Ruta base de las carátulas
+            string posterUrl = $"{baseUrl}{posterPath}";
+
+            int idPE = peliculacen.CrearPelicula(
+                $"{movie2["title"]}",
+                posterUrl, // URL completa de la carátula
+                $"{movie2["overview"]}",
+                releaseDate,
+                genero,
+                runtime,
+                votoagregar,
+                $"{movie2["status"]}"
+            );
 
             idsPelis.Add(idPE);
         }
