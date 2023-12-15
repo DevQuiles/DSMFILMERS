@@ -16,6 +16,30 @@ namespace WebApplication2.Controllers
 {
     public class PlaylistController : BasicController
     {
+
+        public ActionResult PlayListByUsuario()
+        {
+            SessionInitialize();
+            UsuarioViewModel usuario = HttpContext.Session.Get<UsuarioViewModel>("usuario");
+            UsuarioRepository usR = new UsuarioRepository(session);
+            UsuarioCEN usuarioCEN = new UsuarioCEN(usR);
+            UsuarioEN usuarioEN = usuarioCEN.DamePorOID(usuario.Email);
+
+            var playlistENs = new List<object>();
+
+            foreach (var i in usuarioEN.Playlistcreadas)
+            {
+                var playlistItem = new
+                {
+                    nombrePlaylist = i.Nombre
+                };
+
+                playlistENs.Add(playlistItem);
+            }
+
+            return Json(playlistENs);
+        }
+
         // GET: PlaylistController
         public ActionResult Index()
         {
@@ -65,11 +89,12 @@ namespace WebApplication2.Controllers
         public ActionResult Create()
         {
             SessionInitialize();
-            PlaylistRepository playlistRepository = new PlaylistRepository();
+            PlaylistRepository playlistRepository = new PlaylistRepository(session);
             PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);
-
             PlaylistEN playlistEN = new PlaylistEN();
             PlaylistViewModel playlistViewModel = new PlaylistAssembler().ConvertirEnToViewModel(playlistEN);
+            
+
             SessionClose();
 
             return View(playlistViewModel);
@@ -78,13 +103,14 @@ namespace WebApplication2.Controllers
         // POST: PlaylistController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(PlaylistViewModel play, UsuarioViewModel usu)
+        public ActionResult Create(PlaylistViewModel play)
         {
             try
             {
+                UsuarioViewModel usuario = HttpContext.Session.Get<UsuarioViewModel>("usuario");
                 PlaylistRepository playlistRepository = new PlaylistRepository();
                 PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);
-                int id =  playlistCEN.CrearPlaylist(play.nombre, play.Descripcion, usu.Email);
+                int id =  playlistCEN.CrearPlaylist(play.nombre, play.Descripcion, usuario.Email);
                 return RedirectToAction("Details", new { id });
             }
             catch

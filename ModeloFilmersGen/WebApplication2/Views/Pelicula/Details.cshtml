@@ -4,57 +4,158 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<style>
+    .img-reducida {
+        max-width: 50%;
+        height: auto;
+    }
+</style>
+
+<h1>@Html.DisplayFor(model => model.nombre)</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <img src="@Html.DisplayFor(model => model.caratula)" alt="IMG" class="img-reducida" />
+    </div>
+
+    <div class="col-md-8">
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.fecha)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.fecha)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.duracion)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.duracion)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.puntuacion)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.puntuacion)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.estado)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.estado)
+            </dd>
+            <dt class ="col-sm-8">
+                <h4>¡Añade la pelicula a una de tus playlis!</h4>
+                <hr />
+            </dt>
+            <dt class="col-sm-8">
+                <select id="desplegable" class="form-control"></select>
+            </dt>
+            <dd class="col-sm-4">
+                <button class="btn btn-primary" aria-haspopup="true" aria-expanded="false">
+                    Añadir
+                </button>
+            </dd>
+        </dl>
+        <div>
+            
+        </div>
+    </div>
+</div>
 
 <div>
-    <h4>PeliculaViewModel</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.caratula)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.caratula)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.fecha)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.fecha)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.duracion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.duracion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.puntuacion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.puntuacion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.estado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.estado)
-        </dd>
-    </dl>
+    <a asp-action="Index">Volver</a>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        mostrarDesplegable(); // Mostrar el desplegable al cargar la página
+
+        function mostrarDesplegable() {
+            fetch("/Playlist/PlayListByUsuario")
+                .then(response => response.json())
+                .then(data => {
+                    var desplegable = document.getElementById("desplegable");
+                    desplegable.innerHTML = "";
+
+                    data.forEach(function (playlist) {
+                        var opcion = document.createElement("option");
+                        opcion.text = playlist.nombrePlaylist;
+
+                        desplegable.add(opcion);
+                    });
+
+                    desplegable.style.display = "block";
+                    $('#desplegable').dropdown(); // Utiliza Bootstrap para el dropdown
+                })
+                .catch(error => console.error("Error al obtener la lista de playlists:", error));
+        }
+    });
+</script>
+
+@* 
+<script>
+    // Función para obtener elementos dinámicamente
+    function obtenerElementos() {
+
+        // Realizar una solicitud AJAX al servidor
+        $.ajax({
+            url: '/Playlist/PlayListByUsuario', // Ajusta la URL según tu configuración
+            type: 'GET', // O 'GET' según lo que necesites
+            dataType: 'json', // O 'html', 'text', etc.
+            success: function (data) {
+                // Manejar la respuesta del servidor
+                console.log('Éxito: ', data);
+                $.each(data, function (index, playlist) {
+                    llenarDesplegable(data);
+                });
+            },
+            error: function (error) {
+                // Manejar errores
+                console.error('Error: ', error);
+            }
+        });
+    }
+
+    // Función para llenar el desplegable con elementos
+    function llenarDesplegable(data) {
+        var contenidoDesplegable = $("#contenidoDesplegable");
+
+        // Limpiamos el contenido actual del desplegable
+        contenidoDesplegable.empty();
+
+        // Llenamos el desplegable con los nuevos elementos
+        $.each(data, function (index, playlist) {
+            contenidoDesplegable.append('<a class="dropdown-item" href="#">' + playlist.nombre + '</a>');
+        });
+    }
+
+    // Llamamos a la función para obtener elementos al cargar la página
+    $(document).ready(function () {
+        obtenerElementos();
+    });
+
+    // Agregamos un evento al botón para volver a obtener elementos al hacer clic
+    $("#btnDesplegable").on("click", function () {
+        obtenerElementos();
+    });
+
+    // // Llamamos a la función para llenar el desplegable al cargar la página
+    // llenarDesplegable();
+
+    // // Agregamos un evento al botón para volver a llenar el desplegable al hacer clic
+    // $("#btnDesplegable").on("click", function () {
+    //     llenarDesplegable();
+    // });
+</script> *@
