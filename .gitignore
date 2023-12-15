@@ -19,4 +19,3 @@ project.assets.json
 # Además, ignora cualquier archivo de configuración local que no debería ser compartido
 **/appsettings.Local.json
 **/appsettings.Development.json
-
