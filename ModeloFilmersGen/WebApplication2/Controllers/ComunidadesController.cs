@@ -35,7 +35,6 @@ namespace WebApplication2.Controllers
             ComunidadesEN comunidadesEN = comunidadesCEN.DamePorOID(id);
             ComunidadesViewModel comunidadesVM = new ComunidadesAssembler().ConvertirENToViewModel(comunidadesEN);
 
-
             SessionClose();
             return View(comunidadesVM);
         }

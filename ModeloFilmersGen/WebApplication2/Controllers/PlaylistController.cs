@@ -70,7 +70,7 @@ namespace WebApplication2.Controllers
                 PlaylistRepository playlistRepository = new PlaylistRepository();
                 PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);
                 playlistCEN.CrearPlaylist(play.nombre, play.Descripcion, usu.Email);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Home","Index");
             }
             catch
             {
