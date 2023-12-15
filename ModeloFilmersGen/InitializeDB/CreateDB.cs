@@ -111,31 +111,31 @@ namespace InitializeDB
                 PeliculaApiService movieApiService = new PeliculaApiService(apiKey);
 
                 //-------------------------------------------------------------
-                //---------------OBTENER 200 PELICULAS DEL API-----------------
+                //---------------OBTENER 200 PELICULAS DEL API---------------- -
                 //-------------------------------------------------------------
 
-                //Console.WriteLine("++++++++++++++++++++++++++++++++++++++++");
-                //Console.WriteLine("++++++++++++++20 PELICULAS+++++++++++++");
+                Console.WriteLine("++++++++++++++++++++++++++++++++++++++++");
+                Console.WriteLine("++++++++++++++20 PELICULAS+++++++++++++");
 
-                List<JObject> listaPeliculas = movieApiService.GetMultipleMovies(10);
+                List<JObject> listaPeliculas = movieApiService.GetMultipleMovies(50);
                 List<int> idsPeliculas200 = movieApiService.crearPeliculasApi(listaPeliculas);
 
                 Console.WriteLine("---------------------");
                 Console.WriteLine("---PELICULAS---------");
                 Console.WriteLine("---------------------");
 
-                foreach (int movieId in idsPeliculas200)
-                {
-                    PeliculaEN peli = peliculacen.DamePorOID(movieId);
-                    Console.WriteLine(peli.Nombre);
-                }
+                //foreach (int movieId in idsPeliculas200)
+                //{
+                //    PeliculaEN peli = peliculacen.DamePorOID(movieId);
+                //    Console.WriteLine(peli.Nombre);
+                //}
 
                 Console.WriteLine("+++++++++++++++++++++++++++");
                 Console.WriteLine("+++++++++++++++++++++++++++");
 
                 //Obtener los últimos lanzamientos
-                List<JObject> movies = movieApiService.GetLatestReleases();
-                List<int> idsPeliculasLast = movieApiService.crearPeliculasApi(movies);
+                //List<JObject> movies = movieApiService.GetLatestReleases();
+                //List<int> idsPeliculasLast = movieApiService.crearPeliculasApi(movies);
 
                 Console.WriteLine("++++++++++++++LAS ULTIMAS PELICULAS+++++++++++++");
                 Console.WriteLine("++++++++++++++LAS ULTIMAS PELICULAS+++++++++++++");
