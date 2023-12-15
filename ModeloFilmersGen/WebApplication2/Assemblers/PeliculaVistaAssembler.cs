@@ -16,6 +16,7 @@ namespace WebApplication2.Assemblers
             peli.comentario = en.Comentario;
             peli.valoracion = en.Valoracion;
             peli.fecha = (DateTime)en.Fecha;
+            peli.idPelicula = en.Pelicula.Id;
 
             return peli;
         }

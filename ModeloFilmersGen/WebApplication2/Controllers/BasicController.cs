@@ -29,6 +29,12 @@ namespace WebApplication2.Controllers
             }
         }
 
+        protected bool UsuarioEstaAutenticado()
+        {
+            var usuario = HttpContext.Session.GetString("usuario");
+            return usuario != null;
+        }
+
 
         protected void SessionClose()
         {
