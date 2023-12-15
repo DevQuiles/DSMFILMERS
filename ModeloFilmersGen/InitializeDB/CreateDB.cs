@@ -369,6 +369,9 @@ namespace InitializeDB
                 Console.WriteLine("++++++++++++++ COMUNIDAD POR OID MODIFICADA: +++++++++++++");
                 ComunidadesEN comunidadObtenida = comunidadescen.DamePorOID(idComunidad1);
 
+                int idMensaje = mensajecen.CrearMensaje("mensaje1", now, idComunidad2);
+                int idMensaje2 = mensajecen.CrearMensaje("mensaje2", new DateTime(2023, 12, 12, 0, 0, 0, DateTimeKind.Utc), idComunidad2);
+
                 if (comunidadObtenida != null)
                 {
                     Console.WriteLine($"Comunidad obtenida: {comunidadObtenida.Id}, {comunidadObtenida.Nombre}, {comunidadObtenida.Descripcion}");

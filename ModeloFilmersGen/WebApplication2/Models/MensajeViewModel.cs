@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApplication2.Models
 {
@@ -15,6 +16,15 @@ namespace WebApplication2.Models
 
         [Display(Prompt = "Introduce fecha", Description = "Fecha del Mensaje", Name = "Fecha")]
         [Required(ErrorMessage = "Debe indicar la fecha")]
-        public DateTime Fecha { get; set; }
+        public DateOnly Fecha { get; set; }
+
+        public int Dias { get; set; }
+
+        public string Usuario { get; set; }
+        public AvatarEnum Avatar{ get; set; }
+        public string Comunidad { get; set; }
+        public string ComunidadDescripcion { get; set; }
+
+
     }
 }

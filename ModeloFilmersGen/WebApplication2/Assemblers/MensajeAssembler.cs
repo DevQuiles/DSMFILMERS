@@ -10,7 +10,15 @@ namespace WebApplication2.Assemblers
             MensajeViewModel men = new MensajeViewModel();
             men.IdMensaje = en.Id;
             men.Contenido = en.Contenido;
-            men.Fecha = (DateTime)en.Fecha;
+            men.Fecha = DateOnly.FromDateTime((DateTime)en.Fecha);
+            TimeSpan diferenca = DateTime.Now - (DateTime)en.Fecha;
+
+            men.Dias = diferenca.Days;
+            
+            men.Usuario = en.Comunidad.Creador_Emisor.NomUsuario;
+            men.Avatar = en.Comunidad.Creador_Emisor.AvatarIcon;
+            men.Comunidad = en.Comunidad.Nombre;
+            men.ComunidadDescripcion = en.Comunidad.Descripcion;
             return men;
         }
 
