@@ -17,40 +17,6 @@ public class PeliculaApiService
         this.apiKey = apiKey;
     }
 
-    //public List<int> crearPeliculasApi(List<JObject> peliculas)
-    //{
-    //    PeliculaRepository pelicularepository = new PeliculaRepository();
-    //    PeliculaCEN peliculacen = new PeliculaCEN(pelicularepository);
-    //    List<int> idsPelis = new List<int>();
-
-    //    foreach (JObject item in peliculas)
-    //    {
-    //        int movieId = (int)item["id"];
-    //        string movieDetailsJson = GetMovieDetails(movieId);
-    //        JObject movie2 = JObject.Parse(movieDetailsJson);
-
-    //        List<String> genero = new List<String>();
-
-    //        foreach (var genre in movie2["genres"])
-    //        {
-    //            genero.Add($"{genre["name"]}");
-    //        }
-
-    //        var runtimeValue = movie2["runtime"];
-    //        int runtime = Convert.ToInt32(runtimeValue);
-
-    //        var voto = movie2["vote_average"];
-    //        int votoagregar = (int)Math.Truncate(Convert.ToDouble(voto));
-
-    //        DateTime releaseDate = DateTime.Parse($"{movie2["release_date"]}");
-
-    //        int idPE = peliculacen.CrearPelicula($"{movie2["title"]}", $"{movie2["poster_path"]}", $"{movie2["overview"]}", releaseDate, genero, runtime, votoagregar, $"{movie2["status"]}");
-
-    //        idsPelis.Add(idPE);
-    //    }
-    //    return idsPelis;
-    //}
-
     public List<int> crearPeliculasApi(List<JObject> peliculas)
     {
         PeliculaRepository pelicularepository = new PeliculaRepository();

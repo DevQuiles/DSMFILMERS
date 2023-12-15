@@ -1,8 +1,8 @@
-﻿@model WebApplication2.Models.PlaylistViewModel
+@model WebApplication2.Models.PlaylistViewModel
 
 @{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    Layout = null;
 }
 
 <style>
@@ -45,6 +45,7 @@
 
 <h4>PlaylistViewModel</h4>
 <hr />
+
 <div class="row">
     <div class="col-xl-3"></div>
     <div class="col-xl-6 form-container">
@@ -60,6 +61,7 @@
                 <input asp-for="Descripcion" class="form-control" />
                 <span asp-validation-for="Descripcion" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
                 <input type="submit" value="Guardar" class="btn btn-create" />
             </div>

@@ -10,13 +10,14 @@ namespace WebApplication2.Assemblers
     public class PeliculaVistaAssembler
     {
         public PeliculaVistaViewModel ConvertirEnToViewModel(PeliculaVistaEN en)
-        {
+        {   
             PeliculaVistaViewModel peli = new PeliculaVistaViewModel();
             peli.Id = en.Id;
             peli.comentario = en.Comentario;
             peli.valoracion = en.Valoracion;
             peli.fecha = (DateTime)en.Fecha;
             peli.idPelicula = en.Pelicula.Id;
+
 
             return peli;
         }

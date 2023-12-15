@@ -35,9 +35,15 @@ namespace WebApplication2.Controllers
             ComunidadesEN comunidadesEN = comunidadesCEN.DamePorOID(id);
             ComunidadesViewModel comunidadesVM = new ComunidadesAssembler().ConvertirENToViewModel(comunidadesEN);
 
-
             SessionClose();
             return View(comunidadesVM);
+        }
+
+
+        // GET: HomeController1/Create ---> PARCIAL
+        public ActionResult _CreateComunidadPartial()
+        {
+            return PartialView();
         }
 
         // GET: HomeController1/Create
@@ -58,7 +64,7 @@ namespace WebApplication2.Controllers
                 //TODO 
                 int com = comCEN.CrearComunidad(comVM.Nombre, System.DateTime.Now, comVM.Descripcion, comVM.Emisor);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             catch
             {

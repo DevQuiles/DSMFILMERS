@@ -1,4 +1,4 @@
-﻿@model WebApplication2.Models.PlaylistViewModel
+﻿@model WebApplication2.Models.PlayList_PeliculasViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -38,29 +38,41 @@
 </style>
 
 
-<h1>Details</h1>
+<div>
+    <h2>@Model.Playlist.nombre</h2>
+    <hr />
+    <p>@Model.Playlist.Descripcion</p>
+
+    <div>
+        <a class="btn btn-primary" href="@Url.Action("Index", "Pelicula")">Añadir Película</a>
+    </div>
+
+    <div class="row mt-4">
+        @if (Model.Pelicula.Any())
+        {
+            @foreach (var movie in Model.Pelicula)
+            {
+                <div class="col-md-3 mb-4">
+                    <a href="@Url.Action("Details", "Pelicula", new { id = movie.Id })" class="card-link">
+                        <div class="card">
+                            <img src="@movie.caratula" class="card-img-top" alt="Carátula de la película">
+                            <div class="card-body">
+                                <h5 class="card-title">@movie.nombre</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        }
+        else
+        {
+            <p>¡No has añadido ninguna película a tu playlist todavía!</p>
+        }
+    </div>
+
+</div>
 
 <div>
-    <h4>PlaylistViewModel</h4>
-    <hr />
-    <div class="playlist-container">
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
-    </dl>
-</div>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-create" title="Edit">Edit</a>
-    <a asp-action="Index" class="btn btn-return" title="return">Volver</a>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Playlist.Id }) |
+    <a asp-action="Index">Back to List</a>
 </div>
