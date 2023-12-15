@@ -596,7 +596,13 @@ namespace InitializeDB
 
                 }
 
+                Console.WriteLine("-----------------------------------PRUEBAS DE PELICULAS EN PLAYLIST---------------------------------------------");
+                Console.WriteLine("----------------------------------------------------------------------------------------------------------------");
+                Console.WriteLine("----------------------------------------------------------------------------------------------------------------");
 
+                int PLAYLISTPRUEBA = playlistcen.CrearPlaylist("pruebaPeliculas", "Esto es una prueba de ver si hace bn el details", "email2");
+                playlistcen.AsignarPeliculas(PLAYLISTPRUEBA, new List<int> { idPeli1, idPeli2 });
+                playlistcen.AsignarPeliculas(PLAYLISTPRUEBA, new List<int> { idPeli3, idPeli2 });
 
                 Console.WriteLine("----------------------------------------------------------------------------------------------------------------");
                 Console.WriteLine("----------------------------------------------------------------------------------------------------------------");
