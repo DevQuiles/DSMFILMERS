@@ -2,7 +2,41 @@
 
 @{
     ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .playlist-container {
+        background-color: #333;
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    body {
+        background-color: black;
+        color: white;
+    }
+
+    /* Estilos para los botones */
+    .btn-create {
+        background-color: green;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        margin-right: 5px;
+    }
+
+    .btn-return {
+        background-color: blue;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        margin-right: 5px;
+    }
+</style>
+
 
 <div>
     <h2>@Model.Playlist.nombre</h2>

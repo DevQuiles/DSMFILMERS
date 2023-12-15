@@ -1,11 +1,54 @@
-﻿@model WebApplication2.Models.PlaylistViewModel
+@model WebApplication2.Models.PlaylistViewModel
 
 @{
+
     Layout = null;
 }
 
+<style>
+    body {
+        background-color: black;
+        color: white;
+        text-align: center;
+    }
+
+    .form-container {
+        background-color: #333; /* Negro menos oscuro */
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px; /* Ajusta el margen superior según tus preferencias */
+        justify-content:center;
+        align-items:center;
+    }
+
+    /* Estilos para los botones */
+    .btn-create {
+        background-color: green;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        margin-right: 5px;
+    }
+
+    .btn-return {
+        background-color: blue;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        margin-right: 5px;
+    }
+</style>
+
+<h1>Crea tu propia playlist </h1>
+
+<h4>PlaylistViewModel</h4>
+<hr />
+
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-xl-3"></div>
+    <div class="col-xl-6 form-container">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -20,16 +63,19 @@
             </div>
             <br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-create" />
             </div>
         </form>
     </div>
+    <div class="col-xl-3"></div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-return" title="return">Volver</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

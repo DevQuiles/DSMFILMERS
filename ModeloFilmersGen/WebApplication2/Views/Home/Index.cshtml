@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.PeliculaEN>
+@model WebApplication2.Models.PeliculasYVistasViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -100,64 +100,48 @@
 </script>
 
 @*----------------------------------------------Vista de la pelicula--------------------------------------------------------------------------*@
+
+<!-- Muestra las películas -->
+<h2>Películas</h2>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Caratula)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fecha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Duracion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Puntuacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th></th>
+            <th>Nombre</th>
+            <th>Carátula</th>
+            <!-- Agrega más columnas según sea necesario -->
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var pelicula in Model.Peliculas)
+        {
+            <tr>
+                <td>@pelicula.nombre</td>
+                <td>@pelicula.caratula</td>
+                <!-- Muestra más datos de la película -->
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Muestra las últimas vistas -->
+<h2>Últimas Películas Vistas</h2>
+<table class="table">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Caratula)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fecha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Duracion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Puntuacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
+            <th>ID Película</th>
+            <th>Comentario</th>
+            <!-- Agrega más columnas según sea necesario -->
         </tr>
-}
+    </thead>
+    <tbody>
+        @foreach (var vista in Model.UltimasVistas)
+        {
+            <tr>
+                <td>@vista.idPelicula</td>
+                <td>@vista.comentario</td>
+                <!-- Muestra más datos de la vista -->
+            </tr>
+        }
     </tbody>
 </table>

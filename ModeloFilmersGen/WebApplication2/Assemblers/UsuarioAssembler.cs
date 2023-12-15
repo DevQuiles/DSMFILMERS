@@ -1,5 +1,6 @@
 ﻿using ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto;
 using ModeloFilmersGen.Infraestructure.CP;
+using NHibernate;
 using WebApplication2.Models;
 
 namespace WebApplication2.Assemblers
@@ -22,7 +23,8 @@ namespace WebApplication2.Assemblers
             usu.Avatar = en.AvatarIcon;
             usu.Seguidores = en.Seguidores.Count();
             usu.Seguidos = en.Seguidos.Count();
-
+            usu.PelisVistas = en.PeliculasVistas.Count();
+            
 
 
             return usu;

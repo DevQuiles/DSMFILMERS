@@ -20,29 +20,50 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public ActionResult Login(LoginUsuarioViewModel login)
         {
-            UsuarioRepository usuarioRepo = new UsuarioRepository();
+            SessionInitialize();
+            UsuarioRepository usuarioRepo = new UsuarioRepository(session);
             UsuarioCEN usuCen = new UsuarioCEN(usuarioRepo);
 
             if (usuCen.Login(login.Email, login.Password) == null)
             {
                 ModelState.AddModelError("", "Error al introducir los datos de EMAIL o password");
+                SessionClose();
                 return View();
             }
             else 
             {
+                //SessionInitialize();
+                UsuarioEN usuEN = usuCen.DamePorOID(login.Email);
+                UsuarioViewModel usuVM = new UsuarioAssembler().ConvertirENToViewModel(usuEN);
+                HttpContext.Session.Set<UsuarioViewModel>("usuario", usuVM);
+                SessionClose();
                 return RedirectToAction("Index", "Home");
             }
             return View();
         }
 
-        // GET: UsuarioController
-        public ActionResult Index()
+        public ActionResult Logout()
+        {
+            HttpContext.Session.Remove("usuario");
+            return RedirectToAction("Login", "Usuario");
+        }
+
+        public ActionResult Index(string searchString)
         {
             SessionInitialize();
             UsuarioRepository usuRepository = new UsuarioRepository(session);
             UsuarioCEN usuCEN = new UsuarioCEN(usuRepository);
 
-            IList<UsuarioEN> usuEN = usuCEN.DameTodos(0, -1);
+            IList<UsuarioEN> usuEN;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                usuEN = usuCEN.DameUsuarioPorNombre(searchString); // Usar el método de filtrado por nombre
+            }
+            else
+            {
+                usuEN = usuCEN.DameTodos(0, -1); // Obtener todos si no se proporciona una cadena de búsqueda
+            }
 
             IEnumerable<UsuarioViewModel> listUsus = new UsuarioAssembler().ConvertirListENToViewModel(usuEN).ToList();
             SessionClose();
@@ -77,6 +98,7 @@ namespace WebApplication2.Controllers
                    .ToList();
 
             ViewData["Avatares"] = avatares;
+
             return View();
         }
 
@@ -89,9 +111,9 @@ namespace WebApplication2.Controllers
             {
                 UsuarioRepository usuRepo = new UsuarioRepository();
                 UsuarioCEN usuCen = new UsuarioCEN(usuRepo);
-                
+                HttpContext.Session.Set<UsuarioViewModel>("usuario", usuVM);
                 usuCen.CrearUsuario(usuVM.Email, usuVM.NombreUsuario, usuVM.Nombre, usuVM.FechaNac, usuVM.Localidad, usuVM.Pais, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado , usuVM.Pass, false, usuVM.Avatar);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             catch
             {

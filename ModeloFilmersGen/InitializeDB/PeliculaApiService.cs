@@ -16,6 +16,7 @@ public class PeliculaApiService
     {
         this.apiKey = apiKey;
     }
+
     public List<int> crearPeliculasApi(List<JObject> peliculas)
     {
         PeliculaRepository pelicularepository = new PeliculaRepository();
@@ -62,6 +63,7 @@ public class PeliculaApiService
         }
         return idsPelis;
     }
+
 
     public List<JObject> GetMultipleMovies(int count)
     {
