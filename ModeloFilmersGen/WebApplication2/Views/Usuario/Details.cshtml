@@ -4,10 +4,30 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>UsuarioViewModel</h4>
+<div class="row">
+    <div class="col-sm-4 pb-3" style="max-width: 250px; max-height: 250px;">
+            <img src="/Img/@(Model.Avatar).jpeg" alt="Avatar" class="img-fluid rounded-circle" />
+    </div>
+    <div class="col-sm-8 pb-3">
+        <h3>@Model.NombreUsuario</h3>
+        <h4>@Model.Nombre</h4>
+        <br />
+            <div class="row">
+            <div class="col-sm-4 text-center">
+                    <h5>@Model.Seguidores</h5>
+                    <p>Seguidores</p>
+                </div>
+            <div class="col-sm-4 text-center">
+                    <h5>@Model.Seguidos</h5>
+                    <p>Seguidos</p>
+                </div>
+            <div class="col-sm-4 text-center">
+                    <h5>@Model.PelisVistas</h5>
+                    <p>Películas</p>
+                </div>
+            </div>
+            
+    </div>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -75,6 +95,12 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Seguidos)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PelisVistas)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PelisVistas)
         </dd>
     </dl>
 </div>

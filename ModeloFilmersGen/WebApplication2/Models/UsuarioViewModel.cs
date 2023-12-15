@@ -68,5 +68,8 @@ namespace WebApplication2.Models
         [ScaffoldColumn(false)]
         public int Seguidos { get; set; }
 
+        [ScaffoldColumn(false)]
+        public int PelisVistas { get; set; }
+
     }
 }

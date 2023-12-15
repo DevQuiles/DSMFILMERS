@@ -48,14 +48,22 @@ namespace WebApplication2.Controllers
             return RedirectToAction("Login", "Usuario");
         }
 
-        // GET: UsuarioController
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
             SessionInitialize();
             UsuarioRepository usuRepository = new UsuarioRepository(session);
             UsuarioCEN usuCEN = new UsuarioCEN(usuRepository);
 
-            IList<UsuarioEN> usuEN = usuCEN.DameTodos(0, -1);
+            IList<UsuarioEN> usuEN;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                usuEN = usuCEN.DameUsuarioPorNombre(searchString); // Usar el método de filtrado por nombre
+            }
+            else
+            {
+                usuEN = usuCEN.DameTodos(0, -1); // Obtener todos si no se proporciona una cadena de búsqueda
+            }
 
             IEnumerable<UsuarioViewModel> listUsus = new UsuarioAssembler().ConvertirListENToViewModel(usuEN).ToList();
             SessionClose();
@@ -90,6 +98,7 @@ namespace WebApplication2.Controllers
                    .ToList();
 
             ViewData["Avatares"] = avatares;
+
             return View();
         }
 
@@ -102,9 +111,9 @@ namespace WebApplication2.Controllers
             {
                 UsuarioRepository usuRepo = new UsuarioRepository();
                 UsuarioCEN usuCen = new UsuarioCEN(usuRepo);
-                
+                HttpContext.Session.Set<UsuarioViewModel>("usuario", usuVM);
                 usuCen.CrearUsuario(usuVM.Email, usuVM.NombreUsuario, usuVM.Nombre, usuVM.FechaNac, usuVM.Localidad, usuVM.Pais, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado , usuVM.Pass, false, usuVM.Avatar);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             catch
             {
