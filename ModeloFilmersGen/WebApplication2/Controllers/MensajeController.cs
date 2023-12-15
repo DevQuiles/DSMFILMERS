@@ -11,6 +11,7 @@ namespace WebApplication2.Controllers
     public class MensajeController : BasicController
     {
         // GET: MensajeController
+
         public ActionResult Index()
         {
             SessionInitialize();
@@ -32,7 +33,7 @@ namespace WebApplication2.Controllers
         }
 
         // GET: MensajeController/Create
-        public ActionResult Create()
+        public ActionResult Create(int idCom)
         {
             return View();
         }
