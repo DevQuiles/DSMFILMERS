@@ -1,3 +1,4 @@
+
 html {
   font-size: 14px;
 }
@@ -53,3 +54,79 @@ body {
     overflow-x: hidden;
     overflow-y: auto;*/ /* Scrollable contents if viewport is shorter than content. */
 /*}*/
+
+
+
+/*------------------------------------------------HOME--------------------------------------------------------*/
+
+/*------------------------------------------------MODAL--------------------------------------------------------*/
+.circle-btn {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background-color: #808080;
+    color: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+
+/*------------------------------------------------CARROUSEL--------------------------------------------------------*/
+.carousel-control-prev, .carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+}
+
+.carousel-control-prev {
+    left: 10px; 
+}
+
+.carousel-control-next {
+    right: 10px; 
+}
+
+.hover-overlay {
+    position: relative;
+}
+
+.hover-overlay .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, hsla(168, 85%, 52%, 0), hsla(263, 88%, 45%, 0) 100%);
+        transition: background 0.5s ease;
+}
+
+    .hover-overlay:hover .mask {
+        background: linear-gradient(45deg, hsla(168, 85%, 52%, 0.5), hsla(263, 88%, 45%, 0.5) 100%);
+    }
+
+
+.carousel-control-prev,
+.carousel-control-next {
+    border-radius: 50%; 
+    width: 40px; /* Ajusta el ancho del botón */
+    height: 40px; /* Ajusta la altura del botón */
+    background-color: rgba(0, 0, 0, 1); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 20px; /* Ajusta el tamaño del ícono */
+    height: 20px;
+}
+
+
