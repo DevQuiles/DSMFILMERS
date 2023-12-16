@@ -28,5 +28,9 @@ namespace WebApplication2.Models
 
         public  int idPelicula { get; set; }
 
+        public String nombrePeli { get; set; }
+
+        public String fotoPeli { get; set; }
+
     }
 }
