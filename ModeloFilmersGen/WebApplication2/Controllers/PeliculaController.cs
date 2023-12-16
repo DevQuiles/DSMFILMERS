@@ -11,7 +11,7 @@ namespace WebApplication2.Controllers
     public class PeliculaController : BasicController
     {
         // GET: PeliculaController
-        public ActionResult Index(string searchString)
+        public ActionResult Index(string searchString, string searchanyo, string searchValoracion, string searchGen)
         {
             SessionInitialize();
             PeliculaRepository peliRepository = new PeliculaRepository();
@@ -43,12 +43,13 @@ namespace WebApplication2.Controllers
 
             PeliculaEN pelEN = pelCEN.DamePorOID(id);
 
+
             PeliculaViewModel pelVM = new PeliculaAssembler().ConvertirEnToViewModel(pelEN);
+            List<string> generos = new PeliculaAssembler().ObtenerGeneros(pelEN);
 
             SessionClose();
 
             return View(pelVM);
-
            
         }
 

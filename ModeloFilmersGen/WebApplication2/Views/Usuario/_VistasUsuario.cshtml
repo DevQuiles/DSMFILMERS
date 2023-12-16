@@ -1,0 +1,17 @@
+﻿@model IEnumerable<WebApplication2.Models.PeliculaVistaViewModel>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-2 col-md-4 col-sm-6 col-12">
+            <div class="card border-0">
+                <a href="@Url.Action("Details", "Pelicula", new { id = item.idPelicula })">
+                    <img src="@item.fotoPeli" class="card-img-top img-fluid" alt="Carátula">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title text-center">@item.nombrePeli</h5>
+                </div>
+            </div>
+        </div>
+    }
+</div>

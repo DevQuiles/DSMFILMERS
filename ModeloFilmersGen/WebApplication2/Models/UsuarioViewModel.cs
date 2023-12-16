@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -70,6 +71,9 @@ namespace WebApplication2.Models
 
         [ScaffoldColumn(false)]
         public int PelisVistas { get; set; }
+
+        //[ScaffoldColumn(false)]
+        //public IList<PeliculaVistaEN> ListaPelisVistas { get; set; }
 
     }
 }
