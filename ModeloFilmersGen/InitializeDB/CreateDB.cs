@@ -111,31 +111,31 @@ namespace InitializeDB
                 PeliculaApiService movieApiService = new PeliculaApiService(apiKey);
 
                 //-------------------------------------------------------------
-                //---------------OBTENER 200 PELICULAS DEL API-----------------
+                //---------------OBTENER 200 PELICULAS DEL API---------------- -
                 //-------------------------------------------------------------
 
-                //Console.WriteLine("++++++++++++++++++++++++++++++++++++++++");
-                //Console.WriteLine("++++++++++++++20 PELICULAS+++++++++++++");
+                Console.WriteLine("++++++++++++++++++++++++++++++++++++++++");
+                Console.WriteLine("++++++++++++++20 PELICULAS+++++++++++++");
 
-                List<JObject> listaPeliculas = movieApiService.GetMultipleMovies(10);
+                List<JObject> listaPeliculas = movieApiService.GetMultipleMovies(50);
                 List<int> idsPeliculas200 = movieApiService.crearPeliculasApi(listaPeliculas);
 
                 Console.WriteLine("---------------------");
                 Console.WriteLine("---PELICULAS---------");
                 Console.WriteLine("---------------------");
 
-                foreach (int movieId in idsPeliculas200)
-                {
-                    PeliculaEN peli = peliculacen.DamePorOID(movieId);
-                    Console.WriteLine(peli.Nombre);
-                }
+                //foreach (int movieId in idsPeliculas200)
+                //{
+                //    PeliculaEN peli = peliculacen.DamePorOID(movieId);
+                //    Console.WriteLine(peli.Nombre);
+                //}
 
                 Console.WriteLine("+++++++++++++++++++++++++++");
                 Console.WriteLine("+++++++++++++++++++++++++++");
 
                 //Obtener los últimos lanzamientos
-                List<JObject> movies = movieApiService.GetLatestReleases();
-                List<int> idsPeliculasLast = movieApiService.crearPeliculasApi(movies);
+                //List<JObject> movies = movieApiService.GetLatestReleases();
+                //List<int> idsPeliculasLast = movieApiService.crearPeliculasApi(movies);
 
                 Console.WriteLine("++++++++++++++LAS ULTIMAS PELICULAS+++++++++++++");
                 Console.WriteLine("++++++++++++++LAS ULTIMAS PELICULAS+++++++++++++");
@@ -369,6 +369,9 @@ namespace InitializeDB
                 Console.WriteLine("++++++++++++++ COMUNIDAD POR OID MODIFICADA: +++++++++++++");
                 ComunidadesEN comunidadObtenida = comunidadescen.DamePorOID(idComunidad1);
 
+                int idMensaje = mensajecen.CrearMensaje("mensaje1", now, idComunidad2);
+                int idMensaje2 = mensajecen.CrearMensaje("mensaje2", new DateTime(2023, 12, 12, 0, 0, 0, DateTimeKind.Utc), idComunidad2);
+
                 if (comunidadObtenida != null)
                 {
                     Console.WriteLine($"Comunidad obtenida: {comunidadObtenida.Id}, {comunidadObtenida.Nombre}, {comunidadObtenida.Descripcion}");
@@ -593,9 +596,16 @@ namespace InitializeDB
                 foreach (var item in listactividades)
                 {
                     Console.WriteLine(item.Fecha);
+
                 }
 
+                Console.WriteLine("-----------------------------------PRUEBAS DE PELICULAS EN PLAYLIST---------------------------------------------");
+                Console.WriteLine("----------------------------------------------------------------------------------------------------------------");
+                Console.WriteLine("----------------------------------------------------------------------------------------------------------------");
 
+                int PLAYLISTPRUEBA = playlistcen.CrearPlaylist("pruebaPeliculas", "Esto es una prueba de ver si hace bn el details", "email2");
+                playlistcen.AsignarPeliculas(PLAYLISTPRUEBA, new List<int> { idPeli1, idPeli2 });
+                playlistcen.AsignarPeliculas(PLAYLISTPRUEBA, new List<int> { idPeli3, idPeli2 });
 
                 Console.WriteLine("----------------------------------------------------------------------------------------------------------------");
                 Console.WriteLine("----------------------------------------------------------------------------------------------------------------");

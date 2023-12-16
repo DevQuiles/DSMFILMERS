@@ -23,12 +23,13 @@ namespace WebApplication2.Models
         [ScaffoldColumn(false)]
         [Display(Prompt = "Introduce fecha de creación", Description = "Fecha de creacion de la comunidad", Name = "Fecha de creación")]
         [Required(ErrorMessage = "Debe indicar la fecha de creacion")]
-        public DateTime FechaCreacion { get; set; }
+        public DateOnly FechaCreacion { get; set; }
 
 
 
         [Display(Prompt = "Introduce el usuario emisor", Description = "Usuario emisor de la comunidad", Name = "Usuario emisor")]
         [Required(ErrorMessage = "Debe indicar el usuario emisor")]
         public String Emisor { get; set; }
+
     }
 }

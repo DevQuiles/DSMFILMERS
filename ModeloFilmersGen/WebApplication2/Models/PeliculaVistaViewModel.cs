@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 using System.Threading.Tasks;
 
 namespace WebApplication2.Models
@@ -25,11 +26,12 @@ namespace WebApplication2.Models
         [DataType(DataType.Date, ErrorMessage = "La fecha introducida tiene que tener un formato válido")]
         public DateTime? fecha { get; set; }
 
-        
-
         public  int idPelicula { get; set; }
 
-        public int idUsuario { get; set; }
+        public String nombrePeli { get; set; }
+
+        public String fotoPeli { get; set; }
+
 
     }
 }

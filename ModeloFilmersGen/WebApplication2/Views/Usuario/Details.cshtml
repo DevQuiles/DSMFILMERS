@@ -4,81 +4,45 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>UsuarioViewModel</h4>
+<div class="row">
+    <div class="col-sm-4 pb-3" style="max-width: 250px; max-height: 250px;">
+            <img src="/Img/@(Model.Avatar).jpeg" alt="Avatar" class="img-fluid rounded-circle" />
+    </div>
+    <div class="col-sm-8 pb-3">
+        <h3>@Model.NombreUsuario</h3>
+        <h4>@Model.Nombre</h4>
+        <br />
+            <div class="row">
+            <div class="col-sm-4 text-center">
+                    <h5>@Model.Seguidores</h5>
+                    <p>Seguidores</p>
+                </div>
+            <div class="col-sm-4 text-center">
+                    <h5>@Model.Seguidos</h5>
+                    <p>Seguidos</p>
+                </div>
+            <div class="col-sm-4 text-center">
+                    <h5>@Model.PelisVistas</h5>
+                    <p>Películas</p>
+                </div>
+            </div>
+            
+    </div>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NombreUsuario)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NombreUsuario)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaNac)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaNac)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Localidad)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Localidad)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Pais)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Pais)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Pass)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Pass)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Recompensa)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Recompensa)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Avatar)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Avatar)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Seguidores)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Seguidores)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Seguidos)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Seguidos)
-        </dd>
-    </dl>
+    <div id="vistasUsuario">
+        
+
+    </div>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Email }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        var idUsuario = '@Model.Email'; // Reemplaza esto con tu lógica para obtener el ID del usuario
+        $.get('/Usuario/Vistas/' + idUsuario, function (data) {
+            $('#vistasUsuario').html(data);
+        });
+    });
+</script>

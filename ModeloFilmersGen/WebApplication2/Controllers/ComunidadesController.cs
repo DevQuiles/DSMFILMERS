@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ModeloFilmersGen.ApplicationCore.CEN.Pruebadeesquemaproyecto;
 using ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto;
 using ModeloFilmersGen.Infraestructure.Repository.Pruebadeesquemaproyecto;
+using System.Collections.Generic;
 using WebApplication2.Assemblers;
 using WebApplication2.Models;
 
@@ -25,6 +26,21 @@ namespace WebApplication2.Controllers
             return View(listComs);
         }
 
+        public ActionResult Mensajes(int id)
+        {
+            SessionInitialize();
+            ComunidadesRepository comunidadesRepository = new ComunidadesRepository(session);
+            ComunidadesCEN comunidadesCEN = new ComunidadesCEN(comunidadesRepository);
+            ComunidadesEN comEN = comunidadesCEN.DamePorOID(id);    
+
+            IList<MensajeEN> listmensajesEN = comEN.Menesajes;
+            IList <MensajeViewModel> listmensajeVM = new MensajeAssembler().ConvertirListENToViewModel(listmensajesEN);
+
+            SessionClose();
+
+            return PartialView("_MensajesComunidad", listmensajeVM);
+        }
+
         // GET: HomeController1/Details/5
         public ActionResult Details(int id)
         {
@@ -35,9 +51,15 @@ namespace WebApplication2.Controllers
             ComunidadesEN comunidadesEN = comunidadesCEN.DamePorOID(id);
             ComunidadesViewModel comunidadesVM = new ComunidadesAssembler().ConvertirENToViewModel(comunidadesEN);
 
-
             SessionClose();
             return View(comunidadesVM);
+        }
+
+
+        // GET: HomeController1/Create ---> PARCIAL
+        public ActionResult _CreateComunidadPartial()
+        {
+            return PartialView();
         }
 
         // GET: HomeController1/Create
@@ -58,7 +80,7 @@ namespace WebApplication2.Controllers
                 //TODO 
                 int com = comCEN.CrearComunidad(comVM.Nombre, System.DateTime.Now, comVM.Descripcion, comVM.Emisor);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             catch
             {

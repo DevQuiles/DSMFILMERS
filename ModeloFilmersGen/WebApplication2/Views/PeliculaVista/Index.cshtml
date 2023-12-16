@@ -7,41 +7,47 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Create New</a>
 </p>
-<table class="table">
+
+<table class="table table-striped">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.comentario)
+                Comentario
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.fecha)
+                Fecha
+            </th>
             <th>
-                @Html.DisplayNameFor(model => model.valoracion)
+                Valoración
             </th>
+            <th>
+                Action
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.comentario)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.fecha)
-            </td>
-            <td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.comentario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fecha)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.valoracion)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-            </td>
-        </tr>
-}
+                </td>
+                <td>
+                    <div class="btn-group">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning mr-3" })
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info mr-3" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                    </div>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

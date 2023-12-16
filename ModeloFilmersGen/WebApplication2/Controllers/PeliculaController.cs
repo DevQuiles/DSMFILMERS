@@ -11,13 +11,22 @@ namespace WebApplication2.Controllers
     public class PeliculaController : BasicController
     {
         // GET: PeliculaController
-        public ActionResult Index()
+        public ActionResult Index(string searchString, string searchanyo, string searchValoracion, string searchGen)
         {
             SessionInitialize();
             PeliculaRepository peliRepository = new PeliculaRepository();
             PeliculaCEN peliCEN = new PeliculaCEN(peliRepository);
 
-            IList<PeliculaEN> peliEN = peliCEN.DameTodos(0, -1);
+            IList<PeliculaEN> peliEN;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                peliEN = peliCEN.DamePeliculaPorNombre(searchString); // Usar el método de filtrado por nombre
+            }
+            else
+            {
+                peliEN = peliCEN.DameTodos(0, -1); // Obtener todos si no se proporciona una cadena de búsqueda
+            }
 
             IEnumerable<PeliculaViewModel> listPelis = new PeliculaAssembler().ConvertirListEnToViewModel(peliEN).ToList();
             SessionClose();
@@ -34,12 +43,13 @@ namespace WebApplication2.Controllers
 
             PeliculaEN pelEN = pelCEN.DamePorOID(id);
 
+
             PeliculaViewModel pelVM = new PeliculaAssembler().ConvertirEnToViewModel(pelEN);
+            List<string> generos = new PeliculaAssembler().ObtenerGeneros(pelEN);
 
             SessionClose();
 
             return View(pelVM);
-
            
         }
 

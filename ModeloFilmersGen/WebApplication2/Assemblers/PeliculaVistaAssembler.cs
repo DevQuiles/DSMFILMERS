@@ -11,9 +11,8 @@ namespace WebApplication2.Assemblers
     public class PeliculaVistaAssembler
     {
         public PeliculaVistaViewModel ConvertirEnToViewModel(PeliculaVistaEN en)
-        {
-           
-            
+
+        {   
 
             PeliculaVistaViewModel peli = new PeliculaVistaViewModel();
             peli.Id = en.Id;
@@ -21,6 +20,7 @@ namespace WebApplication2.Assemblers
             peli.valoracion = en.Valoracion;
             peli.fecha = (DateTime)en.Fecha;
             peli.idPelicula = en.Pelicula.Id;
+
 
             return peli;
         }

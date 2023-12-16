@@ -1,30 +1,78 @@
-﻿@model WebApplication2.Models.PlaylistViewModel
+﻿@model WebApplication2.Models.PlayList_PeliculasViewModel
 
 @{
     ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .playlist-container {
+        background-color: #333;
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 10px;
+    }
 
-<h1>Details</h1>
+    body {
+        background-color: black;
+        color: white;
+    }
+
+    /* Estilos para los botones */
+    .btn-create {
+        background-color: green;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        margin-right: 5px;
+    }
+
+    .btn-return {
+        background-color: blue;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        margin-right: 5px;
+    }
+</style>
+
 
 <div>
-    <h4>PlaylistViewModel</h4>
+    <h2>@Model.Playlist.nombre</h2>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
-    </dl>
+    <p>@Model.Playlist.Descripcion</p>
+
+    <div>
+        <a class="btn btn-primary" href="@Url.Action("Index", "Pelicula")">Añadir Película</a>
+    </div>
+
+    <div class="row mt-4">
+        @if (Model.Pelicula.Any())
+        {
+            @foreach (var movie in Model.Pelicula)
+            {
+                <div class="col-md-3 mb-4">
+                    <a href="@Url.Action("Details", "Pelicula", new { id = movie.Id })" class="card-link">
+                        <div class="card">
+                            <img src="@movie.caratula" class="card-img-top" alt="Carátula de la película">
+                            <div class="card-body">
+                                <h5 class="card-title">@movie.nombre</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        }
+        else
+        {
+            <p>¡No has añadido ninguna película a tu playlist todavía!</p>
+        }
+    </div>
+
 </div>
+
 <div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Playlist.Id }) |
     <a asp-action="Index">Back to List</a>
 </div>

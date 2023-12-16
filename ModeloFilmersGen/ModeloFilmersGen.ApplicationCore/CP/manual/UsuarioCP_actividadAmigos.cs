@@ -33,8 +33,6 @@ public System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Prue
 
                 PeliculaVistaCEN peliculaVistaCEN = new PeliculaVistaCEN (CPSession.UnitRepo.PeliculaVistaRepository);
 
-
-
                 UsuarioEN usuarioConsulta = usuarioCEN.DamePorOID (p_oid);
 
                 IList<UsuarioEN> listaSeguidos = usuarioConsulta.Seguidos;

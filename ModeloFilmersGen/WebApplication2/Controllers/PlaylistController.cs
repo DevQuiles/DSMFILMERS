@@ -35,15 +35,30 @@ namespace WebApplication2.Controllers
         public ActionResult Details(int id)
         {
             SessionInitialize();
-            PlaylistRepository playlistRepository = new PlaylistRepository();
+            PlaylistRepository playlistRepository = new PlaylistRepository(session);
             PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);
 
             PlaylistEN playlistEN = playlistCEN.DamePorOID(id);
             PlaylistViewModel playlistViewModel = new PlaylistAssembler().ConvertirEnToViewModel(playlistEN);
 
+            IList<PeliculaEN> peliculasEnPlay = new List<PeliculaEN>();
+
+            foreach(var i in playlistEN.Peliculas)
+            {
+                peliculasEnPlay.Add(i);
+            }
+
+            IList<PeliculaViewModel> p = new PeliculaAssembler().ConvertirListEnToViewModel(peliculasEnPlay).ToList();
+
+            var vista = new PlayList_PeliculasViewModel
+            {
+                Playlist = playlistViewModel,
+                Pelicula = p
+            };
+
             SessionClose();
 
-            return View(playlistViewModel);
+            return View(vista);
         }
 
         // GET: PlaylistController/Create
@@ -69,8 +84,8 @@ namespace WebApplication2.Controllers
             {
                 PlaylistRepository playlistRepository = new PlaylistRepository();
                 PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);
-                playlistCEN.CrearPlaylist(play.nombre, play.Descripcion, usu.Email);
-                return RedirectToAction(nameof(Index));
+                int id =  playlistCEN.CrearPlaylist(play.nombre, play.Descripcion, usu.Email);
+                return RedirectToAction("Details", new { id });
             }
             catch
             {
