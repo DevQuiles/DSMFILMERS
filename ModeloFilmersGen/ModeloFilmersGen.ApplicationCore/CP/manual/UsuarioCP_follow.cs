@@ -47,7 +47,7 @@ namespace ModeloFilmersGen.ApplicationCore.CP.Pruebadeesquemaproyecto
 
                 usuarioCEN.AsignarSeguidores(p_usuarioSeguido, new List<string> { p_usuarioSeguidor });
 
-                int i = notiCEN.CrearNotificacion("Te ha seguido  --> " + usuariosSeguidorEN.NomUsuario, p_usuarioSeguido, DateTime.Now, false, false);
+                int i = notiCEN.CrearNotificacion("Te ha seguido --> " + usuariosSeguidorEN.NomUsuario, p_usuarioSeguido, DateTime.Now, false, false);
 
                 Console.WriteLine(notiCEN.DamePorOID(i).Contenido);
 

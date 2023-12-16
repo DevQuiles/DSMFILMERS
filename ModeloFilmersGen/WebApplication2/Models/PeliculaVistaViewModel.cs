@@ -26,11 +26,13 @@ namespace WebApplication2.Models
         [DataType(DataType.Date, ErrorMessage = "La fecha introducida tiene que tener un formato válido")]
         public DateTime? fecha { get; set; }
 
-        public  int idPelicula { get; set; }
-
         public String nombrePeli { get; set; }
 
+        public int idPelicula { get; set; }
+
         public String fotoPeli { get; set; }
+
+        public String nombreUsuario { get; set; }
 
 
     }

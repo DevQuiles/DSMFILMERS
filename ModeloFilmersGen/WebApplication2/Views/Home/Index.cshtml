@@ -93,8 +93,25 @@
 @*----------------------------------------------Vista de la pelicula--------------------------------------------------------------------------*@
 
 <!-- Muestra las películas -->
-<h2>Películas</h2>
+<h2>Últimas peliculas</h2>
 
+<div class="row">
+        @foreach (var item in Model.Peliculas.Take(12))
+        {
+            <div class="col-xxl-2 col-xl-3 col-lg-4 col-sm-6 col-12">
+                <div class="card border-0">
+                    <a href="@Url.Action("Details", "Pelicula", new { id = item.Id })">
+                        <img src="@item.caratula" class="card-img-top img-fluid" alt="Carátula">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title text-center">@item.nombre</h5>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+<h2>Actividad de tus amigos</h2>
 <div id="carruselPeliculas" class="carousel slide carousel-fade" data-ride="carousel" data-interval ="false">
     <div class="carousel-inner">
         @{ 
@@ -106,27 +123,32 @@
 
         <div class="carousel-item active">
             <div class="row">
-                @foreach (var pelicula in Model.Peliculas)
+                @foreach (var pelicula in Model.UltimasVistas)
                 {
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                    <div class="col-xxl-2 col-xl-3 col-lg-4 col-sm-6 col-12">
                         <div class="card border-0">
                             <div class="hover-overlay">
-                                <a href="@Url.Action("Details", "Pelicula", new { id = pelicula.Id })">
-                                <img src="@pelicula.caratula" class="card-img-top img-fluid" alt="Carátula">
+                                <a href="@Url.Action("Details", "Pelicula", new { id = pelicula.idPelicula })">
+                                <img src="@pelicula.fotoPeli" class="card-img-top img-fluid" alt="Carátula">
+                                 
                                 <div class="mask"></div>
                             </a>
+                            <h5 class="card-title text-center">@pelicula.nombrePeli</h5>
 
                             </div>
                             
                             
                             <div class="card-body">
-                                <h5 class="card-title text-center">@pelicula.nombre</h5>
+                               
+                                <h5 class="card-title text-center">@pelicula.nombreUsuario</h5>
+                                <h5 class="card-title text-center">@pelicula.comentario</h5>
+
                             </div>
                         </div>
                     </div>
 
                     contador++;
-                    if (contador % 8 == 0 && !Model.Peliculas.Last().Equals(pelicula))
+                    if (contador % 6 == 0 && !Model.Peliculas.Last().Equals(pelicula))
                     {
                         esPrimerItem = false;
                         @:</div></div><div class="carousel-item"><div class="row">
@@ -136,35 +158,16 @@
 
             </div>
         </div>
+         @if (Model.UltimasVistas.Count() % 6 != 0) 
+    {
+        <a class="carousel-control-prev" href="#carruselPeliculas" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carruselPeliculas" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    }
     </div>
-    <a class="carousel-control-prev" href="#carruselPeliculas" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carruselPeliculas" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div> 
 
-<!-- Muestra las últimas vistas -->
-<h2>Últimas Películas Vistas</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>ID Película</th>
-            <th>Comentario</th>
-            <!-- Agrega más columnas según sea necesario -->
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var vista in Model.UltimasVistas)
-        {
-            <tr>
-                <td>@vista.idPelicula</td>
-                <td>@vista.comentario</td>
-                <!-- Muestra más datos de la vista -->
-            </tr>
-        }
-    </tbody>
-</table>
