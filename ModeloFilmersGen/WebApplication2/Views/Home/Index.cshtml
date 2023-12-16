@@ -1,26 +1,164 @@
 ﻿@model WebApplication2.Models.PeliculasYVistasViewModel
 
+
+
 @{
     ViewData["Title"] = "Index";
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 }
 
-<h1>Index</h1>
 
-<!-- Muestra las películas -->
-<h2>Películas</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Carátula</th>
-            <!-- Agrega más columnas según sea necesario -->
-        </tr>
+
+
+
+<h1>INICIO</h1>
+
+<div class="container mt-5">
+    <div class="dropup">
+        <button class="btn circle-btn" type="button" id="dropupMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-plus"></i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropupMenuButton">
+            <a class="dropdown-item" href="#" id="openCreateModal">Añadir Pelicula a vista</a>
+            <a class="dropdown-item" href="#" id="openCrearPlaylist">Crear Playlist</a>
+            <a class="dropdown-item" href="#" id="openCrearComunidad">Crear comunidad</a>
+        </div>
+    </div>
+</div>
+
+@*----------------------------------------------MODAL DE CREAR COMUNIDAD--------------------------------------------------------------------*@
+
+<!-- Modal -->
+<div class="modal" tabindex="-1" role="dialog" id="createModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Crear una nueva comunidad</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Contenido de la vista _Create se cargará aquí -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+            <div class="modal-footer">
+<script>
+    $(document).ready(function () {
+        $('#openCrearComunidad').on('click', function () {
+            $('#createModal .modal-body').load('/Comunidades/Create');
+            $('#createModal').modal('show');
+        });
+    });
+</script>
+
+@*----------------------------------------------MODAL DE CREAR PlayList-----------------------------------------------------------------------*@
+
+<!-- Modal -->
+<div class="modal" tabindex="-1" role="dialog" id="createModalPlaylist">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Crear una nueva playlist</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Contenido de la vista _Create se cargará aquí -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#openCrearPlaylist').on('click', function () {
+            $('#createModalPlaylist .modal-body').load('/Playlist/Create');
+            $('#createModalPlaylist').modal('show');
+        });
+    });
+
+</script>
+
+@*----------------------------------------------Vista de la pelicula--------------------------------------------------------------------------*@
+
+
+<script>
+
+<div id="carruselPeliculas" class="carousel slide carousel-fade" data-ride="carousel" data-interval ="false">
+    <div class="carousel-inner">
+        @{ 
+            bool esPrimerItem = true;
+            int contador = 0;
+
+
+        }
+
+        <div class="carousel-item active">
+            <div class="row">
+                @foreach (var pelicula in Model.Peliculas)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                        <div class="card border-0">
+                            <div class="hover-overlay">
+                                <a href="@Url.Action("Details", "Pelicula", new { id = pelicula.Id })">
+                                <img src="@pelicula.caratula" class="card-img-top img-fluid" alt="Carátula">
+                                <div class="mask"></div>
+                            </a>
+
+                            </div>
+                            
+                            
+                            <div class="card-body">
+                                <h5 class="card-title text-center">@pelicula.nombre</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    contador++;
+                    if (contador % 8 == 0 && !Model.Peliculas.Last().Equals(pelicula))
+                    {
+                        esPrimerItem = false;
+                        @:</div></div><div class="carousel-item"><div class="row">
+                    }
+                }
+
+
+            </div>
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carruselPeliculas" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carruselPeliculas" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div> 
     </thead>
     <tbody>
         @foreach (var pelicula in Model.Peliculas)
         {
             <tr>
                 <td>@pelicula.nombre</td>
+                <td>@pelicula.caratula</td>
+                <!-- Muestra más datos de la película -->
+            </tr>
+        }
+    </tbody>
+</table>
                 <td>@pelicula.caratula</td>
                 <!-- Muestra más datos de la película -->
             </tr>
@@ -49,3 +187,7 @@
         }
     </tbody>
 </table>
+
+
+
+

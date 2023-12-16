@@ -1,4 +1,5 @@
 ﻿using ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto;
+using ModeloFilmersGen.Infraestructure.Repository.Pruebadeesquemaproyecto;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,6 +12,9 @@ namespace WebApplication2.Assemblers
     {
         public PeliculaVistaViewModel ConvertirEnToViewModel(PeliculaVistaEN en)
         {
+           
+            
+
             PeliculaVistaViewModel peli = new PeliculaVistaViewModel();
             peli.Id = en.Id;
             peli.comentario = en.Comentario;

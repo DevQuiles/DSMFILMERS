@@ -27,8 +27,8 @@ namespace WebApplication2.Controllers
         {
             SessionInitialize();
 
-            PeliculaRepository peliculaRepository = new PeliculaRepository();
-            PeliculaVistaRepository peliculaVistaRepository = new PeliculaVistaRepository(); 
+            PeliculaRepository peliculaRepository = new PeliculaRepository(session);
+           
 
             PeliculaCEN peliculacen = new PeliculaCEN(peliculaRepository);
             UsuarioCP usCP = new UsuarioCP(new SessionCPNHibernate());
@@ -36,6 +36,8 @@ namespace WebApplication2.Controllers
 
             IList<PeliculaEN> listapelEN = peliculacen.DameTodos(0, -1);
             IList<PeliculaVistaEN> ultimasVistasEN = usCP.ActividadAmigos("email6"); 
+            
+            
 
             IEnumerable<PeliculaViewModel> peliculasViewModel = new PeliculaAssembler().ConvertirListEnToViewModel(listapelEN.ToList());
             IEnumerable<PeliculaVistaViewModel> peliculasVistasViewModel = new PeliculaVistaAssembler().ConvertirListEnToViewModel(ultimasVistasEN.ToList());
