@@ -94,7 +94,6 @@ namespace WebApplication2.Controllers
                     comentario = peliculaVistaEN.Comentario,
                     valoracion = peliculaVistaEN.Valoracion,
                     fecha = (DateTime)peliculaVistaEN.Fecha,
-                    idPelicula = peliculaVistaEN.Pelicula.Id,
                     nombrePeli = peliculaEN.Nombre,
                     fotoPeli = peliculaEN.Caratula, // Suponiendo que 'Caratula' es la propiedad que contiene la URL de la imagen de la carátula
                                                     // Agrega otras propiedades que necesites

@@ -109,6 +109,12 @@ public void ModifyDefault (NotificacionesEN notificaciones)
 
                 notificacionesNH.Destacada = notificaciones.Destacada;
 
+
+                notificacionesNH.UsuariorEmisor = notificaciones.UsuariorEmisor;
+
+
+                notificacionesNH.Pelicula = notificaciones.Pelicula;
+
                 session.Update (notificacionesNH);
                 SessionCommit ();
         }
@@ -207,6 +213,12 @@ public void ModificarNotificacion (NotificacionesEN notificaciones)
 
 
                 notificacionesNH.Destacada = notificaciones.Destacada;
+
+
+                notificacionesNH.UsuariorEmisor = notificaciones.UsuariorEmisor;
+
+
+                notificacionesNH.Pelicula = notificaciones.Pelicula;
 
                 session.Update (notificacionesNH);
                 SessionCommit ();
