@@ -33,24 +33,32 @@ public System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Prue
 
                 PeliculaVistaCEN peliculaVistaCEN = new PeliculaVistaCEN (CPSession.UnitRepo.PeliculaVistaRepository);
 
+
+
                 UsuarioEN usuarioConsulta = usuarioCEN.DamePorOID (p_oid);
-
-                IList<UsuarioEN> listaSeguidos = usuarioConsulta.Seguidos;
                 IList<PeliculaVistaEN> resultado = new List<PeliculaVistaEN>();
+                if (usuarioConsulta.Seguidos != null && usuarioConsulta.Seguidos.Any()) { 
 
-                foreach (var user in listaSeguidos) {
+                    IList<UsuarioEN> listaSeguidos = usuarioConsulta.Seguidos;
+                    
+
+                    foreach (var user in listaSeguidos)
+                    {
                         var ultimasTresPeliculas = user.PeliculasVistas
-                                                   .OrderByDescending (p => p.Fecha)
-                                                   .Take (3)
-                                                   .ToList ();
+                                                   .OrderByDescending(p => p.Fecha)
+                                                   .Take(3)
+                                                   .ToList();
 
-                        foreach (var pelicula in ultimasTresPeliculas) {
-                                resultado.Add (pelicula);
+                        foreach (var pelicula in ultimasTresPeliculas)
+                        {
+                            resultado.Add(pelicula);
                         }
-                }
+                    }
 
-                // Ordenar la lista acumulativa por fecha
-                resultado = resultado.OrderByDescending (p => p.Fecha).ToList ();
+                    // Ordenar la lista acumulativa por fecha
+                    resultado = resultado.OrderByDescending(p => p.Fecha).ToList();
+                }
+                
 
                 CPSession.Commit ();
                 return resultado;

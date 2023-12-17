@@ -24,6 +24,12 @@
 					<property name="Destacada" type="boolean"> 
 						<column name="destacada"  not-null="true"/>
 					</property>
+					<property name="UsuariorEmisor" type="string"> 
+						<column name="usuariorEmisor"  not-null="true"/>
+					</property>
+					<property name="Pelicula" type="integer"> 
+						<column name="pelicula"  not-null="true"/>
+					</property>
 			
 			
 			
@@ -36,6 +42,10 @@
 			
 			
 			
+			
+			
+					
+					
 					
 					
 					
