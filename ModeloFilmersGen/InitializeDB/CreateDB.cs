@@ -117,7 +117,7 @@ namespace InitializeDB
                 Console.WriteLine("++++++++++++++++++++++++++++++++++++++++");
                 Console.WriteLine("++++++++++++++20 PELICULAS+++++++++++++");
 
-                List<JObject> listaPeliculas = movieApiService.GetMultipleMovies(50);
+                List<JObject> listaPeliculas = movieApiService.GetMultipleMovies(300);
                 List<int> idsPeliculas200 = movieApiService.crearPeliculasApi(listaPeliculas);
 
                 Console.WriteLine("---------------------");
