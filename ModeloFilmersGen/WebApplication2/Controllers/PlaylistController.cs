@@ -16,6 +16,22 @@ namespace WebApplication2.Controllers
 {
     public class PlaylistController : BasicController
     {
+        [HttpPost]
+        public IActionResult AgregarPeliculaAPlaylist(string idPelicula, string idPlaylist)
+        {
+            SessionInitialize();
+            int idP = int.Parse(idPelicula);
+            int idPlay = int.Parse(idPlaylist);
+
+            PlaylistRepository playlistRepository = new PlaylistRepository();
+            PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);      
+
+            playlistCEN.AsignarPeliculas(idPlay, new List<int> { idP });
+
+            SessionClose();
+            return Json(new { success = true, redirectUrl = Url.Action("Details", new { id = idPlay }) }); ;
+
+        }
 
         public ActionResult PlayListByUsuario()
         {
@@ -23,20 +39,22 @@ namespace WebApplication2.Controllers
             UsuarioViewModel usuario = HttpContext.Session.Get<UsuarioViewModel>("usuario");
             UsuarioRepository usR = new UsuarioRepository(session);
             UsuarioCEN usuarioCEN = new UsuarioCEN(usR);
-            UsuarioEN usuarioEN = usuarioCEN.DamePorOID(usuario.Email);
-
             var playlistENs = new List<object>();
-
-            foreach (var i in usuarioEN.Playlistcreadas)
+            if (usuario != null)
             {
-                var playlistItem = new
+                UsuarioEN usuarioEN = usuarioCEN.DamePorOID(usuario.Email);
+                foreach (var i in usuarioEN.Playlistcreadas)
                 {
-                    nombrePlaylist = i.Nombre
-                };
+                    var playlistItem = new
+                    {
+                        id = i.Id,
+                        nombrePlaylist = i.Nombre,
+                        descripcion = i.Descripcion
+                    };
 
-                playlistENs.Add(playlistItem);
+                    playlistENs.Add(playlistItem);
+                }
             }
-
             return Json(playlistENs);
         }
 
@@ -48,11 +66,11 @@ namespace WebApplication2.Controllers
             PlaylistCEN playCEN = new PlaylistCEN(playRepository);
 
             IList<PlaylistEN> playEN = playCEN.DameTodos(0, -1);
-
-            IEnumerable<PlaylistViewModel> listPlay = new PlaylistAssembler().ConvertirListEnToViewModel(playEN).ToList();
+            IEnumerable<PlaylistViewModel> listPlay = playEN.Select(en => new PlaylistAssembler().ConvertirEnToViewModel(en));
             SessionClose();
 
             return View(listPlay);
+            
         }
 
         // GET: PlaylistController/Details/5
@@ -93,7 +111,6 @@ namespace WebApplication2.Controllers
             PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);
             PlaylistEN playlistEN = new PlaylistEN();
             PlaylistViewModel playlistViewModel = new PlaylistAssembler().ConvertirEnToViewModel(playlistEN);
-            
 
             SessionClose();
 

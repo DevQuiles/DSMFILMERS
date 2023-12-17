@@ -76,7 +76,7 @@
                 <select id="desplegable" class="form-control"></select>
             </dt>
             <dd class="col-sm-4">
-                <button class="btn btn-primary" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-primary" id="btnAñadir" aria-haspopup="true" aria-expanded="false">
                     Añadir
                 </button>
             </dd>
@@ -91,9 +91,24 @@
     <a asp-action="Index">Volver</a>
 </div>
 
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         mostrarDesplegable(); // Mostrar el desplegable al cargar la página
+
+        document.getElementById("btnAñadir").addEventListener("click", function () {
+            // Obtener la opción seleccionada del desplegable
+            var desplegable = document.getElementById("desplegable");
+            var opcionSeleccionada = desplegable.options[desplegable.selectedIndex];
+
+            // Obtener el ID de la película y el ID de la playlist
+            var idPelicula = '@Model.Id';
+            var idPlaylist = opcionSeleccionada.value;
+            console.log(idPelicula);
+            console.log(idPlaylist);
+            // Llamar a la función y pasar ambos parámetros
+            agregarPeliculaAPlaylist(idPelicula, idPlaylist);
+        });
 
         function mostrarDesplegable() {
             fetch("/Playlist/PlayListByUsuario")
@@ -104,9 +119,10 @@
 
                     data.forEach(function (playlist) {
                         var opcion = document.createElement("option");
+                        opcion.value = playlist.id; // Asignar el ID de la playlist al valor
                         opcion.text = playlist.nombrePlaylist;
 
-                        desplegable.add(opcion);
+                        desplegable.add(opcion);                     
                     });
 
                     desplegable.style.display = "block";
@@ -114,61 +130,23 @@
                 })
                 .catch(error => console.error("Error al obtener la lista de playlists:", error));
         }
+
+        function agregarPeliculaAPlaylist(idPelicula, idPlaylist) {
+            // Realizar la llamada AJAX al controlador
+            $.ajax({
+                url: '/Playlist/AgregarPeliculaAPlaylist',
+                type: 'POST',
+                data: { idPelicula: idPelicula, idPlaylist: idPlaylist },
+                success: function (result) {
+                    // Manejar el éxito de la llamada AJAX
+                    // console.log(result);
+                    window.location.href = result.redirectUrl;
+                },
+                error: function (error) {
+                    // Manejar el error de la llamada AJAX
+                    console.error("Error al llamar al controlador:", error);
+                }
+            });
+        }
     });
 </script>
-
-@* 
-<script>
-    // Función para obtener elementos dinámicamente
-    function obtenerElementos() {
-
-        // Realizar una solicitud AJAX al servidor
-        $.ajax({
-            url: '/Playlist/PlayListByUsuario', // Ajusta la URL según tu configuración
-            type: 'GET', // O 'GET' según lo que necesites
-            dataType: 'json', // O 'html', 'text', etc.
-            success: function (data) {
-                // Manejar la respuesta del servidor
-                console.log('Éxito: ', data);
-                $.each(data, function (index, playlist) {
-                    llenarDesplegable(data);
-                });
-            },
-            error: function (error) {
-                // Manejar errores
-                console.error('Error: ', error);
-            }
-        });
-    }
-
-    // Función para llenar el desplegable con elementos
-    function llenarDesplegable(data) {
-        var contenidoDesplegable = $("#contenidoDesplegable");
-
-        // Limpiamos el contenido actual del desplegable
-        contenidoDesplegable.empty();
-
-        // Llenamos el desplegable con los nuevos elementos
-        $.each(data, function (index, playlist) {
-            contenidoDesplegable.append('<a class="dropdown-item" href="#">' + playlist.nombre + '</a>');
-        });
-    }
-
-    // Llamamos a la función para obtener elementos al cargar la página
-    $(document).ready(function () {
-        obtenerElementos();
-    });
-
-    // Agregamos un evento al botón para volver a obtener elementos al hacer clic
-    $("#btnDesplegable").on("click", function () {
-        obtenerElementos();
-    });
-
-    // // Llamamos a la función para llenar el desplegable al cargar la página
-    // llenarDesplegable();
-
-    // // Agregamos un evento al botón para volver a llenar el desplegable al hacer clic
-    // $("#btnDesplegable").on("click", function () {
-    //     llenarDesplegable();
-    // });
-</script> *@

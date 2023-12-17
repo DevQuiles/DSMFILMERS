@@ -30,12 +30,42 @@
             <i class="fa fa-plus"></i>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropupMenuButton">
-            <a class="dropdown-item" href="#" id="openCreateModal">Añadir Pelicula a vista</a>
+            <a class="dropdown-item" href="#" id="openCreateModalPeliculaVista">Añadir Pelicula a vista</a>
             <a class="dropdown-item" href="#" id="openCrearPlaylist">Crear Playlist</a>
             <a class="dropdown-item" href="#" id="openCrearComunidad">Crear comunidad</a>
         </div>
     </div>
 </div>
+@*----------------------------------------------MODAL DE ANYADIL PELICULA A VISTA--------------------------------------------------------------------*@
+
+<!-- Modal -->
+<div class="modal" tabindex="-1" role="dialog" id="createModalPelicualaVista">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Crear una nueva comunidad</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Contenido de la vista _Create se cargará aquí -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#openCreateModalPeliculaVista').on('click', function () {
+            $('#createModalPelicualaVista .modal-body').load('/PeliculaVista/Create');
+            $('#createModalPelicualaVista').modal('show');
+        });
+    });
+</script>
 
 @*----------------------------------------------MODAL DE CREAR COMUNIDAD--------------------------------------------------------------------*@
 

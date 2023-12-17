@@ -10,6 +10,10 @@ namespace WebApplication2.Controllers
 {
     public class PeliculaController : BasicController
     {
+
+
+       
+
         // GET: PeliculaController
         public ActionResult Index(string searchString)
         {
