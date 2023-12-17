@@ -109,10 +109,5 @@ public System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Prue
 {
         return _IPeliculaRepository.DamePeliculasPorFiltro (p_genero, p_anyo, p_puntuacion);
 }
-
-        public IList<PeliculaEN> DamePeliculaPorNombre()
-        {
-            throw new NotImplementedException();
-        }
-    }
+}
 }

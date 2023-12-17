@@ -130,3 +130,10 @@ body {
 }
 
 
+
+.icon-placeholder {
+    /* Estilo para el ícono */
+    display: inline-block;
+    width: 30px; /* O el tamaño que prefieras */
+    text-align: center;
+}

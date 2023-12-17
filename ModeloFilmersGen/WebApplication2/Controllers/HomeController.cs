@@ -37,32 +37,43 @@ namespace WebApplication2.Controllers
             UsuarioCP usCP = new UsuarioCP(new SessionCPNHibernate());
             UsuarioCEN usCEN = new UsuarioCEN(usuarioRepository);
 
-
+            
             IList<PeliculaEN> listapelEN = peliculacen.DameTodos(0, -1);
 
-            IList<PeliculaVistaEN> ultimasVistasEN = usCP.ActividadAmigos("email6");
+
+            UsuarioViewModel usuario = HttpContext.Session.Get<UsuarioViewModel>("usuario");
             IList<PeliculaVistaViewModel> listapelvistaVM = new List<PeliculaVistaViewModel>();
+            if (usuario != null)
+            {
 
-            foreach (var ultVistas in ultimasVistasEN) {
-
-                PeliculaEN peliculaEN = peliculacen.DamePorOID(ultVistas.Pelicula.Id);
-                UsuarioEN usuEN = usCEN.DamePorOID(ultVistas.Usuario.Email);
-
-                PeliculaVistaViewModel pelicuVM = new PeliculaVistaViewModel
+                IList<PeliculaVistaEN> ultimasVistasEN = usCP.ActividadAmigos(usuario.Email);
+                
+                foreach (var ultVistas in ultimasVistasEN)
                 {
-                    Id = ultVistas.Id,
-                    comentario = ultVistas.Comentario,
-                    valoracion = ultVistas.Valoracion,
-                    fecha = (DateTime)ultVistas.Fecha,
-                    idPelicula = ultVistas.Pelicula.Id,
-                    nombrePeli = peliculaEN.Nombre,
-                    fotoPeli = peliculaEN.Caratula,
-                    nombreUsuario = usuEN.Nombre,
 
-                };
+                    PeliculaEN peliculaEN = peliculacen.DamePorOID(ultVistas.Pelicula.Id);
+                    UsuarioEN usuEN = usCEN.DamePorOID(ultVistas.Usuario.Email);
 
-                listapelvistaVM.Add(pelicuVM);
+                    PeliculaVistaViewModel pelicuVM = new PeliculaVistaViewModel
+                    {
+                        Id = ultVistas.Id,
+                        comentario = ultVistas.Comentario,
+                        valoracion = ultVistas.Valoracion,
+                        fecha = (DateTime)ultVistas.Fecha,
+                        idPelicula = ultVistas.Pelicula.Id,
+                        nombrePeli = peliculaEN.Nombre,
+                        fotoPeli = peliculaEN.Caratula,
+                        nombreUsuario = usuEN.Nombre,
+
+                    };
+
+                    listapelvistaVM.Add(pelicuVM);
+                }
             }
+            
+            
+
+            
             
 
             IEnumerable<PeliculaViewModel> peliculasViewModel = new PeliculaAssembler().ConvertirListEnToViewModel(listapelEN.ToList());

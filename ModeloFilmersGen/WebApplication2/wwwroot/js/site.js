@@ -8,3 +8,6 @@
 $('#carruselPeliculas').carousel({
     interval: false
 });
+
+
+

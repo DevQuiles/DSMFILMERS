@@ -6,6 +6,17 @@
     ViewData["Title"] = "Index";
 }
 
+@{
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    string nombre = "";
+    string email = "";
+    if(usuario != null)
+    {
+        nombre = usuario.Nombre;
+        email = usuario.Email;
+    }
+}
+
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -111,8 +122,20 @@
         }
     </div>
 
-<h2>Actividad de tus amigos</h2>
-<div id="carruselPeliculas" class="carousel slide carousel-fade" data-ride="carousel" data-interval ="false">
+ @{ 
+            bool iniciado = false;
+            }
+
+@if (usuario != null)
+{
+    <h2>Actividad de tus amigos</h2>
+
+        iniciado = true;
+    
+}
+@if (Model.UltimasVistas != null && Model.UltimasVistas.Any())
+{
+    <div id="carruselPeliculas" class="carousel slide carousel-fade" data-ride="carousel" data-interval ="false">
     <div class="carousel-inner">
         @{ 
             bool esPrimerItem = true;
@@ -159,15 +182,23 @@
             </div>
         </div>
          @if (Model.UltimasVistas.Count() % 6 != 0) 
-    {
-        <a class="carousel-control-prev" href="#carruselPeliculas" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carruselPeliculas" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    }
+        {
+                <a class="carousel-control-prev" href="#carruselPeliculas" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carruselPeliculas" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+        }
     </div>
+    </div>
+}
+else if(iniciado)
+    {
+        <div class="alert alert-info mt-2" role="alert">
+            No tienes amigos o ellos aún no han visto ninguna película.
+        </div>
+    }
 
