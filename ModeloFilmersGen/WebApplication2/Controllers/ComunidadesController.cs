@@ -73,14 +73,15 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ComunidadesViewModel comVM)
         {
+            UsuarioViewModel usuario = HttpContext.Session.Get<UsuarioViewModel>("usuario");
+
             try
             {
                 ComunidadesRepository comRepository = new ComunidadesRepository();
                 ComunidadesCEN comCEN = new ComunidadesCEN(comRepository);
-                //TODO 
-                int com = comCEN.CrearComunidad(comVM.Nombre, System.DateTime.Now, comVM.Descripcion, comVM.Emisor);
+                int com = comCEN.CrearComunidad(comVM.Nombre, System.DateTime.Now, comVM.Descripcion, usuario.Email);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Comunidades");
             }
             catch
             {

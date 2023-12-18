@@ -4,69 +4,150 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+<style>
+    .img-reducida {
+        max-width: 50%;
+        height: auto;
+    }
+</style>
+
+<h1>@Html.DisplayFor(model => model.nombre)</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <img src="@Html.DisplayFor(model => model.caratula)" alt="IMG" class="img-reducida" />
+    </div>
+
+    <div class="col-md-8">
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.fecha)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.fecha)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.duracion)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.duracion)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.puntuacion)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.puntuacion)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.estado)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.estado)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.genero)
+            </dt>
+            <dd class="col-sm-10">
+                @foreach (var genero in Model.genero)
+                {
+                    <span>@genero</span>
+                    if (!genero.Equals(Model.genero.Last())) // Evita agregar coma después del último elemento
+                    {
+                        <span>, </span>
+                    }
+                }
+            </dd>
+            <dt class ="col-sm-8">
+                <h4>¡Añade la pelicula a una de tus playlis!</h4>
+                <hr />
+            </dt>
+            <dt class="col-sm-8">
+                <select id="desplegable" class="form-control"></select>
+            </dt>
+            <dd class="col-sm-4">
+                <button class="btn btn-primary" id="btnAñadir" aria-haspopup="true" aria-expanded="false">
+                    Añadir
+                </button>
+            </dd>
+        </dl>
+        <div>
+            
+        </div>
+    </div>
+</div>
 
 <div>
-    <h4>PeliculaViewModel</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.caratula)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.caratula)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.fecha)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.fecha)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.duracion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.duracion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.puntuacion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.puntuacion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.estado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.estado)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.genero)
-        </dt>
-        <dd class="col-sm-10">
-            @foreach (var genre in Model.genero)
-            {
-                <span>@genre</span>
-
-                <br />
-            }
-        </dd>
-
-    </dl>
+    <a asp-action="Index">Volver</a>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        mostrarDesplegable(); // Mostrar el desplegable al cargar la página
+
+        document.getElementById("btnAñadir").addEventListener("click", function () {
+            // Obtener la opción seleccionada del desplegable
+            var desplegable = document.getElementById("desplegable");
+            var opcionSeleccionada = desplegable.options[desplegable.selectedIndex];
+
+            // Obtener el ID de la película y el ID de la playlist
+            var idPelicula = '@Model.Id';
+            var idPlaylist = opcionSeleccionada.value;
+            console.log(idPelicula);
+            console.log(idPlaylist);
+            // Llamar a la función y pasar ambos parámetros
+            agregarPeliculaAPlaylist(idPelicula, idPlaylist);
+        });
+
+        function mostrarDesplegable() {
+            fetch("/Playlist/PlayListByUsuario")
+                .then(response => response.json())
+                .then(data => {
+                    var desplegable = document.getElementById("desplegable");
+                    desplegable.innerHTML = "";
+
+                    data.forEach(function (playlist) {
+                        var opcion = document.createElement("option");
+                        opcion.value = playlist.id; // Asignar el ID de la playlist al valor
+                        opcion.text = playlist.nombrePlaylist;
+
+                        desplegable.add(opcion);                     
+                    });
+
+                    desplegable.style.display = "block";
+                    $('#desplegable').dropdown(); // Utiliza Bootstrap para el dropdown
+                })
+                .catch(error => console.error("Error al obtener la lista de playlists:", error));
+        }
+
+        function agregarPeliculaAPlaylist(idPelicula, idPlaylist) {
+            // Realizar la llamada AJAX al controlador
+            $.ajax({
+                url: '/Playlist/AgregarPeliculaAPlaylist',
+                type: 'POST',
+                data: { idPelicula: idPelicula, idPlaylist: idPlaylist },
+                success: function (result) {
+                    // Manejar el éxito de la llamada AJAX
+                    // console.log(result);
+                    window.location.href = result.redirectUrl;
+                },
+                error: function (error) {
+                    // Manejar el error de la llamada AJAX
+                    console.error("Error al llamar al controlador:", error);
+                }
+            });
+        }
+    });
+</script>
