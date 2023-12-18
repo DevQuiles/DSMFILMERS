@@ -40,7 +40,7 @@ public ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.Recomendacion
 
                 
 
-                int i = notiCEN.CrearNotificacion (usuEN.Nombre + " te ha recomendado la pelicula ", p_recomendado, DateTime.Now, false, false,usuEN.Email,p_pelicula);
+                int i = notiCEN.CrearNotificacion (usuEN.NomUsuario + " te ha recomendado la pelicula ", p_recomendado, DateTime.Now, false, false,usuEN.Email,p_pelicula);
 
                 Console.WriteLine (notiCEN.DamePorOID (i).Contenido);
 

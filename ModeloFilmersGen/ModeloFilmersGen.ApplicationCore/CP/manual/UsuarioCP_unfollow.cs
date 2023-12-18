@@ -36,7 +36,7 @@ namespace ModeloFilmersGen.ApplicationCore.CP.Pruebadeesquemaproyecto
 
                 usuarioCEN.DesasignarSeguidores(p_seguido, new List<string> { p_seguidor });
 
-                int i = notiCEN.CrearNotificacion(usEN.Nombre + " te ha dejado seguir :( ", p_seguido, DateTime.Now, false, false, usEN.Email, -1);
+                int i = notiCEN.CrearNotificacion(usEN.NomUsuario + " te ha dejado seguir :( ", p_seguido, DateTime.Now, false, false, usEN.Email, -1);
 
                 Console.WriteLine(notiCEN.DamePorOID(i).Contenido);
 
