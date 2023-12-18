@@ -494,7 +494,7 @@ namespace InitializeDB
                 Console.WriteLine("Disponible? -> " + usuarioR.RecompensaDisponible);
 
                 //marcarDestacada --------------------------------------------------------
-                int i = notificacionescen.CrearNotificacion("hola", emailUsuario2, now, false, false);
+                int i = notificacionescen.CrearNotificacion("hola", emailUsuario2, now, false, false, emailUsuario4, -1);
                 notificacionescen.MarcarDestacada(i);
                 Console.WriteLine(i);
                 NotificacionesEN not = notificacionescen.DamePorOID(i);

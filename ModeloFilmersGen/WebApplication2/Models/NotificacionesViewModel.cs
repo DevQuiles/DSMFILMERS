@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using NHibernate.Linq.Functions;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApplication2.Models
 {
@@ -21,5 +22,14 @@ namespace WebApplication2.Models
 
         [ScaffoldColumn(false)]
         public String IdUsuario { get; set; }
+
+        public int idPelicula { get; set; }
+
+        public string nombrePeli { get; set; }
+
+        public String IdUsuarioEmisor {  get; set; }
+
+        public ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum fotoUsuarioEmisor {  get; set; }
+
     }
 }

@@ -1,4 +1,6 @@
 ﻿using ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto;
+using NHibernate;
+using NuGet.Packaging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,6 +12,7 @@ namespace WebApplication2.Assemblers
 {
     public class PeliculaAssembler
     {
+       
         public PeliculaViewModel ConvertirEnToViewModel(PeliculaEN en)
         {
             PeliculaViewModel peli = new PeliculaViewModel();
@@ -26,6 +29,15 @@ namespace WebApplication2.Assemblers
             return peli;
         }
 
+        public List<string> ObtenerGeneros(PeliculaEN en)
+        {
+            // Verificar que la colección no sea nula antes de intentar extraer sus elementos
+            if (en != null && en.Genero != null)
+            {
+                return new List<string>(en.Genero);
+            }
+            return new List<string>(); // Si la colección es nula, devolver una lista vacía
+        }
         public IList<PeliculaViewModel> ConvertirListEnToViewModel(IList<PeliculaEN> ens)
         {
             IList<PeliculaViewModel> pelis = new List<PeliculaViewModel>();
@@ -35,6 +47,16 @@ namespace WebApplication2.Assemblers
             }
 
             return pelis;
+        }
+
+        public List<string> ObtenerGeneros(PeliculaEN en)
+        {
+            // Verificar que la colección no sea nula antes de intentar extraer sus elementos
+            if (en != null && en.Genero != null)
+            {
+                return new List<string>(en.Genero);
+            }
+            return new List<string>(); // Si la colección es nula, devolver una lista vacía
         }
     }
 }

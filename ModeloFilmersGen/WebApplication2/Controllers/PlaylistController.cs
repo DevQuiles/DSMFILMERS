@@ -16,6 +16,48 @@ namespace WebApplication2.Controllers
 {
     public class PlaylistController : BasicController
     {
+        [HttpPost]
+        public IActionResult AgregarPeliculaAPlaylist(string idPelicula, string idPlaylist)
+        {
+            SessionInitialize();
+            int idP = int.Parse(idPelicula);
+            int idPlay = int.Parse(idPlaylist);
+
+            PlaylistRepository playlistRepository = new PlaylistRepository();
+            PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);      
+
+            playlistCEN.AsignarPeliculas(idPlay, new List<int> { idP });
+
+            SessionClose();
+            return Json(new { success = true, redirectUrl = Url.Action("Details", new { id = idPlay }) }); ;
+
+        }
+
+        public ActionResult PlayListByUsuario()
+        {
+            SessionInitialize();
+            UsuarioViewModel usuario = HttpContext.Session.Get<UsuarioViewModel>("usuario");
+            UsuarioRepository usR = new UsuarioRepository(session);
+            UsuarioCEN usuarioCEN = new UsuarioCEN(usR);
+            var playlistENs = new List<object>();
+            if (usuario != null)
+            {
+                UsuarioEN usuarioEN = usuarioCEN.DamePorOID(usuario.Email);
+                foreach (var i in usuarioEN.Playlistcreadas)
+                {
+                    var playlistItem = new
+                    {
+                        id = i.Id,
+                        nombrePlaylist = i.Nombre,
+                        descripcion = i.Descripcion
+                    };
+
+                    playlistENs.Add(playlistItem);
+                }
+            }
+            return Json(playlistENs);
+        }
+
         // GET: PlaylistController
         public ActionResult Index()
         {
@@ -24,11 +66,11 @@ namespace WebApplication2.Controllers
             PlaylistCEN playCEN = new PlaylistCEN(playRepository);
 
             IList<PlaylistEN> playEN = playCEN.DameTodos(0, -1);
-
-            IEnumerable<PlaylistViewModel> listPlay = new PlaylistAssembler().ConvertirListEnToViewModel(playEN).ToList();
+            IEnumerable<PlaylistViewModel> listPlay = playEN.Select(en => new PlaylistAssembler().ConvertirEnToViewModel(en));
             SessionClose();
 
             return View(listPlay);
+            
         }
 
         // GET: PlaylistController/Details/5
@@ -65,11 +107,11 @@ namespace WebApplication2.Controllers
         public ActionResult Create()
         {
             SessionInitialize();
-            PlaylistRepository playlistRepository = new PlaylistRepository();
+            PlaylistRepository playlistRepository = new PlaylistRepository(session);
             PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);
-
             PlaylistEN playlistEN = new PlaylistEN();
             PlaylistViewModel playlistViewModel = new PlaylistAssembler().ConvertirEnToViewModel(playlistEN);
+
             SessionClose();
 
             return View(playlistViewModel);
@@ -78,13 +120,14 @@ namespace WebApplication2.Controllers
         // POST: PlaylistController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(PlaylistViewModel play, UsuarioViewModel usu)
+        public ActionResult Create(PlaylistViewModel play)
         {
             try
             {
+                UsuarioViewModel usuario = HttpContext.Session.Get<UsuarioViewModel>("usuario");
                 PlaylistRepository playlistRepository = new PlaylistRepository();
                 PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);
-                int id =  playlistCEN.CrearPlaylist(play.nombre, play.Descripcion, usu.Email);
+                int id =  playlistCEN.CrearPlaylist(play.nombre, play.Descripcion, usuario.Email);
                 return RedirectToAction("Details", new { id });
             }
             catch

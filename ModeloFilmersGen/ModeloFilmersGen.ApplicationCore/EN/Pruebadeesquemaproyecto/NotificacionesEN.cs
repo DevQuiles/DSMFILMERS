@@ -47,6 +47,20 @@ private bool destacada;
 
 
 
+/**
+ *	Atributo usuariorEmisor
+ */
+private string usuariorEmisor;
+
+
+
+/**
+ *	Atributo pelicula
+ */
+private int pelicula;
+
+
+
 
 
 
@@ -86,6 +100,18 @@ public virtual bool Destacada {
 
 
 
+public virtual string UsuariorEmisor {
+        get { return usuariorEmisor; } set { usuariorEmisor = value;  }
+}
+
+
+
+public virtual int Pelicula {
+        get { return pelicula; } set { pelicula = value;  }
+}
+
+
+
 
 
 public NotificacionesEN()
@@ -94,20 +120,20 @@ public NotificacionesEN()
 
 
 
-public NotificacionesEN(int id, string contenido, ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.UsuarioEN usuario, Nullable<DateTime> fecha, bool estado, bool destacada
+public NotificacionesEN(int id, string contenido, ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.UsuarioEN usuario, Nullable<DateTime> fecha, bool estado, bool destacada, string usuariorEmisor, int pelicula
                         )
 {
-        this.init (Id, contenido, usuario, fecha, estado, destacada);
+        this.init (Id, contenido, usuario, fecha, estado, destacada, usuariorEmisor, pelicula);
 }
 
 
 public NotificacionesEN(NotificacionesEN notificaciones)
 {
-        this.init (notificaciones.Id, notificaciones.Contenido, notificaciones.Usuario, notificaciones.Fecha, notificaciones.Estado, notificaciones.Destacada);
+        this.init (notificaciones.Id, notificaciones.Contenido, notificaciones.Usuario, notificaciones.Fecha, notificaciones.Estado, notificaciones.Destacada, notificaciones.UsuariorEmisor, notificaciones.Pelicula);
 }
 
 private void init (int id
-                   , string contenido, ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.UsuarioEN usuario, Nullable<DateTime> fecha, bool estado, bool destacada)
+                   , string contenido, ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.UsuarioEN usuario, Nullable<DateTime> fecha, bool estado, bool destacada, string usuariorEmisor, int pelicula)
 {
         this.Id = id;
 
@@ -121,6 +147,10 @@ private void init (int id
         this.Estado = estado;
 
         this.Destacada = destacada;
+
+        this.UsuariorEmisor = usuariorEmisor;
+
+        this.Pelicula = pelicula;
 }
 
 public override bool Equals (object obj)
