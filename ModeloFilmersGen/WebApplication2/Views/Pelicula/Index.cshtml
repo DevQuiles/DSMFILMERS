@@ -19,9 +19,7 @@
                     <div class="input-group rounded">
                         <!-- Input para buscar por nombre -->
                         <input type="search" name="searchString" class="form-control rounded" placeholder="Buscar por nombre" aria-label="Search" aria-describedby="search-addon" />
-                        <span class="input-group-text border-0" id="search-addon">
-                            <i class="fas fa-search"></i>
-                        </span>
+                        
                     </div>
                 </div>
 
@@ -29,9 +27,7 @@
                     <div class="input-group rounded">
                         <!-- Input para buscar por género -->
                         <input type="search" name="searchGen" class="form-control rounded" placeholder="Buscar por género" aria-label="Search" aria-describedby="search-addon" />
-                        <span class="input-group-text border-0" id="search-addon">
-                            <i class="fas fa-search"></i>
-                        </span>
+                        
                     </div>
                 </div>
 
@@ -52,19 +48,17 @@
                             <option value="10">10</option>
                             <!-- Agrega más opciones según sea necesario -->
                         </select>
-                        <span class="input-group-text border-0" id="search-addon">
-                            <i class="fas fa-search"></i>
-                        </span>
+                      
                     </div>
                 </div>
 
                 <div class="col-md-2 mb-3">
                     <div class="input-group rounded">
                         <!-- Input para buscar por año -->
-                        <input type="search" name="searchanyo" class="form-control rounded" placeholder="Año (AAAA)" aria-label="Search" aria-describedby="search-addon" pattern="[0-9]{4}" title="Formato de año válido: AAAA" />
-                        <span class="input-group-text border-0" id="search-addon">
+                        <input type="search" name="searchanyo" class="form-control rounded" placeholder="Año (AAAA)" aria-label="Search" aria-describedby="search-addon" pattern="[0-9]{4}" title="Formato de año válido: AAAA" maxlength="4" />
+                        <button class="input-group-text border-0 ms-2"  id="search-addon">
                             <i class="fas fa-search"></i>
-                        </span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -88,7 +82,15 @@
             <div class="col-lg-2 col-md-4 col-sm-6 col-12">
                 <div class="card border-0">
                     <a href="@Url.Action("Details", "Pelicula", new { id = item.Id })">
-                        <img src="@item.caratula" class="card-img-top img-fluid" alt="Carátula">
+
+                        @if (item.caratula == "https://image.tmdb.org/t/p/w500")
+                        {
+                            <img src="/Img/nodisponible.png" class="card-img-top img-fluid" alt="No Disponible">
+                        }
+                        else
+                        {
+                            <img src="@item.caratula" class="card-img-top img-fluid" alt="Carátula">
+                        }
                     </a>
                     <div class="card-body">
                         <h5 class="card-title text-center">@item.nombre</h5>
@@ -98,3 +100,18 @@
         }
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Capturar el evento keypress para el formulario
+        $('#searchForm').keypress(function (e) {
+            // Verificar si la tecla presionada es "Enter"
+            if (e.which === 13) {
+                // Enviar el formulario
+                $(this).submit();
+                return false; // Evitar que el formulario haga la acción por defecto
+            }
+        });
+    });
+</script>

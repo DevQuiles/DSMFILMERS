@@ -18,7 +18,7 @@ namespace WebApplication2.Models
         [ScaffoldColumn(true)]
         [Display(Prompt = "Introduce el nombre de usuario", Description = "Nombre de usuario", Name = "Nombre de usuario")]
         [Required(ErrorMessage = "Debe indicar un nombre de usuario")]
-        public String NombreUsuario {  get; set; }
+        public String NombreUsuario { get; set; }
 
         [ScaffoldColumn(true)]
         [Display(Prompt = "Introduce el nombre", Description = "Nombre", Name = "Nombre")]
@@ -65,6 +65,8 @@ namespace WebApplication2.Models
 
         [ScaffoldColumn(false)]
         public int Seguidores { get; set; }
+
+        public IList<String> UsuariosSeguidos { get; set; }
 
         [ScaffoldColumn(false)]
         public int Seguidos { get; set; }

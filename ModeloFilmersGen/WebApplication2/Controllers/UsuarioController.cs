@@ -94,7 +94,7 @@ namespace WebApplication2.Controllers
                     comentario = peliculaVistaEN.Comentario,
                     valoracion = peliculaVistaEN.Valoracion,
                     fecha = (DateTime)peliculaVistaEN.Fecha,
-                    idPelicula = peliculaVistaEN.Pelicula.Id,
+                    idPelicula = peliculaEN.Id,
                     nombrePeli = peliculaEN.Nombre,
                     fotoPeli = peliculaEN.Caratula, // Suponiendo que 'Caratula' es la propiedad que contiene la URL de la imagen de la carátula
                                                     // Agrega otras propiedades que necesites
@@ -118,12 +118,19 @@ namespace WebApplication2.Controllers
 
             UsuarioEN usuen = usuCen.DamePorOID(id);
 
+            UsuarioViewModel usu = new UsuarioAssembler().ConvertirENToViewModel(usuen);
+            SessionClose();
+            return View(usu);
+        }
 
-            //UsuarioViewModel usu = new UsuarioViewModel
-            //{
-            //    // ... inicialización de otros datos del usuario
-            //    ListaPelisVistas = usuen.PeliculasVistas // Asigna la lista de películas a ListaPeliculasVistas en el modelo
-            //};
+        // GET: UsuarioController/Details/5
+        public ActionResult DetailsPerfil(String id)
+        {
+            SessionInitialize();
+            UsuarioRepository usuRep = new UsuarioRepository(session);
+            UsuarioCEN usuCen = new UsuarioCEN(usuRep);
+
+            UsuarioEN usuen = usuCen.DamePorOID(id);
 
             UsuarioViewModel usu = new UsuarioAssembler().ConvertirENToViewModel(usuen);
             SessionClose();
@@ -208,6 +215,7 @@ namespace WebApplication2.Controllers
                     usuVM.Pass = usuen.Pass; // Mantiene la contraseña actual si el campo está vacío
                 }
 
+                // Modifica el usuario con la contraseña actualizada (o la misma si no se cambió)
                 usuCen.ModificarUsuario(id, usuVM.NombreUsuario, usuVM.Nombre, usuVM.FechaNac, usuVM.Localidad, usuVM.Pais, usuen.Nivel, usuVM.Pass, usuen.RecompensaDisponible, usuVM.Avatar);
                 return RedirectToAction(nameof(Index));
             }
@@ -216,6 +224,7 @@ namespace WebApplication2.Controllers
                 return View();
             }
         }
+
 
         // GET: UsuarioController/EditPass/5
         public ActionResult EditPass(String id)
@@ -234,12 +243,12 @@ namespace WebApplication2.Controllers
                 UsuarioCEN usuCen = new UsuarioCEN(usuRep);
                 UsuarioEN usuen = usuCen.DamePorOID(id);
                 String contrasenya = ModeloFilmersGen.ApplicationCore.Utils.Util.GetEncondeMD5(pusuVM.PasswordAntigua);
-                String contrasenya2 = ModeloFilmersGen.ApplicationCore.Utils.Util.GetEncondeMD5(pusuVM.PasswordAntigua);
                 if ( usuen.Pass == contrasenya)
                 {
                     usuCen.ModificarUsuario(id, usuen.NomUsuario, usuen.Nombre, usuen.FechaNac, usuen.Localidad, usuen.Pais, usuen.Nivel, pusuVM.Password, usuen.RecompensaDisponible, usuen.AvatarIcon);
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Edit", "Usuario", new { id = id });
+
             }
             catch
             {

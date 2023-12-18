@@ -2,6 +2,7 @@
 <html lang="en">
 
 @using Microsoft.AspNetCore.Http
+@using System.Linq
 
 @{
     UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
@@ -35,7 +36,7 @@
                     <a class="list-group-item list-group-item-action py-2 ripple" asp-area="" asp-controller="Usuario" asp-action="Index">Búsqueda</a>
                     <a class="list-group-item list-group-item-action py-2 ripple" asp-area="" asp-controller="Playlist" asp-action="Index">Playlist</a>
                     <a class="list-group-item list-group-item-action py-2 ripple" asp-area="" asp-controller="Comunidades" asp-action="Index">Comunidades</a>
-                    <a class="list-group-item list-group-item-action py-2 ripple" asp-area="" asp-controller="Usuario" asp-action="Details" asp-route-id=@email>Perfil</a>
+                    <a class="list-group-item list-group-item-action py-2 ripple" asp-area="" asp-controller="Usuario" asp-action="DetailsPerfil" asp-route-id=@email>Perfil</a>
                     <a class="list-group-item list-group-item-action py-2 ripple" asp-area="" asp-controller="Notificaciones" asp-action="Index">Notificaciones</a>
                     <a class="list-group-item list-group-item-action py-2 ripple" asp-area="" asp-controller="Usuario" asp-action="Logout">Cerrar Sesión</a>
                 </div>
