@@ -30,7 +30,7 @@ public INotificacionesRepository get_INotificacionesRepository ()
         return this._INotificacionesRepository;
 }
 
-public int CrearNotificacion (string p_contenido, string p_usuario, Nullable<DateTime> p_fecha, bool p_estado, bool p_destacada)
+public int CrearNotificacion (string p_contenido, string p_usuario, Nullable<DateTime> p_fecha, bool p_estado, bool p_destacada, string p_usuariorEmisor, int p_pelicula)
 {
         NotificacionesEN notificacionesEN = null;
         int oid;
@@ -53,6 +53,10 @@ public int CrearNotificacion (string p_contenido, string p_usuario, Nullable<Dat
 
         notificacionesEN.Destacada = p_destacada;
 
+        notificacionesEN.UsuariorEmisor = p_usuariorEmisor;
+
+        notificacionesEN.Pelicula = p_pelicula;
+
 
 
         oid = _INotificacionesRepository.CrearNotificacion (notificacionesEN);
@@ -68,7 +72,7 @@ public NotificacionesEN DamePorOID (int id
         return notificacionesEN;
 }
 
-public void ModificarNotificacion (int p_Notificaciones_OID, string p_contenido, Nullable<DateTime> p_fecha, bool p_estado, bool p_destacada)
+public void ModificarNotificacion (int p_Notificaciones_OID, string p_contenido, Nullable<DateTime> p_fecha, bool p_estado, bool p_destacada, string p_usuariorEmisor, int p_pelicula)
 {
         NotificacionesEN notificacionesEN = null;
 
@@ -79,6 +83,8 @@ public void ModificarNotificacion (int p_Notificaciones_OID, string p_contenido,
         notificacionesEN.Fecha = p_fecha;
         notificacionesEN.Estado = p_estado;
         notificacionesEN.Destacada = p_destacada;
+        notificacionesEN.UsuariorEmisor = p_usuariorEmisor;
+        notificacionesEN.Pelicula = p_pelicula;
         //Call to NotificacionesRepository
 
         _INotificacionesRepository.ModificarNotificacion (notificacionesEN);

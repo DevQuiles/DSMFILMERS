@@ -64,27 +64,6 @@ public string CrearUsuario (string p_email, string p_nomUsuario, string p_nombre
         return oid;
 }
 
-public void ModificarUsuario (string p_Usuario_OID, string p_nomUsuario, string p_nombre, Nullable<DateTime> p_fechaNac, string p_localidad, string p_pais, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum p_nivel, String p_pass, bool p_recompensaDisponible, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum p_avatarIcon)
-{
-        UsuarioEN usuarioEN = null;
-
-        //Initialized UsuarioEN
-        usuarioEN = new UsuarioEN ();
-        usuarioEN.Email = p_Usuario_OID;
-        usuarioEN.NomUsuario = p_nomUsuario;
-        usuarioEN.Nombre = p_nombre;
-        usuarioEN.FechaNac = p_fechaNac;
-        usuarioEN.Localidad = p_localidad;
-        usuarioEN.Pais = p_pais;
-        usuarioEN.Nivel = p_nivel;
-        usuarioEN.Pass = Utils.Util.GetEncondeMD5 (p_pass);
-        usuarioEN.RecompensaDisponible = p_recompensaDisponible;
-        usuarioEN.AvatarIcon = p_avatarIcon;
-        //Call to UsuarioRepository
-
-        _IUsuarioRepository.ModificarUsuario (usuarioEN);
-}
-
 public void BorrarUsuario (string email
                            )
 {
