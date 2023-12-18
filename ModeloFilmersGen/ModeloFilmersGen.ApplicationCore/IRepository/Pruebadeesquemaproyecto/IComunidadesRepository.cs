@@ -23,8 +23,8 @@ int CrearComunidad (ComunidadesEN comunidades);
 void ModificarComunidad (ComunidadesEN comunidades);
 
 
-void BorrarComunidad (int id
-                      );
+void BorrarSoloComunidad (int id
+                          );
 
 
 ComunidadesEN DamePorOID (int id
