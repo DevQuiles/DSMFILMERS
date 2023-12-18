@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModeloFilmersGen.ApplicationCore.CEN.Pruebadeesquemaproyecto;
+using ModeloFilmersGen.ApplicationCore.CP.Pruebadeesquemaproyecto;
 using ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto;
+using ModeloFilmersGen.Infraestructure.CP;
 using ModeloFilmersGen.Infraestructure.Repository.Pruebadeesquemaproyecto;
 using System.Collections.Generic;
 using WebApplication2.Assemblers;
@@ -131,8 +133,9 @@ namespace WebApplication2.Controllers
         {
             ComunidadesRepository comRepository = new ComunidadesRepository();
             ComunidadesCEN comCEN = new ComunidadesCEN(comRepository);
+            ComunidadesCP comCP = new ComunidadesCP(new SessionCPNHibernate());
 
-            comCEN.BorrarComunidad(id);
+            comCP.BorrarComunidad(id);
             return RedirectToAction(nameof(Index));
         }
 
