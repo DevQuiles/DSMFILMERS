@@ -37,10 +37,132 @@
         </div>
     </div>
 </div>
-@*----------------------------------------------MODAL DE ANYADIL PELICULA A VISTA--------------------------------------------------------------------*@
+@*----------------------------------------------MODAL BUSQUEDA DE PELICULA--------------------------------------------------------------------*@
 
 <!-- Modal -->
 <div class="modal" tabindex="-1" role="dialog" id="createModalPelicualaVista">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Añadir Película a Vista</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"> <!-- Ajusta el valor de py-4 según tus necesidades -->
+                <div class="row">
+                    <div class="col-md-6 mb-2">
+                        <div class="input-group rounded">
+                            @if(usuario != null)
+                            {
+                                <!-- Input para buscar por nombre -->
+                                <input type="search" id="searchString" class="form-control rounded" placeholder="Buscar por nombre" aria-label="Search" aria-describedby="search-addon" />
+                          
+                                <div>
+                                    <a class="btn btn-primary" id="openAnyadirAVista">Añadir Película</a>
+                                </div>
+                            
+                                <!-- Desplegable para mostrar resultados de la búsqueda -->
+                                <select id="resultadoBusqueda" class="form-control mt-3" style="display: none;"></select>
+                            }
+                            else
+                            {
+                                <h3>¡Debes de iniciar sesión para agregar peliculas a vistas!</h3>
+                            }
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#openCreateModalPeliculaVista').on('click', function () {
+            // $('#createModalPelicualaVista .modal-body').load('/PeliculaVista/Create');
+            $('#createModalPelicualaVista').modal('show');
+        });
+
+        // Evento de clic en el botón de búsqueda
+        $('#searchString').on('input', function () {
+            // Obtener el valor de la barra de búsqueda
+            var searchString = $(this).val();
+
+            // Validar que la barra de búsqueda no esté vacía
+            if (searchString.trim() !== '') {
+                // Realizar la llamada AJAX al controlador para la búsqueda
+                $.ajax({
+                    url: '/Pelicula/buscaRapidoPeliculas',
+                    type: 'GET',
+                    data: { searchString: searchString },
+                    success: function (result) {
+                        // Mostrar los resultados en el desplegable
+                        mostrarResultados(result);
+                    },
+                    error: function (error) {
+                        console.error("Error al realizar la búsqueda:", error);
+                    }
+                });
+            } else {
+                // La barra de búsqueda está vacía, ocultar el desplegable
+                $('#resultadoBusqueda').hide();
+            }
+        });
+
+        // Función para mostrar los resultados en el desplegable
+        function mostrarResultados(result) {
+            // Limpiar el desplegable
+            $('#resultadoBusqueda').empty();
+
+            // Agregar opciones al desplegable
+            result.forEach(function (pelicula) {
+                var opcion = $('<option>', { value: pelicula.id }).text(pelicula.nombre);
+                $('#resultadoBusqueda').append(opcion);
+            });
+            // $('#resultadoBusqueda').removeClass('d-none').addClass('show position-absolute w-100 mt-5');
+
+            $('#resultadoBusqueda').removeClass('d-none').addClass('position-absolute w-100 mt-5').show();
+            // Mostrar el desplegable
+            // $('#resultadoBusqueda').show();
+        }
+
+
+        // Evento de clic en el botón "Añadir"
+        $('#openAnyadirAVista').on('click', function () {
+            var opcionSeleccionada = $('#resultadoBusqueda option:selected');
+            var idPelicula = opcionSeleccionada.val();
+
+            // Realizar la llamada AJAX al controlador para establecer TempData
+            $.ajax({
+                url: '/PeliculaVista/SetTempData',
+                type: 'GET',
+                data: { idPelicula: idPelicula },
+                success: function () {
+                    // Cerrar el modal actual
+                    $('#createModalPelicualaVista').modal('hide');
+                    // Cargar el contenido en el nuevo modal (ajusta la URL según sea necesario)
+                    $('#createModalAnaydirPV .modal-body').load('/PeliculaVista/Create');
+                    // Abrir el nuevo modal
+                    $('#createModalAnaydirPV').modal('show');
+                },
+                error: function (error) {
+                    console.error("Error en la solicitud AJAX:", error);
+                }
+            });
+        });
+
+    });
+</script>
+
+@*----------------------------------------------MODAL DE AÑADIR PELICULA A VISTA--------------------------------------------------------------------*@
+
+<div class="modal" tabindex="-1" role="dialog" id="createModalAnaydirPV">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -58,15 +180,6 @@
         </div>
     </div>
 </div>
-
-<script>
-    $(document).ready(function () {
-        $('#openCreateModalPeliculaVista').on('click', function () {
-            $('#createModalPelicualaVista .modal-body').load('/PeliculaVista/Create');
-            $('#createModalPelicualaVista').modal('show');
-        });
-    });
-</script>
 
 @*----------------------------------------------MODAL DE CREAR COMUNIDAD--------------------------------------------------------------------*@
 

@@ -11,6 +11,31 @@ namespace WebApplication2.Controllers
     public class PeliculaController : BasicController
     {
 
+        public ActionResult buscaRapidoPeliculas(string searchString)
+        {
+            SessionInitialize();
+            PeliculaRepository peliRepository = new PeliculaRepository();
+            PeliculaCEN peliCEN = new PeliculaCEN(peliRepository);
+
+            IList<PeliculaEN> peliPorNombre = new List<PeliculaEN>();
+
+            peliPorNombre = peliCEN.DamePeliculaPorNombre(searchString);
+
+            var listaPelis = new List<object>();
+
+            foreach(var i in peliPorNombre)
+            {
+                var nombres = new
+                {
+                    nombre = i.Nombre,
+                    id = i.Id
+                };
+
+                listaPelis.Add(nombres);
+            }
+
+            return Json(listaPelis);
+        }
 
        
 

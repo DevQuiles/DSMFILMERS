@@ -18,7 +18,7 @@ namespace WebApplication2.Assemblers
             peli.Id = en.Id;
             peli.comentario = en.Comentario;
             peli.valoracion = en.Valoracion;
-            peli.fecha = (DateTime)en.Fecha;
+            peli.fecha = en.Fecha ?? DateTime.MinValue; // O el valor predeterminado que prefieras
             peli.idPelicula = en.Pelicula.Id;
 
 
