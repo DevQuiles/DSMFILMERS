@@ -168,7 +168,7 @@
     <div id="carruselPeliculas" class="carousel slide carousel-fade" data-ride="carousel" data-interval ="false">
     <div class="carousel-inner">
         @{ 
-            bool esPrimerItem = true;
+           
             int contador = 0;
 
 
@@ -203,7 +203,7 @@
                     contador++;
                     if (contador % 6 == 0 && !Model.Peliculas.Last().Equals(pelicula))
                     {
-                        esPrimerItem = false;
+                       
                         @:</div></div><div class="carousel-item"><div class="row">
                     }
                 }
