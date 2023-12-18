@@ -1,12 +1,13 @@
 ﻿@model WebApplication2.Models.UsuarioViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "DetailsPerfil";
     UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
-    @if (usuario.Email == @Model.Email)
+
+    if (usuario== null || usuario.Email != Model.Email)
     {
         <script>
-            window.location.href = '/Usuario/DetailsPerfil/@Model.Email'; 
+            window.location.href = '/Usuario/Index'; // Reemplaza esto con la ruta correcta a tu página de índice de usuario
         </script>
     }
 }
@@ -16,30 +17,17 @@
         <img src="/Img/@(Model.Avatar).jpeg" alt="Avatar" class="img-fluid rounded-circle" />
     </div>
     <div class="col-sm-8 pb-3">
-        
-            <div class="row align-items-center">
-                <div class="col-2">
-                    <h3>@Model.NombreUsuario</h3>
-                </div>
-            @if (usuario != null && usuario.Email != @Model.Email)
-            {
+
+        <div class="row align-items-center">
+            <div class="col-2">
+                <h3>@Model.NombreUsuario</h3>
+            </div>
+           
                 <div class="col-auto">
-                    @{
-                        // Comprobamos si ya está siguiendo al usuario
-                        bool isFollowing = usuario.UsuariosSeguidos.Contains(Model.Email);
-                        @if (isFollowing)
-                        {
-                            <button type="button" data-follow-id="@Model.Email" class="btn btn-success btn-sm" onclick="followUnfollow('@usuario.Email', '@Model.Email', true)">Siguiendo</button>
-                        }
-                        else
-                        {
-                            <button type="button" data-follow-id="@Model.Email" class="btn btn-outline-primary btn-sm" onclick="followUnfollow('@usuario.Email', '@Model.Email', false)">Seguir</button>
-                        }
-                    }
+                <a class="btn btn-primary mx-2" href="@Url.Action("Edit", "Usuario", new { id = Model.Email })"> Editar Perfil </a>
                 </div>
-            }
         </div>
-        
+
 
         <h4>@Model.Nombre</h4>
         <br />
