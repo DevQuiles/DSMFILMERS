@@ -86,7 +86,7 @@ namespace WebApplication2.Controllers
                 IList<ComunidadesEN> comEN = comCEN.DameComunidadPorNombre(nomComunidad);
 
 
-                menCEN.CrearMensaje(contenido, DateTime.Now, comEN.First().Id);
+                int idMen = menCEN.CrearMensaje(contenido, DateTime.Now, comEN.First().Id);
 
                 return Ok();
             }
