@@ -195,8 +195,8 @@ public void ModificarComunidad (ComunidadesEN comunidades)
                 SessionClose ();
         }
 }
-public void BorrarComunidad (int id
-                             )
+public void BorrarSoloComunidad (int id
+                                 )
 {
         try
         {

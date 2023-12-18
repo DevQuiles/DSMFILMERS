@@ -49,14 +49,5 @@ namespace WebApplication2.Assemblers
             return pelis;
         }
 
-        public List<string> ObtenerGeneros(PeliculaEN en)
-        {
-            // Verificar que la colección no sea nula antes de intentar extraer sus elementos
-            if (en != null && en.Genero != null)
-            {
-                return new List<string>(en.Genero);
-            }
-            return new List<string>(); // Si la colección es nula, devolver una lista vacía
-        }
     }
 }
