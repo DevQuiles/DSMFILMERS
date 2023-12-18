@@ -391,7 +391,9 @@ namespace InitializeDB
                 }
 
                 // Borrar una comunidad
-                comunidadescen.BorrarComunidad(idComunidad1);
+                ComunidadesCP comCP = new ComunidadesCP(new SessionCPNHibernate());
+
+                comCP.BorrarComunidad(idComunidad1);
 
                 comunidadObtenida = comunidadescen.DamePorOID(idComunidad1);
 

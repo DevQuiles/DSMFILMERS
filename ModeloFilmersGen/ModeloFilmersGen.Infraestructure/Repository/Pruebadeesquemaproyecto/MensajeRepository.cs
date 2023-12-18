@@ -139,6 +139,7 @@ public int CrearMensaje (MensajeEN mensaje)
                 }
 
                 session.Save (mensajeNH);
+                session.Flush ();
                 SessionCommit ();
         }
 

@@ -7,6 +7,7 @@ using ModeloFilmersGen.ApplicationCore.Exceptions;
 using ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto;
 using ModeloFilmersGen.ApplicationCore.IRepository.Pruebadeesquemaproyecto;
 using ModeloFilmersGen.ApplicationCore.CEN.Pruebadeesquemaproyecto;
+using System.Linq;
 
 
 

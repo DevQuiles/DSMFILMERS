@@ -108,19 +108,15 @@
         messagesDiv.append(data);
 
         mensajesContainer.append(messagesDiv);
+        mensajesContainer.scrollTop(mensajesContainer[0].scrollHeight);
 
         var usuario = document.getElementById('sesion').value;
 
         // Verificar si el usuario puede enviar mensajes
-        if (usuarioPuedeEnviarMensajes(creadorComunidad, usuario)) {
+        if (creadorComunidad.trim() === usuario) {
             agregarInputMensaje(mensajesContainer, nombreComunidad, comunidadId, descripcionComunidad, creadorComunidad);
         }
 
-        mensajesContainer.scrollTop(mensajesContainer[0].scrollHeight);
-    }
-
-    function usuarioPuedeEnviarMensajes(creadorComunidad, usuario) {
-        return creadorComunidad.trim() === usuario;
     }
 
     function agregarInputMensaje(contenedor, nombreComunidad, comunidadId, descripcionComunidad, creadorComunidad) {
