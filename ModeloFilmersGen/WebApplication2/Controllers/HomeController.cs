@@ -11,6 +11,8 @@ using ModeloFilmersGen.Infraestructure.CP;
 using static NHibernate.Engine.Query.CallableParser;
 using WebApplication2.Assemblers;
 using Microsoft.AspNetCore.Authorization;
+using NHibernate.Hql.Ast.ANTLR.Util;
+using ModeloFilmersGen.Infraestructure.EN.Pruebadeesquemaproyecto;
 
 namespace WebApplication2.Controllers
 { 
@@ -27,35 +29,66 @@ namespace WebApplication2.Controllers
         {
             SessionInitialize();
 
-            PeliculaRepository peliculaRepository = new PeliculaRepository();
-            PeliculaVistaRepository peliculaVistaRepository = new PeliculaVistaRepository(); 
+            PeliculaRepository peliculaRepository = new PeliculaRepository(session);
+            UsuarioRepository usuarioRepository = new UsuarioRepository(session);
+           
 
             PeliculaCEN peliculacen = new PeliculaCEN(peliculaRepository);
             UsuarioCP usCP = new UsuarioCP(new SessionCPNHibernate());
+            UsuarioCEN usCEN = new UsuarioCEN(usuarioRepository);
 
-
+            
             IList<PeliculaEN> listapelEN = peliculacen.DameTodos(0, -1);
-            IList<PeliculaVistaEN> ultimasVistasEN = usCP.ActividadAmigos("email6"); 
+
+
+            UsuarioViewModel usuario = HttpContext.Session.Get<UsuarioViewModel>("usuario");
+            IList<PeliculaVistaViewModel> listapelvistaVM = new List<PeliculaVistaViewModel>();
+            if (usuario != null)
+            {
+
+                IList<PeliculaVistaEN> ultimasVistasEN = usCP.ActividadAmigos(usuario.Email);
+                
+                foreach (var ultVistas in ultimasVistasEN)
+                {
+
+                    PeliculaEN peliculaEN = peliculacen.DamePorOID(ultVistas.Pelicula.Id);
+                    UsuarioEN usuEN = usCEN.DamePorOID(ultVistas.Usuario.Email);
+
+                    PeliculaVistaViewModel pelicuVM = new PeliculaVistaViewModel
+                    {
+                        Id = ultVistas.Id,
+                        comentario = ultVistas.Comentario,
+                        valoracion = ultVistas.Valoracion,
+                        fecha = (DateTime)ultVistas.Fecha,
+                        idPelicula = ultVistas.Pelicula.Id,
+                        nombrePeli = peliculaEN.Nombre,
+                        fotoPeli = peliculaEN.Caratula,
+                        nombreUsuario = usuEN.Nombre,
+
+                    };
+
+                    listapelvistaVM.Add(pelicuVM);
+                }
+            }
+            
+            
+
+            
+            
 
             IEnumerable<PeliculaViewModel> peliculasViewModel = new PeliculaAssembler().ConvertirListEnToViewModel(listapelEN.ToList());
-            IEnumerable<PeliculaVistaViewModel> peliculasVistasViewModel = new PeliculaVistaAssembler().ConvertirListEnToViewModel(ultimasVistasEN.ToList());
+            
 
             var model = new PeliculasYVistasViewModel
             {
                 Peliculas = peliculasViewModel,
-                UltimasVistas = peliculasVistasViewModel
+                UltimasVistas = listapelvistaVM
             };
             SessionClose();
 
             return View(model);
 
 
-            //PeliculaRepository peliculaRepository = new PeliculaRepository();
-            //PeliculaCEN peliculacen = new PeliculaCEN(peliculaRepository);
-
-            //IEnumerable<PeliculaEN> listapel = peliculacen.DameTodos(0, -1);
-
-            //return View(listapel);
         }
 
         public IActionResult Privacy()

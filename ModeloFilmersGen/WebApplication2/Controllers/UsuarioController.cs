@@ -71,6 +71,43 @@ namespace WebApplication2.Controllers
             return View(listUsus);
         }
 
+        public ActionResult Vistas(string id)
+        {
+            SessionInitialize();
+            UsuarioRepository usuarioRepo = new UsuarioRepository(session);
+
+            UsuarioCEN usuCEN = new UsuarioCEN(usuarioRepo);
+            UsuarioEN usuarioEN = usuCEN.DamePorOID(id);
+
+            IList<PeliculaVistaEN> listpelisEN = usuarioEN.PeliculasVistas;
+            IList<PeliculaVistaViewModel> listapelivistaVM = new List<PeliculaVistaViewModel>();
+
+            foreach (var peliculaVistaEN in listpelisEN)
+            {
+                // Suponiendo que PeliculaVistaEN tiene una propiedad Pelicula que referencia a PeliculaEN
+                PeliculaEN peliculaEN = peliculaVistaEN.Pelicula;
+
+                // Crear un ViewModel para la película con la información necesaria (nombre, carátula, etc.)
+                PeliculaVistaViewModel peliculaViewModel = new PeliculaVistaViewModel
+                {
+                    Id = peliculaVistaEN.Id,
+                    comentario = peliculaVistaEN.Comentario,
+                    valoracion = peliculaVistaEN.Valoracion,
+                    fecha = (DateTime)peliculaVistaEN.Fecha,
+                    nombrePeli = peliculaEN.Nombre,
+                    fotoPeli = peliculaEN.Caratula, // Suponiendo que 'Caratula' es la propiedad que contiene la URL de la imagen de la carátula
+                                                    // Agrega otras propiedades que necesites
+                };
+
+                listapelivistaVM.Add(peliculaViewModel);
+            }
+
+            SessionClose();
+
+            return PartialView("_VistasUsuario", listapelivistaVM);
+        }
+
+
         // GET: UsuarioController/Details/5
         public ActionResult Details(String id)
         {
@@ -79,8 +116,15 @@ namespace WebApplication2.Controllers
             UsuarioCEN usuCen = new UsuarioCEN(usuRep);
 
             UsuarioEN usuen = usuCen.DamePorOID(id);
-            UsuarioViewModel usu = new UsuarioAssembler().ConvertirENToViewModel(usuen);
 
+
+            //UsuarioViewModel usu = new UsuarioViewModel
+            //{
+            //    // ... inicialización de otros datos del usuario
+            //    ListaPelisVistas = usuen.PeliculasVistas // Asigna la lista de películas a ListaPeliculasVistas en el modelo
+            //};
+
+            UsuarioViewModel usu = new UsuarioAssembler().ConvertirENToViewModel(usuen);
             SessionClose();
             return View(usu);
         }

@@ -18,7 +18,6 @@ namespace WebApplication2.Assemblers
             not.IdUsuario = en.Usuario.Email;
             not.Destacada = en.Destacada;
             not.Estado = en.Estado;
-
             not.Fecha = (DateTime)en.Fecha;
 
 

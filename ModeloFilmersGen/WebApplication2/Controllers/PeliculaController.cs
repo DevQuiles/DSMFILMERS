@@ -15,28 +15,60 @@ namespace WebApplication2.Controllers
        
 
         // GET: PeliculaController
-        public ActionResult Index(string searchString)
+        public ActionResult Index(string searchString, string searchanyo, string searchValoracion, string searchGen)
         {
             SessionInitialize();
             PeliculaRepository peliRepository = new PeliculaRepository();
             PeliculaCEN peliCEN = new PeliculaCEN(peliRepository);
 
-            IList<PeliculaEN> peliEN;
+            IList<PeliculaEN> peliPorNombre = new List<PeliculaEN>();
+            IList<PeliculaEN> peliPorFiltro = new List<PeliculaEN>();
 
+            // Filtrar por nombre si se proporciona una cadena de búsqueda
             if (!string.IsNullOrEmpty(searchString))
             {
-                peliEN = peliCEN.DamePeliculaPorNombre(searchString); // Usar el método de filtrado por nombre
+                peliPorNombre = peliCEN.DamePeliculaPorNombre(searchString);
+            }
+            else 
+            {
+                peliPorNombre = peliCEN.DameTodos(0,-1);
+            }
+
+            // Aplicar filtros si se proporcionan
+            int? anyo = null;
+            if (!string.IsNullOrEmpty(searchanyo) && int.TryParse(searchanyo, out int year))
+            {
+                anyo = year;
+            }
+
+            int? puntuacion = null;
+            if (!string.IsNullOrEmpty(searchValoracion) && int.TryParse(searchValoracion, out int rating))
+            {
+                puntuacion = rating;
+            }
+
+            if (!string.IsNullOrEmpty(searchGen) || anyo != null || puntuacion != null)
+            {
+                peliPorFiltro = peliCEN.DamePeliculasPorFiltro(searchGen, anyo, puntuacion);
             }
             else
             {
-                peliEN = peliCEN.DameTodos(0, -1); // Obtener todos si no se proporciona una cadena de búsqueda
+               peliPorFiltro = peliCEN.DameTodos(0, -1);
             }
 
-            IEnumerable<PeliculaViewModel> listPelis = new PeliculaAssembler().ConvertirListEnToViewModel(peliEN).ToList();
+            IList<PeliculaEN> resultado = new List<PeliculaEN>();
+
+            resultado = peliPorNombre.Intersect(peliPorFiltro).ToList();
+           
+
+            IEnumerable<PeliculaViewModel> listPelis = new PeliculaAssembler().ConvertirListEnToViewModel(resultado).ToList();
             SessionClose();
 
             return View(listPelis);
         }
+
+
+
 
         // GET: PeliculaController/Details/5
         public ActionResult Details(int id)
@@ -47,12 +79,13 @@ namespace WebApplication2.Controllers
 
             PeliculaEN pelEN = pelCEN.DamePorOID(id);
 
+
             PeliculaViewModel pelVM = new PeliculaAssembler().ConvertirEnToViewModel(pelEN);
             List<string> generos = new PeliculaAssembler().ObtenerGeneros(pelEN);
+
             SessionClose();
 
             return View(pelVM);
-
            
         }
 

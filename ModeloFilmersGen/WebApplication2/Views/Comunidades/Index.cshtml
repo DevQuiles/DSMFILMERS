@@ -3,45 +3,68 @@
 @{
     ViewData["Title"] = "Index";
 }
+<style>
 
-<h1>Index</h1>
+</style>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaCreacion)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaCreacion)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.IdCom  }) |
-                @Html.ActionLink("Details", "Details", new { id=item.IdCom }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.IdCom })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<div class="row">
+    <div class="list-group position-sticky col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
+        @foreach (var item in Model)
+        {
+            <a asp-area="" asp-controller="Comunidades" asp-action="Mensajes" asp-route-id="@item.IdCom" class="list-group-item list-group-item-action comunidad-item id=@item.IdCom" id=@item.IdCom aria-current="true">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 id="nombreComunidad" class="mb-1">@Html.DisplayFor(modelItem => item.Nombre)</h5>
+                    <small>@Html.DisplayFor(modelItem => item.FechaCreacion)</small>
+                </div>
+                <p id="descripcionComunidad"  class="mb-1">@Html.DisplayFor(modelItem => item.Descripcion)</p>
+            </a>
+       
+        }
+  
+    </div>
+
+    <div class="col-md-6 col-lg-7 col-xl-8 mensajesContainer">
+
+    </div>
+
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.comunidad-item').click(function (e) {
+            e.preventDefault();
+            var nombreComunidad = $(this).find('h5').text();
+            var descripcionComunidad = $(this).find('p').text();
+            var comunidadId = $(this).attr('id');
+            $('.active').removeClass('active');
+            $(this).addClass('active');
+
+            //VISTA DE LOS MENSAJES DE LA COMUNIDAD ACTIVA
+            $.ajax({
+                url: `/Comunidades/Mensajes/${comunidadId}`,
+                type: 'GET',
+                success: function (data) {
+                    // Limpia el contenedor de mensajes
+                    $('.mensajesContainer').empty();
+
+                    // Verifica si hay datos para mostrar
+                    if (data.length > 0) {
+
+                        $('.mensajesContainer').append('<h5>' + nombreComunidad + '</h5>');
+                        $('.mensajesContainer').append('<p>' + descripcionComunidad + '</p>');
+
+                        // Agrega los mensajes
+                        $('.mensajesContainer').append(data);
+                    }
+                },
+                error: function (error) {
+                    console.error('Error al cargar los mensajes', error);
+                }
+            });
+        });
+    });
+</script>
+

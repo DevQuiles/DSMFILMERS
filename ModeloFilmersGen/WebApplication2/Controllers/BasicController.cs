@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication2.Controllers
 {
-    public class BasicController:Controller
+    public class BasicController : Controller
     {
         private NHibernate.ISession sessionInside;
 
