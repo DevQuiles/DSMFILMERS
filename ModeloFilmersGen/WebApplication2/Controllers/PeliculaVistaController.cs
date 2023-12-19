@@ -12,21 +12,12 @@ using ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto;
 using WebApplication2.Models;
 using WebApplication2.Assemblers;
 using ModeloFilmersGen.ApplicationCore.CP.Pruebadeesquemaproyecto;
+using Humanizer;
 
 namespace WebApplication2.Controllers
 {
     public class PeliculaVistaController : BasicController
     {
-        public ActionResult _listaActividad(string email)
-        {
-            SessionInitialize();
-            UsuarioCP usCP = new UsuarioCP(new SessionCPNHibernate());
-            email = "email6";//ESTO ESTA ASI PARA HACER LAS PRUEBAS
-            IList<PeliculaVistaEN> listactividades = usCP.ActividadAmigos(email);
-            IEnumerable<PeliculaVistaViewModel> viewModelList = new PeliculaVistaAssembler().ConvertirListEnToViewModel(listactividades).ToList();
-            SessionClose();
-            return PartialView(viewModelList);
-        }
 
         // GET: PeliculaVistaController
         public ActionResult Index()
@@ -51,36 +42,40 @@ namespace WebApplication2.Controllers
             PeliculaVistaCEN pvCEN = new PeliculaVistaCEN(pVRep);
             PeliculaVistaEN pvEN = pvCEN.DamePorOID(id);
 
-            //PeliculaRepository peliculaRepository = new PeliculaRepository(session);
-            //PeliculaCEN pCEN = new PeliculaCEN(peliculaRepository);
-            //PeliculaEN pEN = new PeliculaEN();
-            //pCEN.
-
             PeliculaVistaViewModel peliculaVistaViewModel = new PeliculaVistaAssembler().ConvertirEnToViewModel(pvEN);
             SessionClose();
 
             return View(peliculaVistaViewModel);
         }
 
+        public ActionResult SetTempData(string idPelicula)
+        {
+            TempData["IdPelicula"] = idPelicula;
+            return Json(new { success = true });
+        }
+
         // GET: PeliculaVistaController/Create
         public ActionResult Create()
         {
             return View();
+            
         }
 
         // POST: PeliculaVistaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(PeliculaVistaViewModel pv, int idP, string emailUsu)
+        public ActionResult Create(PeliculaVistaViewModel pv)
         {
             try
             {
-                idP = 32768;
-                emailUsu = "email2";
+                var idPelicula = TempData["IdPelicula"]?.ToString();
+                UsuarioViewModel usuario = HttpContext.Session.Get<UsuarioViewModel>("usuario");
+                PeliculaRepository peliculaRepository = new PeliculaRepository();  
                 PeliculaVistaRepository peliRepository = new PeliculaVistaRepository();
                 PeliculaVistaCEN peliCEN = new PeliculaVistaCEN(peliRepository);
-                int nuevaPeliculaVista = peliCEN.CrearPeliculaVista(pv.comentario,pv.valoracion, pv.fecha, idP, emailUsu);
-                return RedirectToAction(nameof(Index));
+                int nuevaPeliculaVista = peliCEN.CrearPeliculaVista(pv.comentario, pv.valoracion, pv.fecha,int.Parse(idPelicula), usuario.Email);
+                
+                return RedirectToAction("Index","Home");
             }
             catch
             {

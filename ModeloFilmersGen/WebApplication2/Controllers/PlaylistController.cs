@@ -16,6 +16,7 @@ namespace WebApplication2.Controllers
 {
     public class PlaylistController : BasicController
     {
+
         [HttpPost]
         public IActionResult AgregarPeliculaAPlaylist(string idPelicula, string idPlaylist)
         {
@@ -57,6 +58,7 @@ namespace WebApplication2.Controllers
             }
             return Json(playlistENs);
         }
+
 
         // GET: PlaylistController
         public ActionResult Index()
@@ -168,6 +170,9 @@ namespace WebApplication2.Controllers
                 return View();
             }
         }
+
+
+
 
         // GET: PlaylistController/Delete/5
         public ActionResult Delete(int id)

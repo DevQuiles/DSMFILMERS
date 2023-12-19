@@ -1,15 +1,8 @@
 ﻿@model WebApplication2.Models.PeliculaVistaViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    Layout = null;
 }
-
-<h1>Create</h1>
-
-<h4>PeliculaVistaViewModel</h4>
-<hr/>
-
-
 
 <div class="row">
     <div class="col-md-4">
@@ -44,40 +37,7 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
-
-@* <!-- Button to Open the Modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-    Open modal
-</button>
-
-<!-- The Modal -->
-<div class="modal" id="myModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Modal Heading</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-                Modal body..
-            </div>
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-            </div>
-
-        </div>
-    </div>
-</div> *@
 
 @section Scripts {
     @{
