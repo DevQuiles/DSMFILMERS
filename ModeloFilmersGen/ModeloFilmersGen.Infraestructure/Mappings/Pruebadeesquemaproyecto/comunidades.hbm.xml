@@ -34,7 +34,7 @@
 											 					
 			
 		  			
-						<bag name="Menesajes" cascade="delete">
+						<bag name="Menesajes" >
 							<key>
 							
 								

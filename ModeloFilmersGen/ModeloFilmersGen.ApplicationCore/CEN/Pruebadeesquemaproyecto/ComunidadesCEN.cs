@@ -72,10 +72,10 @@ public void ModificarComunidad (int p_Comunidades_OID, string p_nombre, Nullable
         _IComunidadesRepository.ModificarComunidad (comunidadesEN);
 }
 
-public void BorrarComunidad (int id
-                             )
+public void BorrarSoloComunidad (int id
+                                 )
 {
-        _IComunidadesRepository.BorrarComunidad (id);
+        _IComunidadesRepository.BorrarSoloComunidad (id);
 }
 
 public ComunidadesEN DamePorOID (int id

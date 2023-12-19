@@ -26,7 +26,7 @@ namespace WebApplication2.Models
         public DateOnly FechaCreacion { get; set; }
 
 
-
+        [ScaffoldColumn(false)]
         [Display(Prompt = "Introduce el usuario emisor", Description = "Usuario emisor de la comunidad", Name = "Usuario emisor")]
         [Required(ErrorMessage = "Debe indicar el usuario emisor")]
         public String Emisor { get; set; }

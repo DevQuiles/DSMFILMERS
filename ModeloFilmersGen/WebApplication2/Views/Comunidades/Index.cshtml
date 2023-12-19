@@ -2,69 +2,151 @@
 
 @{
     ViewData["Title"] = "Index";
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
 }
-<style>
-
-</style>
-
 
 <div class="row">
     <div class="list-group position-sticky col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
+        <a class="btn btn-primary" id="openCrearComunidad">
+            <i class="fas fa-plus"></i> Nueva comunidad
+        </a>
         @foreach (var item in Model)
         {
-            <a asp-area="" asp-controller="Comunidades" asp-action="Mensajes" asp-route-id="@item.IdCom" class="list-group-item list-group-item-action comunidad-item id=@item.IdCom" id=@item.IdCom aria-current="true">
+            <a asp-area="" asp-controller="Comunidades" asp-action="Mensajes" asp-route-id="@item.IdCom" class="list-group-item list-group-item-action comunidad-item" data-id="@item.IdCom" aria-current="true">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 id="nombreComunidad" class="mb-1">@Html.DisplayFor(modelItem => item.Nombre)</h5>
+                    <h5 class="nombreComunidad mb-1">@Html.DisplayFor(modelItem => item.Nombre)</h5>
                     <small>@Html.DisplayFor(modelItem => item.FechaCreacion)</small>
                 </div>
-                <p id="descripcionComunidad"  class="mb-1">@Html.DisplayFor(modelItem => item.Descripcion)</p>
+                <p class="descripcionComunidad mb-1">@Html.DisplayFor(modelItem => item.Descripcion)</p>
+                <small class="creadorComunidad mb-1"> @Html.DisplayFor(modelItem => item.Emisor)</small>
             </a>
-       
         }
-  
     </div>
+    <input type="hidden" id="sesion" value="@usuario.NombreUsuario" />
 
     <div class="col-md-6 col-lg-7 col-xl-8 mensajesContainer">
-
+        <h2>Bienvenido a la sección de Comunidades</h2>
+        <p>Hola, <span>@usuario.NombreUsuario</span>. ¡Es genial verte por aquí!</p>
     </div>
-
 </div>
 
+<!-- Modal para Crear Comunidad -->
+<div class="modal" tabindex="-1" role="dialog" id="createModal">
+    <!-- Contenido del Modal -->
+</div>
 
+<!-- Incluye jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
     $(document).ready(function () {
+        // Manejo de clic en elementos de la comunidad
         $('.comunidad-item').click(function (e) {
             e.preventDefault();
-            var nombreComunidad = $(this).find('h5').text();
-            var descripcionComunidad = $(this).find('p').text();
-            var comunidadId = $(this).attr('id');
-            $('.active').removeClass('active');
-            $(this).addClass('active');
+            seleccionarComunidad($(this));
+        });
 
-            //VISTA DE LOS MENSAJES DE LA COMUNIDAD ACTIVA
-            $.ajax({
-                url: `/Comunidades/Mensajes/${comunidadId}`,
-                type: 'GET',
-                success: function (data) {
-                    // Limpia el contenedor de mensajes
-                    $('.mensajesContainer').empty();
-
-                    // Verifica si hay datos para mostrar
-                    if (data.length > 0) {
-
-                        $('.mensajesContainer').append('<h5>' + nombreComunidad + '</h5>');
-                        $('.mensajesContainer').append('<p>' + descripcionComunidad + '</p>');
-
-                        // Agrega los mensajes
-                        $('.mensajesContainer').append(data);
-                    }
-                },
-                error: function (error) {
-                    console.error('Error al cargar los mensajes', error);
-                }
-            });
+        // Abrir modal para crear comunidad
+        $('#openCrearComunidad').on('click', function () {
+            abrirModalCrearComunidad();
         });
     });
-</script>
 
+    function seleccionarComunidad(elemento) {
+        // Obtener datos de la comunidad seleccionada
+        var nombreComunidad = elemento.find('.nombreComunidad').text();
+        var descripcionComunidad = elemento.find('.descripcionComunidad').text();
+        var comunidadId = elemento.data('id');
+        var creadorComunidad = elemento.find('.creadorComunidad').text();
+
+        // Actualizar la UI para reflejar la selección
+        $('.active').removeClass('active');
+        elemento.addClass('active');
+
+
+
+        // Cargar mensajes de la comunidad
+        cargarMensajes(comunidadId, nombreComunidad, descripcionComunidad, creadorComunidad);
+    }
+
+    function abrirModalCrearComunidad() {
+        $('#createModal').load('/Comunidades/Create').modal('show');
+    }
+
+    function cargarMensajes(comunidadId, nombreComunidad, descripcionComunidad, creadorComunidad) {
+        // Calcula la altura máxima disponible
+        var maxMessagesHeight = calcularAlturaMaximaMensajes();
+
+
+        $.ajax({
+            url: `/Comunidades/Mensajes/${comunidadId}`,
+            type: 'GET',
+            success: function (data) {
+                mostrarMensajes(data, maxMessagesHeight, nombreComunidad, descripcionComunidad, creadorComunidad, comunidadId);
+            },
+            error: function (error) {
+                console.error('Error al cargar los mensajes', error);
+            }
+        });
+    }
+
+    function calcularAlturaMaximaMensajes() {
+        var windowHeight = $(window).height();
+        var headerHeight = $('.header').outerHeight();
+        var footerHeight = $('.footer').outerHeight();
+        return windowHeight - (headerHeight + footerHeight);
+    }
+
+    function mostrarMensajes(data, maxMessagesHeight, nombreComunidad, descripcionComunidad, creadorComunidad, comunidadId) {
+        
+        // Limpiar contenedor de mensajes y agregar nuevos
+        var mensajesContainer = $('.mensajesContainer').empty();
+
+        var messagesDiv = $('<div>').css('max-height', maxMessagesHeight + 'px').css('overflow-y', 'auto');
+        messagesDiv.append('<h5>' + nombreComunidad + '</h5>');
+        messagesDiv.append('<p>' + descripcionComunidad + '</p>');
+        messagesDiv.append(data);
+
+        mensajesContainer.append(messagesDiv);
+        mensajesContainer.scrollTop(mensajesContainer[0].scrollHeight);
+
+        var usuario = document.getElementById('sesion').value;
+
+        // Verificar si el usuario puede enviar mensajes
+        if (creadorComunidad.trim() === usuario) {
+            agregarInputMensaje(mensajesContainer, nombreComunidad, comunidadId, descripcionComunidad, creadorComunidad);
+        }
+
+    }
+
+    function agregarInputMensaje(contenedor, nombreComunidad, comunidadId, descripcionComunidad, creadorComunidad) {
+        var inputMensajeHtml = '<div class="row">' +
+            '<div class="col">' +
+            '<textarea id="mensaje" class="form-control" placeholder="escribe tu mensaje aquí" rows="1"></textarea>' +
+            '<button id="enviarMensaje" class="btn btn-primary mt-2">enviar</button>' +
+            '</div>' +
+            '</div>';
+
+        var inputMensaje = $(inputMensajeHtml);
+        inputMensaje.find('#enviarMensaje').on('click', function () {
+            var mensaje = $('#mensaje').val();
+            mandarMensaje(mensaje, nombreComunidad, comunidadId, descripcionComunidad, creadorComunidad);
+        });
+
+        contenedor.append(inputMensaje);
+    }
+
+    function mandarMensaje(mensaje, nombreComunidad, comunidadId, descripcionComunidad, creadorComunidad) {
+        $.ajax({
+            url: '@Url.Action("Crear", "Mensaje")',
+            type: 'POST',
+            data: { contenido: mensaje, nomComunidad: nombreComunidad },
+            success: function (response) {
+                cargarMensajes(comunidadId, nombreComunidad, descripcionComunidad, creadorComunidad); // Recargar mensajes
+            },
+            error: function (error) {
+                console.error('Error al enviar el mensaje', JSON.stringify(error));
+            }
+        });
+    }
+</script>

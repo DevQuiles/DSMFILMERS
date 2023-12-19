@@ -12,6 +12,7 @@ namespace WebApplication2.Assemblers
 {
     public class PeliculaAssembler
     {
+       
         public PeliculaViewModel ConvertirEnToViewModel(PeliculaEN en)
         {
             PeliculaViewModel peli = new PeliculaViewModel();
@@ -47,5 +48,6 @@ namespace WebApplication2.Assemblers
 
             return pelis;
         }
+
     }
 }

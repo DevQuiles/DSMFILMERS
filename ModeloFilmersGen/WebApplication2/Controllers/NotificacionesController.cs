@@ -31,7 +31,23 @@ namespace WebApplication2.Controllers
             return Ok();
         }
 
-       
+        public IActionResult RecargarSesion(string idUsuario)
+        {
+            SessionInitialize();
+            UsuarioRepository usuarioRepo = new UsuarioRepository(session);
+            UsuarioCEN usuCen = new UsuarioCEN(usuarioRepo);
+           
+            UsuarioEN usuEN = usuCen.DamePorOID(idUsuario);
+            UsuarioViewModel usuVM = new UsuarioAssembler().ConvertirENToViewModel(usuEN);
+            HttpContext.Session.Set<UsuarioViewModel>("usuario", usuVM);
+            SessionClose();
+
+
+
+            return Ok();
+        }
+
+
         public IActionResult Unfollow(string id, string idSeguido)
         {
 
