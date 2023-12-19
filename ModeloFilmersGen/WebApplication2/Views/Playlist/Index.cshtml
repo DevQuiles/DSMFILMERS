@@ -46,6 +46,21 @@
     }
 </style>
 
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            // Agregar a favoritos
+            $('.btn-add-favorite').click(function () {
+                var playlistId = $(this).data('playlist-id');
+
+
+                // Alerta
+                alert('Playlist agregada a favoritos con ID: ' + playlistId);
+            });
+        });
+    </script>
+}
+
 
 <h1>Bienvenido a las playlists</h1>
 
@@ -71,6 +86,7 @@
                 </div>
 
                 <div class="col-xl-3">
+                    <button class="btn btn-primary btn-add-favorite" data-playlist-id="@item.Id">Agregar a Favoritos</button>
                     <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-success" title="Edit">Editar</a>
                     <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-warning" title="Details">Detalles</a>
                     <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger" title="Delete">Borrar</a>

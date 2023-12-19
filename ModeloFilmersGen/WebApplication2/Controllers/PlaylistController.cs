@@ -16,6 +16,7 @@ namespace WebApplication2.Controllers
 {
     public class PlaylistController : BasicController
     {
+
         // GET: PlaylistController
         public ActionResult Index()
         {
@@ -125,6 +126,9 @@ namespace WebApplication2.Controllers
                 return View();
             }
         }
+
+
+
 
         // GET: PlaylistController/Delete/5
         public ActionResult Delete(int id)
