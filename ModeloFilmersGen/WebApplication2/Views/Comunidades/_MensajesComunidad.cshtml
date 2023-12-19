@@ -1,74 +1,57 @@
 ﻿@model IEnumerable<WebApplication2.Models.MensajeViewModel>
-<style>
-    .chat-container {
-        border: 1px solid #ccc;
-        padding: 10px;
-        border-radius: 5px;
-        margin-top: 20px;
-    }
+@{
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    String creador = "";
 
-    .message {
-        margin-bottom: 15px;
-        padding: 10px;
-        border-radius: 5px;
-        background-color: #f2f2f2;
-        position: relative;
-    }
-
-    .message-content {
-        margin-bottom: 5px;
-    }
-
-    .message-details {
-        font-size: 12px;
-        color: #777;
-    }
-
-    .message-user {
-        margin-left: 10px;
-    }
-
-    .message-date {
-        margin-right: 10px;
-    }
-</style>
-
-
-<div class="container">
-    <div class="row">
-
+}
 
             <!-- Conversación -->
-            <div class="chat-container">
-                @foreach (var item in Model)
-                {
-                    <div class="message">
-                        <div class="message-content">
-                            @Html.DisplayFor(modelItem => item.Contenido)
+<div class="container">
+    <div class="row">
+        <div class="mensajes" style="max-height: calc(100vh - 200px); overflow-y: auto;">
+            @foreach (var item in Model)
+            {
+                creador = item.Usuario;
+                
+                <div class="messagend-0 chat-container" >
+                    <div class="message-content row align-items-center">
+                        <div class="col-auto"><img src="/Img/@(item.Avatar).jpeg" class="img-fluid rounded-circle " style="max-width: 55px; max-height: 55px; "> </div>
+                        <div class="col row"> 
+                            <span class="col" style="line-height: 55px;">@Html.DisplayFor(modelItem => item.Usuario)</span>
+                            <div class="message-details col-auto" style="line-height: 55px;">
+                                @if (item.Dias == 0)
+                                {
+                                    <span class="message-date">hoy</span>
+                                }
+                                else if (item.Dias == 1)
+                                {
+                                    <span class="message-date">ayer</span>
+                                }
+                                else
+                                {
+                                    <span class="message-date">
+                                        hace
+                                        @Html.DisplayFor(modelItem => item.Dias) días
+                                    </span>
+                                }
+                            </div>
                         </div>
-                        <div class="message-details">
-                        @if (item.Dias == 0)
-                        {
-                            <span class="message-date">hoy</span>
-                        }
-                        else if (item.Dias == 1)
-                        {
-                            <span class="message-date">ayer</span>
-                        }
-                        else
-                        {
-                            <span class="message-date">
-                                hace
-                                @Html.DisplayFor(modelItem => item.Dias) días
-                            </span>
-                        }
-                        
-                            <span class="message-user">@Html.DisplayFor(modelItem => item.Usuario)</span>
-                            <!-- Opciones adicionales si es necesario -->
-                            <!-- Edit | Details | Delete -->
-                        </div>
+
+                        <span >@Html.DisplayFor(modelItem => item.Contenido)</span>
                     </div>
-                }
-            </div>
+                        
+                </div>
+            }
         </div>
+        
+    </div>
 </div>
+
+
+<script>
+    // Después de cargar los mensajes, desplázate automáticamente hacia abajo del contenedor de mensajes
+    window.addEventListener('load', function () {
+        var mensajesContainer = $('.mensajes')[0];
+        mensajesContainer.scrollTop = mensajesContainer.scrollHeight;
+    });
+</script>

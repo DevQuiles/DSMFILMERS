@@ -16,43 +16,43 @@ using ModeloFilmersGen.ApplicationCore.CEN.Pruebadeesquemaproyecto;
 
 namespace ModeloFilmersGen.ApplicationCore.CP.Pruebadeesquemaproyecto
 {
-    public partial class UsuarioCP : GenericBasicCP
-    {
-        public void Unfollow(string p_seguidor, string p_seguido)
+public partial class UsuarioCP : GenericBasicCP
+{
+public void Unfollow (string p_seguidor, string p_seguido)
+{
+        /*PROTECTED REGION ID(ModeloFilmersGen.ApplicationCore.CP.Pruebadeesquemaproyecto_Usuario_unfollow) ENABLED START*/
+
+        UsuarioCEN usuarioCEN = null;
+
+        try
         {
-            /*PROTECTED REGION ID(ModeloFilmersGen.ApplicationCore.CP.Pruebadeesquemaproyecto_Usuario_unfollow) ENABLED START*/
-
-            UsuarioCEN usuarioCEN = null;
-
-            try
-            {
-                CPSession.SessionInitializeTransaction();
-                usuarioCEN = new UsuarioCEN(CPSession.UnitRepo.UsuarioRepository);
-                NotificacionesCEN notiCEN = new NotificacionesCEN(CPSession.UnitRepo.NotificacionesRepository);
+                CPSession.SessionInitializeTransaction ();
+                usuarioCEN = new UsuarioCEN (CPSession.UnitRepo.UsuarioRepository);
+                NotificacionesCEN notiCEN = new NotificacionesCEN (CPSession.UnitRepo.NotificacionesRepository);
 
 
-                UsuarioEN usEN = usuarioCEN.DamePorOID(p_seguidor);
+                UsuarioEN usEN = usuarioCEN.DamePorOID (p_seguidor);
                 IList<UsuarioEN> seguidos = usEN.Seguidos;
 
-                usuarioCEN.DesasignarSeguidores(p_seguido, new List<string> { p_seguidor });
+                usuarioCEN.DesasignarSeguidores (p_seguido, new List<string> { p_seguidor });
 
-                int i = notiCEN.CrearNotificacion(usEN.NomUsuario + " te ha dejado seguir :( ", p_seguido, DateTime.Now, false, false, usEN.Email, -1);
+                int i = notiCEN.CrearNotificacion (usEN.NomUsuario + " te ha dejado seguir :( ", p_seguido, DateTime.Now, false, false, usEN.Email, -1);
 
-                Console.WriteLine(notiCEN.DamePorOID(i).Contenido);
+                Console.WriteLine (notiCEN.DamePorOID (i).Contenido);
 
-                CPSession.Commit();
-            }
-            catch (Exception ex)
-            {
-                CPSession.RollBack();
-                throw ex;
-            }
-            finally
-            {
-                CPSession.SessionClose();
-            }
-
-            /*PROTECTED REGION END*/
+                CPSession.Commit ();
         }
-    }
+        catch (Exception ex)
+        {
+                CPSession.RollBack ();
+                throw ex;
+        }
+        finally
+        {
+                CPSession.SessionClose ();
+        }
+
+        /*PROTECTED REGION END*/
+}
+}
 }

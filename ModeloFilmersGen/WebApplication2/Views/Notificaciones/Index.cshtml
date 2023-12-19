@@ -78,6 +78,7 @@
                         } else {
                             btn.text("Siguiendo").removeClass("btn-outline-primary").addClass("btn-success").attr("onclick", "followUnfollow('" + userId + "', '" + followedId + "', true)");
                         }
+                        actualizarSesion(userId);
                     },
                     error: function () {
                         alert("Error al procesar la solicitud.");
@@ -85,6 +86,24 @@
                     }
                 });
             }
+
+
+
+            function actualizarSesion(userId) {
+                $.ajax({
+                    url: '@Url.Action("RecargarSesion", "Notificaciones")',
+                    type: 'SET',
+                    data: {idUsuario: userId},
+                    success: function () {
+                    },
+                    error: function () {
+                        alert("Error al procesar la solicitud.");
+                        btn.prop('disabled', false);
+                    }
+                });
+
+            }
+
         </script>
     }
 

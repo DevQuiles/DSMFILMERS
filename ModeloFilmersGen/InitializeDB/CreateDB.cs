@@ -1,4 +1,3 @@
-
 /*PROTECTED REGION ID(CreateDB_imports) ENABLED START*/
 using System;
 using System.Collections.Generic;
@@ -133,7 +132,7 @@ namespace InitializeDB
                 Console.WriteLine("+++++++++++++++++++++++++++");
                 Console.WriteLine("+++++++++++++++++++++++++++");
 
-                //Obtener los últimos lanzamientos
+                //Obtener los Ãºltimos lanzamientos
                 //List<JObject> movies = movieApiService.GetLatestReleases();
                 //List<int> idsPeliculasLast = movieApiService.crearPeliculasApi(movies);
 
@@ -237,7 +236,7 @@ namespace InitializeDB
                 Console.WriteLine("Caratula: " + peli1.Caratula);
                 Console.WriteLine("Puntuacion: " + peli1.Puntuacion);
                 Console.WriteLine("Descripcion --> " + peli1.Descripcion);
-                Console.WriteLine("Duración: " + peli1.Duracion);
+                Console.WriteLine("DuraciÃ³n: " + peli1.Duracion);
                 Console.WriteLine("Estado de la pelicula status: " + peli1.Estado);
 
 
@@ -358,12 +357,12 @@ namespace InitializeDB
                 //---------------------------------------------- COMUNIDADES CRUDS -------------------------------------
 
                 // Crear una comunidad
-                int idComunidad1 = comunidadescen.CrearComunidad("NuevaComunidad", DateTime.Now, "Descripción de la nueva comunidad", emailUsuario2);
+                int idComunidad1 = comunidadescen.CrearComunidad("NuevaComunidad", DateTime.Now, "DescripciÃ³n de la nueva comunidad", emailUsuario2);
                 int idComunidad2 = comunidadescen.CrearComunidad("comunidad2", DateTime.Today, "Descripcion 2 ", emailUsuario2);
                 int idComunidad3 = comunidadescen.CrearComunidad("comunidad3", DateTime.Today, "Descripcion 3 ", emailUsuario2);
 
                 // Modificar la comunidad
-                comunidadescen.ModificarComunidad(idComunidad1, "ComunidadModificada", DateTime.Now, "Nueva descripción de la comunidad");
+                comunidadescen.ModificarComunidad(idComunidad1, "ComunidadModificada", DateTime.Now, "Nueva descripciÃ³n de la comunidad");
 
                 // Dame por oid
                 Console.WriteLine("++++++++++++++ COMUNIDAD POR OID MODIFICADA: +++++++++++++");
@@ -392,7 +391,9 @@ namespace InitializeDB
                 }
 
                 // Borrar una comunidad
-                comunidadescen.BorrarComunidad(idComunidad1);
+                ComunidadesCP comCP = new ComunidadesCP(new SessionCPNHibernate());
+
+                comCP.BorrarComunidad(idComunidad1);
 
                 comunidadObtenida = comunidadescen.DamePorOID(idComunidad1);
 

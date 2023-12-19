@@ -5,64 +5,67 @@
     IEnumerable<SelectListItem> listaAvatares = (IEnumerable<SelectListItem>)ViewData["Avatares"];
 }
 
-<h1>Edit</h1>
 
-<h4>UsuarioViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" readonly />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NombreUsuario" class="control-label"></label>
-                <input asp-for="NombreUsuario" class="form-control" />
-                <span asp-validation-for="NombreUsuario" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaNac" class="control-label"></label>
-                <input asp-for="FechaNac" class="form-control" />
-                <span asp-validation-for="FechaNac" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Localidad" class="control-label"></label>
-                <input asp-for="Localidad" class="form-control" />
-                <span asp-validation-for="Localidad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pais" class="control-label"></label>
-                <input asp-for="Pais" class="form-control" />
-                <span asp-validation-for="Pais" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <a asp-action="EditPass" asp-route-id="@Model.Email" class="btn btn-primary">Cambiar Contraseña</a>
-            </div>
 
-            <div class="form-group">
-                <label asp-for="Avatar" class="control-label"></label>
-                <select asp-for="Avatar" class="form-select" asp-items="listaAvatares"></select>
-                <span asp-validation-for="Avatar" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<form asp-action="Edit" class="row">
+    <div class="col-sm-4 pb-3" style="max-width: 250px; max-height: 250px;">
+        <img src="/Img/@(Model.Avatar).jpeg" alt="Avatar" class="img-fluid rounded-circle" />
+        <div class="form-group mt-3 text-center">
+            <a asp-action="EditPass" asp-route-id="@Model.Email" class="btn btn-primary">Cambiar Contraseña</a>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div class="col-sm-8">
+        <h1>Editar Perfil</h1>
+        <h4>Información personal</h4>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control" readonly />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="NombreUsuario" class="control-label"></label>
+            <input asp-for="NombreUsuario" class="form-control" />
+            <span asp-validation-for="NombreUsuario" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Nombre" class="control-label"></label>
+            <input asp-for="Nombre" class="form-control" />
+            <span asp-validation-for="Nombre" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="FechaNac" class="control-label"></label>
+            <input asp-for="FechaNac" class="form-control" />
+            <span asp-validation-for="FechaNac" class="text-danger"></span>
+        </div>
+        <br />
+        <h4>Localización</h4>
+        <div class="form-group">
+            <label asp-for="Localidad" class="control-label"></label>
+            <input asp-for="Localidad" class="form-control" />
+            <span asp-validation-for="Localidad" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Pais" class="control-label"></label>
+            <input asp-for="Pais" class="form-control" />
+            <span asp-validation-for="Pais" class="text-danger"></span>
+        </div>
+        <br />
+        <h4>Cambiar imagen</h4>
+        <div class="form-group">
+            <label asp-for="Avatar" class="control-label"></label>
+            <select asp-for="Avatar" class="form-select" asp-items="listaAvatares"></select>
+            <span asp-validation-for="Avatar" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="form-group">
+            <input type="submit" value="Guardar" class="btn btn-primary" />
+        </div>
+    </div>
+</form>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

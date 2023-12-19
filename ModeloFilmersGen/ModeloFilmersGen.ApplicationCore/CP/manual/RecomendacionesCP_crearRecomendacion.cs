@@ -31,16 +31,16 @@ public ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.Recomendacion
         {
                 CPSession.SessionInitializeTransaction ();
                 recomendacionesCEN = new  RecomendacionesCEN (CPSession.UnitRepo.RecomendacionesRepository);
-                UsuarioCEN usuarioCEN = new UsuarioCEN(CPSession.UnitRepo.UsuarioRepository);
-                NotificacionesCEN notiCEN = new NotificacionesCEN(CPSession.UnitRepo.NotificacionesRepository);
+                UsuarioCEN usuarioCEN = new UsuarioCEN (CPSession.UnitRepo.UsuarioRepository);
+                NotificacionesCEN notiCEN = new NotificacionesCEN (CPSession.UnitRepo.NotificacionesRepository);
 
 
                 recomendacionesCEN.CrearRecomendacionDefault (p_fecha, p_recomendador, p_recomendado, p_pelicula);
-                UsuarioEN usuEN = usuarioCEN.DamePorOID(p_recomendador);
+                UsuarioEN usuEN = usuarioCEN.DamePorOID (p_recomendador);
 
-                
 
-                int i = notiCEN.CrearNotificacion (usuEN.NomUsuario + " te ha recomendado la pelicula ", p_recomendado, DateTime.Now, false, false,usuEN.Email,p_pelicula);
+
+                int i = notiCEN.CrearNotificacion (usuEN.NomUsuario + " te ha recomendado la pelicula ", p_recomendado, DateTime.Now, false, false, usuEN.Email, p_pelicula);
 
                 Console.WriteLine (notiCEN.DamePorOID (i).Contenido);
 
