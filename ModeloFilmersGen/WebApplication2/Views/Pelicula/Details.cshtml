@@ -4,6 +4,17 @@
     ViewData["Title"] = "Details";
 }
 
+@{
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    string nombre = "";
+    string email = "";
+    if (usuario != null)
+    {
+        nombre = usuario.Nombre;
+        email = usuario.Email;
+    }
+}
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -16,7 +27,20 @@
     }
 </style>
 
-<h1>@Html.DisplayFor(model => model.nombre)</h1>
+@* <h1>@Html.DisplayFor(model => model.nombre)</h1>
+<hr /> *@
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <h1>@Html.DisplayFor(model => model.nombre)</h1>
+        </div>
+        <div class="col-md-2">
+            <!-- Espacio para los botones -->
+            <button type="button" class="btn btn-primary" id="">Recomendar</button>
+            <button type="button" class="btn btn-secondary" id="btnWatchList">Añadir a Para ver</button>
+        </div>
+    </div>
+</div>
 <hr />
 
 <div class="row">
@@ -69,18 +93,29 @@
                     }
                 }
             </dd>
-            <dt class ="col-sm-8">
-                <h4>¡Añade la pelicula a una de tus playlis!</h4>
-                <hr />
-            </dt>
-            <dt class="col-sm-8">
-                <select id="desplegable" class="form-control"></select>
-            </dt>
-            <dd class="col-sm-4">
-                <button class="btn btn-primary" id="btnAñadir" aria-haspopup="true" aria-expanded="false">
-                    Añadir
-                </button>
-            </dd>
+
+            @if(usuario != null)
+            {
+                <dt class="col-sm-8">
+                    <h4>¡Añade la pelicula a una de tus playlis!</h4>
+                    <hr />
+                </dt>
+                <dt class="col-sm-8">
+                    <select id="desplegable" class="form-control"></select>
+                </dt>
+                <dd class="col-sm-4">
+                    <button class="btn btn-primary" id="btnAñadir" aria-haspopup="true" aria-expanded="false">
+                        Añadir
+                    </button>
+                </dd>
+            }
+            else
+            {
+                <dt class="col-sm-12">
+                    <h4>¡Debes iniciar sesión para añdir peliculas a tus playlist o a vistas!</h4>              
+                </dt>
+            }
+            
         </dl>
         <div>
             
@@ -94,6 +129,12 @@
 
 
 <script>
+
+    var usuario = {
+        nombre: '@nombre',
+        email: '@email'
+    };
+
     document.addEventListener("DOMContentLoaded", function () {
         mostrarDesplegable(); // Mostrar el desplegable al cargar la página
 
@@ -142,6 +183,34 @@
                     // Manejar el éxito de la llamada AJAX
                     // console.log(result);
                     window.location.href = result.redirectUrl;
+                },
+                error: function (error) {
+                    // Manejar el error de la llamada AJAX
+                    console.error("Error al llamar al controlador:", error);
+                }
+            });
+        }
+
+
+
+        document.getElementById("btnWatchList").addEventListener("click", function () {
+            // Obtener el ID de la película y el ID de la playlist
+            var idPelicula = '@Model.Id';
+            var idUsuario = usuario.email;
+            anyadirPeliculaAWatchList(idPelicula, idUsuario);
+        });
+
+        function anyadirPeliculaAWatchList(idPelicula, idUsuario) {
+            // Realizar la llamada AJAX al controlador
+            $.ajax({
+                url: '/Pelicula/anyadirPeliculaAWatchList',
+                type: 'POST',
+                data: { idPelicula: idPelicula, idUsuario: idUsuario },
+                success: function (result) {
+                    // Manejar el éxito de la llamada AJAX
+                    // console.log(result);
+                    window.location.href = '/Usuario/DetailsPerfil/'+idUsuario;
+                    
                 },
                 error: function (error) {
                     // Manejar el error de la llamada AJAX

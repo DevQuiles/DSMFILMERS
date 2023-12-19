@@ -11,6 +11,20 @@ namespace WebApplication2.Controllers
     public class PeliculaController : BasicController
     {
 
+        public ActionResult anyadirPeliculaAWatchList(string idPelicula, string idUsuario)
+        {
+            SessionInitialize();
+            int idP = int.Parse(idPelicula);
+            UsuarioRepository usuarioRepository = new UsuarioRepository();
+            UsuarioCEN usuarioCEN = new UsuarioCEN(usuarioRepository);
+            usuarioCEN.AsignarPeliculaWatchList(idUsuario, new List<int> { idP });
+            SessionClose();
+            return Json(new { success = true });
+        }
+
+
+
+
         public ActionResult buscaRapidoPeliculas(string searchString)
         {
             SessionInitialize();
