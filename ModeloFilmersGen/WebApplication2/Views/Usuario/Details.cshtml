@@ -2,47 +2,106 @@
 
 @{
     ViewData["Title"] = "Details";
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    @if ( usuario!= null  && usuario.Email == @Model.Email)
+    {
+        <script>
+            window.location.href = '/Usuario/DetailsPerfil/@Model.Email'; 
+        </script>
+    }
 }
 
-<div class="row">
+<div class="row align-items-center">
     <div class="col-sm-4 pb-3" style="max-width: 250px; max-height: 250px;">
-            <img src="/Img/@(Model.Avatar).jpeg" alt="Avatar" class="img-fluid rounded-circle" />
+        <img src="/Img/@(Model.Avatar).jpeg" alt="Avatar" class="img-fluid rounded-circle" />
     </div>
     <div class="col-sm-8 pb-3">
-        <h3>@Model.NombreUsuario</h3>
+        
+            <div class="row align-items-center">
+                <div class="col-2">
+                    <h3>@Model.NombreUsuario</h3>
+                </div>
+            @if (usuario != null && usuario.Email != @Model.Email)
+            {
+                <div class="col-auto">
+                    @{
+                        // Comprobamos si ya está siguiendo al usuario
+                        bool isFollowing = usuario.UsuariosSeguidos.Contains(Model.Email);
+                        @if (isFollowing)
+                        {
+                            <button type="button" data-follow-id="@Model.Email" class="btn btn-success btn-sm" onclick="followUnfollow('@usuario.Email', '@Model.Email', true)">Siguiendo</button>
+                        }
+                        else
+                        {
+                            <button type="button" data-follow-id="@Model.Email" class="btn btn-outline-primary btn-sm" onclick="followUnfollow('@usuario.Email', '@Model.Email', false)">Seguir</button>
+                        }
+                    }
+                </div>
+            }
+        </div>
+        
+
         <h4>@Model.Nombre</h4>
         <br />
-            <div class="row">
+        <div class="row">
             <div class="col-sm-4 text-center">
-                    <h5>@Model.Seguidores</h5>
-                    <p>Seguidores</p>
-                </div>
-            <div class="col-sm-4 text-center">
-                    <h5>@Model.Seguidos</h5>
-                    <p>Seguidos</p>
-                </div>
-            <div class="col-sm-4 text-center">
-                    <h5>@Model.PelisVistas</h5>
-                    <p>Películas</p>
-                </div>
+                <h5>@Model.Seguidores</h5>
+                <p id="Seguidores">Seguidores</p>
             </div>
-            
+            <div class="col-sm-4 text-center">
+                <h5>@Model.Seguidos</h5>
+                <p id="Seguidos">Seguidos</p>
+            </div>
+            <div class="col-sm-4 text-center">
+                <h5>@Model.PelisVistas</h5>
+                <p>Películas</p>
+            </div>
+        </div>
     </div>
     <hr />
     <div id="vistasUsuario">
-        
-
     </div>
 </div>
 
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-
-<script>
-    $(document).ready(function () {
-        var idUsuario = '@Model.Email'; // Reemplaza esto con tu lógica para obtener el ID del usuario
-        $.get('/Usuario/Vistas/' + idUsuario, function (data) {
-            $('#vistasUsuario').html(data);
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var idUsuario = '@Model.Email'; // Reemplaza esto con tu lógica para obtener el ID del usuario
+            $.get('/Usuario/Vistas/' + idUsuario, function (data) {
+                $('#vistasUsuario').html(data);
+            });
         });
-    });
-</script>
+    </script>
+
+
+
+    <script>
+        function followUnfollow(userId, followedId, isFollowing) {
+            var btn = $("[data-follow-id='" + followedId + "']");
+            btn.prop('disabled', true);
+
+            var url = isFollowing ? '@Url.Action("Unfollow", "Notificaciones")' : '@Url.Action("Follow", "Notificaciones")';
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: { id: userId, idSeguido: followedId },
+                success: function () {
+                    // Actualizar la interfaz de usuario aquí
+                    btn.prop('disabled', false);
+                    if (isFollowing) {
+                        btn.text("Seguir").removeClass("btn-success").addClass("btn-outline-primary").attr("onclick", "followUnfollow('" + userId + "', '" + followedId + "', false)");
+                    } else {
+                        btn.text("Siguiendo").removeClass("btn-outline-primary").addClass("btn-success").attr("onclick", "followUnfollow('" + userId + "', '" + followedId + "', true)");
+                    }
+                },
+                error: function () {
+                    alert("Error al procesar la solicitud.");
+                    btn.prop('disabled', false);
+                }
+            });
+        }
+    </script>
+}
