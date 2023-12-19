@@ -29,7 +29,15 @@ namespace WebApplication2.Controllers
         // GET: MensajeController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            SessionInitialize();
+            MensajeRepository mensajeRepository = new MensajeRepository(session);
+            MensajeCEN mensajeCEN = new MensajeCEN(mensajeRepository);
+
+            MensajeEN mensajeEN = mensajeCEN.DamePorOID(id);
+            MensajeViewModel mensajeVM = new MensajeAssembler().ConvertirENToViewModel(mensajeEN);
+
+            SessionClose();
+            return View(mensajeVM);
         }
 
         // GET: MensajeController/Create
@@ -41,10 +49,21 @@ namespace WebApplication2.Controllers
         // POST: MensajeController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(MensajeViewModel menVM)
         {
             try
             {
+                SessionInitialize();
+                MensajeRepository menRepository = new MensajeRepository(session);
+                MensajeCEN menCEN = new MensajeCEN(menRepository);
+
+                ComunidadesRepository comRepo = new ComunidadesRepository(session);
+                ComunidadesCEN comunidadesCEN = new ComunidadesCEN(comRepo);
+
+                IList<ComunidadesEN> listCom = comunidadesCEN.DameComunidadPorNombre(menVM.Comunidad);
+
+
+                menCEN.CrearMensaje(menVM.Contenido, DateTime.Now, listCom.First().Id);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -52,6 +71,31 @@ namespace WebApplication2.Controllers
                 return View();
             }
         }
+
+        public ActionResult Crear(String contenido, String nomComunidad)
+        {
+            try
+            {
+                SessionInitialize();
+                MensajeRepository menRepository = new MensajeRepository(session);
+                MensajeCEN menCEN = new MensajeCEN(menRepository);
+
+                ComunidadesRepository comRepo = new ComunidadesRepository(session);
+                ComunidadesCEN comCEN = new ComunidadesCEN(comRepo);
+
+                IList<ComunidadesEN> comEN = comCEN.DameComunidadPorNombre(nomComunidad);
+
+
+                int idMen = menCEN.CrearMensaje(contenido, DateTime.Now, comEN.First().Id);
+
+                return Ok();
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
 
         // GET: MensajeController/Edit/5
         public ActionResult Edit(int id)

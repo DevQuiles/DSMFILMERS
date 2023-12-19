@@ -1,70 +1,238 @@
-﻿@model IEnumerable<WebApplication2.Models.ComunidadesViewModel>
+﻿@model WebApplication2.Models.GrupoComunidadesViewModel
 
 @{
     ViewData["Title"] = "Index";
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+
 }
-<style>
-
-</style>
-
 
 <div class="row">
     <div class="list-group position-sticky col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
-        @foreach (var item in Model)
+        <a class="btn btn-primary" id="openCrearComunidad">
+            <i class="fas fa-plus"></i> Nueva comunidad
+        </a>
+        <br>
+        <div class="list-group-item">
+            @if (Model.misComs.Count() != 0 || Model.uniComs.Count() != 0)
+            {
+                <b>TUS COMUNIDADES</b>
+                @foreach (var item in Model.misComs)
+                {
+                    <a asp-area="" asp-controller="Comunidades" asp-action="Mensajes" asp-route-id="@item.IdCom" class="list-group-item list-group-item-action comunidad-item" data-id="@item.IdCom" aria-current="true">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="nombreComunidad mb-1">@Html.DisplayFor(modelItem => item.Nombre)</h5>
+                            <small>@Html.DisplayFor(modelItem => item.FechaCreacion)</small>
+                        </div>
+                        <div class="d-flex w-100 justify-content-between">
+                            <p class="descripcionComunidad mb-1">@Html.DisplayFor(modelItem => item.Descripcion)</p>
+                            <small class="creadorComunidad mb-1"> @Html.DisplayFor(modelItem => item.Emisor)</small>
+                        </div>
+                        <button type="button" class="btn btn-outline-danger">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+                            </svg>
+                        </button>
+                        <button type="button" class="btn btn-outline-warning">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                            </svg>
+                        </button>
+
+
+                    </a>
+                }
+                @foreach (var item in Model.uniComs)
+                {
+                    <a asp-area="" asp-controller="Comunidades" asp-action="Mensajes" asp-route-id="@item.IdCom" class="list-group-item list-group-item-action comunidad-item" data-id="@item.IdCom" aria-current="true">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="nombreComunidad mb-1">@Html.DisplayFor(modelItem => item.Nombre)</h5>
+                            <small>@Html.DisplayFor(modelItem => item.FechaCreacion)</small>
+                        </div>
+                        <div class="d-flex w-100 justify-content-between">
+                            <p class="descripcionComunidad mb-1">@Html.DisplayFor(modelItem => item.Descripcion)</p>
+                            <small class="creadorComunidad mb-1"> @Html.DisplayFor(modelItem => item.Emisor)</small>
+                        </div>
+
+                    </a>
+                }
+                <br>
+            }
+            
+        <b>TODAS LAS COMUNIDADES</b>
+        @foreach (var item in Model.todasComs)
         {
-            <a asp-area="" asp-controller="Comunidades" asp-action="Mensajes" asp-route-id="@item.IdCom" class="list-group-item list-group-item-action comunidad-item id=@item.IdCom" id=@item.IdCom aria-current="true">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 id="nombreComunidad" class="mb-1">@Html.DisplayFor(modelItem => item.Nombre)</h5>
-                    <small>@Html.DisplayFor(modelItem => item.FechaCreacion)</small>
-                </div>
-                <p id="descripcionComunidad"  class="mb-1">@Html.DisplayFor(modelItem => item.Descripcion)</p>
-            </a>
-       
+            @if (!Model.misComs.Any(mc => mc.IdCom == item.IdCom) && !Model.uniComs.Any(uc => uc.IdCom == item.IdCom))
+            {
+                <a asp-area="" asp-controller="Comunidades" asp-action="Mensajes" asp-route-id="@item.IdCom" class="list-group-item list-group-item-action comunidad-item" data-id="@item.IdCom" aria-current="true">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="nombreComunidad mb-1">@Html.DisplayFor(modelItem => item.Nombre)</h5>
+                        <small>@Html.DisplayFor(modelItem => item.FechaCreacion)</small>
+                    </div>
+                    <div class="d-flex w-100 justify-content-between">
+                        <p class="descripcionComunidad mb-1">@Html.DisplayFor(modelItem => item.Descripcion)</p>
+                        <small class="creadorComunidad mb-1"> @Html.DisplayFor(modelItem => item.Emisor)</small>
+                    </div>
+                
+                </a>
+            }
         }
-  
+        </div>
     </div>
+    <input type="hidden" id="sesion" value="@usuario.NombreUsuario" />
 
-    <div class="col-md-6 col-lg-7 col-xl-8 mensajesContainer">
-
+    <div class="d-flex align-items-center justify-content-center col-md-6 col-lg-7 col-xl-8 ">
+    <div class="col-md-6 col-lg-7 col-xl-8 mensajesContainer text-center">
+        <h2>Bienvenido a la sección de Comunidades</h2>
+        <p>Hola, <span>@usuario.NombreUsuario</span>. ¡Es genial verte por aquí!</p>
     </div>
+</div>
 
 </div>
 
+<!-- Modal -->
+<div class="modal" tabindex="-1" role="dialog" id="createModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Crear una nueva comunidad</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Contenido de la vista _Create se cargará aquí -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+<!-- Incluye jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
     $(document).ready(function () {
+        // Manejo de clic en elementos de la comunidad
         $('.comunidad-item').click(function (e) {
             e.preventDefault();
-            var nombreComunidad = $(this).find('h5').text();
-            var descripcionComunidad = $(this).find('p').text();
-            var comunidadId = $(this).attr('id');
-            $('.active').removeClass('active');
-            $(this).addClass('active');
+            seleccionarComunidad($(this));
+        });
 
-            //VISTA DE LOS MENSAJES DE LA COMUNIDAD ACTIVA
-            $.ajax({
-                url: `/Comunidades/Mensajes/${comunidadId}`,
-                type: 'GET',
-                success: function (data) {
-                    // Limpia el contenedor de mensajes
-                    $('.mensajesContainer').empty();
-
-                    // Verifica si hay datos para mostrar
-                    if (data.length > 0) {
-
-                        $('.mensajesContainer').append('<h5>' + nombreComunidad + '</h5>');
-                        $('.mensajesContainer').append('<p>' + descripcionComunidad + '</p>');
-
-                        // Agrega los mensajes
-                        $('.mensajesContainer').append(data);
-                    }
-                },
-                error: function (error) {
-                    console.error('Error al cargar los mensajes', error);
-                }
-            });
+        // Abrir modal para crear comunidad
+        $('#openCrearComunidad').on('click', function () {
+            $('#createModal .modal-body').load('/Comunidades/Create');
+            $('#createModal').modal('show');
         });
     });
-</script>
 
+    function seleccionarComunidad(elemento) {
+        // Obtener datos de la comunidad seleccionada
+        var nombreComunidad = elemento.find('.nombreComunidad').text();
+        var descripcionComunidad = elemento.find('.descripcionComunidad').text();
+        var comunidadId = elemento.data('id');
+        var creadorComunidad = elemento.find('.creadorComunidad').text();
+
+        // Actualizar la UI para reflejar la selección
+        $('.active').removeClass('active');
+        elemento.addClass('active');
+
+
+
+        // Cargar mensajes de la comunidad
+        cargarMensajes(comunidadId, nombreComunidad, descripcionComunidad, creadorComunidad);
+    }
+
+    function abrirModalCrearComunidad() {
+        $('#createModal').load('/Comunidades/Create').modal('show');
+    }
+
+    function cargarMensajes(comunidadId, nombreComunidad, descripcionComunidad, creadorComunidad) {
+        // Calcula la altura máxima disponible
+        var maxMessagesHeight = calcularAlturaMaximaMensajes();
+
+
+        $.ajax({
+            url: `/Comunidades/Mensajes/${comunidadId}`,
+            type: 'GET',
+            success: function (data) {
+                mostrarMensajes(data, maxMessagesHeight, nombreComunidad, descripcionComunidad, creadorComunidad, comunidadId);
+            },
+            error: function (error) {
+                console.error('Error al cargar los mensajes', error);
+            }
+        });
+    }
+
+    function calcularAlturaMaximaMensajes() {
+        var windowHeight = $(window).height();
+        var headerHeight = $('.header').outerHeight();
+        var footerHeight = $('.footer').outerHeight();
+        return windowHeight - (headerHeight + footerHeight);
+    }
+
+    function mostrarMensajes(data, maxMessagesHeight, nombreComunidad, descripcionComunidad, creadorComunidad, comunidadId) {
+        
+        // Limpiar contenedor de mensajes y agregar nuevos
+        var mensajesContainer = $('.mensajesContainer').empty();
+        var divSuperior = document.querySelector('.d-flex.align-items-center.justify-content-center');
+        var divInferior = document.querySelector('.text-center');
+        if (divSuperior) {
+            divSuperior.classList.remove('align-items-center');
+        }
+        if (divInferior) {
+            divInferior.classList.remove('text-center');
+        }
+        
+
+        var messagesDiv = $('<div>').css('max-height', maxMessagesHeight + 'px').css('overflow-y', 'auto');
+        var messagesDivDiv = $('<div>').addClass('encabezadoChat');;
+        messagesDivDiv.append('<h5>' + nombreComunidad + '</h5>');
+        messagesDivDiv.append('<p>' + descripcionComunidad + '</p>');
+        messagesDiv.append(messagesDivDiv);
+        messagesDiv.append(data);
+
+        mensajesContainer.append(messagesDiv);
+        mensajesContainer.scrollTop(mensajesContainer[0].scrollHeight);
+
+        var usuario = document.getElementById('sesion').value;
+
+        // Verificar si el usuario puede enviar mensajes
+        if (creadorComunidad.trim() === usuario) {
+            agregarInputMensaje(mensajesContainer, nombreComunidad, comunidadId, descripcionComunidad, creadorComunidad);
+        }
+
+    }
+
+    function agregarInputMensaje(contenedor, nombreComunidad, comunidadId, descripcionComunidad, creadorComunidad) {
+        var inputMensajeHtml = '<div class="row">' +
+            '<div class="col">' +
+            '<textarea id="mensaje" class="form-control" placeholder="escribe tu mensaje aquí" rows="1"></textarea>' +
+            '<button id="enviarMensaje" class="btn btn-primary mt-2">enviar</button>' +
+            '</div>' +
+            '</div>';
+
+        var inputMensaje = $(inputMensajeHtml);
+        inputMensaje.find('#enviarMensaje').on('click', function () {
+            var mensaje = $('#mensaje').val();
+            mandarMensaje(mensaje, nombreComunidad, comunidadId, descripcionComunidad, creadorComunidad);
+        });
+
+        contenedor.append(inputMensaje);
+    }
+
+    function mandarMensaje(mensaje, nombreComunidad, comunidadId, descripcionComunidad, creadorComunidad) {
+        $.ajax({
+            url: '@Url.Action("Crear", "Mensaje")',
+            type: 'POST',
+            data: { contenido: mensaje, nomComunidad: nombreComunidad },
+            success: function (response) {
+                cargarMensajes(comunidadId, nombreComunidad, descripcionComunidad, creadorComunidad); // Recargar mensajes
+            },
+            error: function (error) {
+                console.error('Error al enviar el mensaje', JSON.stringify(error));
+            }
+        });
+    }
+</script>

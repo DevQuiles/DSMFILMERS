@@ -1,4 +1,3 @@
-
 /*PROTECTED REGION ID(CreateDB_imports) ENABLED START*/
 using System;
 using System.Collections.Generic;
@@ -117,7 +116,7 @@ namespace InitializeDB
                 Console.WriteLine("++++++++++++++++++++++++++++++++++++++++");
                 Console.WriteLine("++++++++++++++20 PELICULAS+++++++++++++");
 
-                List<JObject> listaPeliculas = movieApiService.GetMultipleMovies(50);
+                List<JObject> listaPeliculas = movieApiService.GetMultipleMovies(300);
                 List<int> idsPeliculas200 = movieApiService.crearPeliculasApi(listaPeliculas);
 
                 Console.WriteLine("---------------------");
@@ -133,7 +132,7 @@ namespace InitializeDB
                 Console.WriteLine("+++++++++++++++++++++++++++");
                 Console.WriteLine("+++++++++++++++++++++++++++");
 
-                //Obtener los últimos lanzamientos
+                //Obtener los Ãºltimos lanzamientos
                 //List<JObject> movies = movieApiService.GetLatestReleases();
                 //List<int> idsPeliculasLast = movieApiService.crearPeliculasApi(movies);
 
@@ -153,7 +152,7 @@ namespace InitializeDB
                 Console.WriteLine("---------------------");
 
                 IList<PeliculaEN> peliculas = peliculacen.DameTodos(0, 6);
-                string emailUsuario1 = usuariocen.CrearUsuario("email1", "usuario1", "nombre1", new DateTime(2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass1", true, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_1);
+                string emailUsuario1 = usuariocen.CrearUsuario("email1@gmail.com", "usuario1", "nombre1", new DateTime(2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass1", true, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_1);
                 DateTime now2022 = new DateTime(2022, 11, 1);
 
                 //CREO PELICULAS VISTAS
@@ -183,7 +182,7 @@ namespace InitializeDB
                 int mesActual2 = now.Month;
 
                 IList<PeliculaEN> peliculas2 = peliculacen.DameTodos(3, 10);
-                string emailUsuario2 = usuariocen.CrearUsuario("email2", "usuario2", "nombre1", new DateTime(2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass1", false, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_2);
+                string emailUsuario2 = usuariocen.CrearUsuario("email2@gmail.com", "usuario2", "nombre1", new DateTime(2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass2", false, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_2);
 
                 foreach (var item in peliculas2)
                 {
@@ -237,7 +236,7 @@ namespace InitializeDB
                 Console.WriteLine("Caratula: " + peli1.Caratula);
                 Console.WriteLine("Puntuacion: " + peli1.Puntuacion);
                 Console.WriteLine("Descripcion --> " + peli1.Descripcion);
-                Console.WriteLine("Duración: " + peli1.Duracion);
+                Console.WriteLine("DuraciÃ³n: " + peli1.Duracion);
                 Console.WriteLine("Estado de la pelicula status: " + peli1.Estado);
 
 
@@ -258,8 +257,8 @@ namespace InitializeDB
                 //Creamos usuarios
                 //string emailUsuario1 = usuariocen.CrearUsuario ("email1", "usuario1", "nombre1", new DateTime (2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass1");
                 //string emailUsuario2 = usuariocen.CrearUsuario ("email2", "usuario2", "nombre2", new DateTime (2005, 07, 03), "loc2", "pais2", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Cinefago_Celestial, "pass2");
-                string emailUsuario3 = usuariocen.CrearUsuario("email3", "usuario3", "nombre3", new DateTime(2003, 02, 02), "loc3", "pais3", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Principiante_cinefilo, "pass3", true, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_3);
-                string emailUsuario4 = usuariocen.CrearUsuario("email4", "usuario4", "nombre4", new DateTime(2005, 07, 03), "loc4", "pais4", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Entusiasta_de_la_Pantalla, "pass4", true, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_4);
+                string emailUsuario3 = usuariocen.CrearUsuario("email3@gmail.com", "usuario3", "nombre3", new DateTime(2003, 02, 02), "loc3", "pais3", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Principiante_cinefilo, "pass3", true, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_3);
+                string emailUsuario4 = usuariocen.CrearUsuario("email4@gmail.com", "usuario4", "nombre4", new DateTime(2005, 07, 03), "loc4", "pais4", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Entusiasta_de_la_Pantalla, "pass4", true, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_4);
 
                 // Modificamos suario
                 usuariocen.ModificarUsuario(emailUsuario1, "UsuarioModificado", "nombre1", new DateTime(2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass1", false, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_5);
@@ -358,12 +357,12 @@ namespace InitializeDB
                 //---------------------------------------------- COMUNIDADES CRUDS -------------------------------------
 
                 // Crear una comunidad
-                int idComunidad1 = comunidadescen.CrearComunidad("NuevaComunidad", DateTime.Now, "Descripción de la nueva comunidad", emailUsuario2);
+                int idComunidad1 = comunidadescen.CrearComunidad("NuevaComunidad", DateTime.Now, "DescripciÃ³n de la nueva comunidad", emailUsuario2);
                 int idComunidad2 = comunidadescen.CrearComunidad("comunidad2", DateTime.Today, "Descripcion 2 ", emailUsuario2);
                 int idComunidad3 = comunidadescen.CrearComunidad("comunidad3", DateTime.Today, "Descripcion 3 ", emailUsuario2);
 
                 // Modificar la comunidad
-                comunidadescen.ModificarComunidad(idComunidad1, "ComunidadModificada", DateTime.Now, "Nueva descripción de la comunidad");
+                comunidadescen.ModificarComunidad(idComunidad1, "ComunidadModificada", DateTime.Now, "Nueva descripciÃ³n de la comunidad");
 
                 // Dame por oid
                 Console.WriteLine("++++++++++++++ COMUNIDAD POR OID MODIFICADA: +++++++++++++");
@@ -392,7 +391,9 @@ namespace InitializeDB
                 }
 
                 // Borrar una comunidad
-                comunidadescen.BorrarComunidad(idComunidad1);
+                ComunidadesCP comCP = new ComunidadesCP(new SessionCPNHibernate());
+
+                comCP.BorrarComunidad(idComunidad1);
 
                 comunidadObtenida = comunidadescen.DamePorOID(idComunidad1);
 
@@ -495,13 +496,13 @@ namespace InitializeDB
                 Console.WriteLine("Disponible? -> " + usuarioR.RecompensaDisponible);
 
                 //marcarDestacada --------------------------------------------------------
-                int i = notificacionescen.CrearNotificacion("hola", emailUsuario2, now, false, false);
+                int i = notificacionescen.CrearNotificacion("hola", emailUsuario2, now, false, false, emailUsuario4, -1);
                 notificacionescen.MarcarDestacada(i);
                 Console.WriteLine(i);
                 NotificacionesEN not = notificacionescen.DamePorOID(i);
                 Console.WriteLine("+++++++++++++++++++++++++++Destacado? -> " + not.Destacada);
 
-                Console.WriteLine("Id:"+ not.Id);
+                Console.WriteLine("Id:" + not.Id);
                 Console.WriteLine("Id:" + not.Contenido);
                 Console.WriteLine("Id:" + not.Destacada);
 
@@ -526,7 +527,7 @@ namespace InitializeDB
                 //Prueba follow
                 UsuarioCP usCP = new UsuarioCP(new SessionCPNHibernate());
                 usCP.Follow(emailUsuario4, emailUsuario2);
-                usCP.Follow(emailUsuario4, emailUsuario2);
+                usCP.Follow(emailUsuario2, emailUsuario4);
                 Console.WriteLine("------------------------------------------------------------------------------------------------");
                 Console.WriteLine("------------------------------------------------------------------------------------------------");
                 Console.WriteLine("------------------------------------------------------------------------------------------------");
@@ -570,9 +571,9 @@ namespace InitializeDB
                 Console.WriteLine("----------------------------------------------------------------------------------------------------------------");
                 Console.WriteLine("----------------------------------------------------------------------------------------------------------------");
                 Console.WriteLine("----------------------------------------------------------------------------------------------------------------");
-                string emailUsuario6 = usuariocen.CrearUsuario("email6", "usuario6", "nombre6", new DateTime(2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass6", true, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_4);
-                string emailUsuario7 = usuariocen.CrearUsuario("email7", "usuario7", "nombre7", new DateTime(2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass7", true, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_5);
-                string emailUsuario8 = usuariocen.CrearUsuario("email8", "usuario8", "nombre8", new DateTime(2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass8", true, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_5);
+                string emailUsuario6 = usuariocen.CrearUsuario("email6@gmail.com", "usuario6", "nombre6", new DateTime(2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass6", true, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_4);
+                string emailUsuario7 = usuariocen.CrearUsuario("email7@gmail.com", "usuario7", "nombre7", new DateTime(2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass7", true, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_5);
+                string emailUsuario8 = usuariocen.CrearUsuario("email8@gmail.com", "usuario8", "nombre8", new DateTime(2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass8", true, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_5);
 
 
 
@@ -589,7 +590,10 @@ namespace InitializeDB
                 UsuarioEN usuarioprueba6 = usuariocen.DamePorOID(emailUsuario6);
 
                 usCP.Follow(emailUsuario6, emailUsuario7);
+                usCP.Follow(emailUsuario6, emailUsuario2);
+                usCP.Follow(emailUsuario7, emailUsuario6);
                 usCP.Follow(emailUsuario6, emailUsuario8);
+
 
                 IList<PeliculaVistaEN> listactividades = usCP.ActividadAmigos(emailUsuario6);
 
@@ -603,7 +607,7 @@ namespace InitializeDB
                 Console.WriteLine("----------------------------------------------------------------------------------------------------------------");
                 Console.WriteLine("----------------------------------------------------------------------------------------------------------------");
 
-                int PLAYLISTPRUEBA = playlistcen.CrearPlaylist("pruebaPeliculas", "Esto es una prueba de ver si hace bn el details", "email2");
+                int PLAYLISTPRUEBA = playlistcen.CrearPlaylist("pruebaPeliculas", "Esto es una prueba de ver si hace bn el details", "email2@gmail.com");
                 playlistcen.AsignarPeliculas(PLAYLISTPRUEBA, new List<int> { idPeli1, idPeli2 });
                 playlistcen.AsignarPeliculas(PLAYLISTPRUEBA, new List<int> { idPeli3, idPeli2 });
 

@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModeloFilmersGen.ApplicationCore.CEN.Pruebadeesquemaproyecto;
+using ModeloFilmersGen.ApplicationCore.CP.Pruebadeesquemaproyecto;
 using ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto;
+using ModeloFilmersGen.Infraestructure.CP;
 using ModeloFilmersGen.Infraestructure.Repository.Pruebadeesquemaproyecto;
+using NHibernate.Criterion;
 using System.Collections.Generic;
 using WebApplication2.Assemblers;
 using WebApplication2.Models;
@@ -19,11 +22,32 @@ namespace WebApplication2.Controllers
             ComunidadesCEN comCEN = new ComunidadesCEN(comRepository);
 
             IList<ComunidadesEN> listEN = comCEN.DameTodos(0, -1);
+            UsuarioViewModel usuario = HttpContext.Session.Get<UsuarioViewModel>("usuario");
+            UsuarioRepository usRepo = new UsuarioRepository(session);
+            UsuarioCEN usuarioCEN = new UsuarioCEN(usRepo);
+            UsuarioEN usuEn = usuarioCEN.DamePorOID(usuario.Email);
 
-            IEnumerable<ComunidadesViewModel> listComs = new ComunidadesAssembler().ConvertirListENToViewModel(listEN).ToList();
+            //COMUNIDADES DE LAS QUE SOY EL AUTOR
+            IList<ComunidadesEN> misComsEn = usuEn.Comunidades;
+            IEnumerable<ComunidadesViewModel> misComs = new ComunidadesAssembler().ConvertirListENToViewModel(misComsEn).ToList();
+
+            //COMUNIDADES A LAS QUE PERTENEZCO
+            IList<ComunidadesEN> uniComsEn = usuEn.Comunidades_0;
+            IEnumerable<ComunidadesViewModel> uniComs = new ComunidadesAssembler().ConvertirListENToViewModel(uniComsEn).ToList();
+
+            //TODAS LAS COMUNIDADES
+            IEnumerable<ComunidadesViewModel> todasComs = new ComunidadesAssembler().ConvertirListENToViewModel(listEN).ToList();
+
+            var grupo = new GrupoComunidadesViewModel
+            {
+                misComs = misComs,
+                uniComs = uniComs,
+                todasComs = todasComs
+            };
+
             SessionClose();
 
-            return View(listComs);
+            return View(grupo);
         }
 
         public ActionResult Mensajes(int id)
@@ -73,14 +97,15 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ComunidadesViewModel comVM)
         {
+            UsuarioViewModel usuario = HttpContext.Session.Get<UsuarioViewModel>("usuario");
+
             try
             {
                 ComunidadesRepository comRepository = new ComunidadesRepository();
                 ComunidadesCEN comCEN = new ComunidadesCEN(comRepository);
-                //TODO 
-                int com = comCEN.CrearComunidad(comVM.Nombre, System.DateTime.Now, comVM.Descripcion, comVM.Emisor);
+                int com = comCEN.CrearComunidad(comVM.Nombre, System.DateTime.Now, comVM.Descripcion, usuario.Email);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Comunidades");
             }
             catch
             {
@@ -130,8 +155,9 @@ namespace WebApplication2.Controllers
         {
             ComunidadesRepository comRepository = new ComunidadesRepository();
             ComunidadesCEN comCEN = new ComunidadesCEN(comRepository);
+            ComunidadesCP comCP = new ComunidadesCP(new SessionCPNHibernate());
 
-            comCEN.BorrarComunidad(id);
+            comCP.BorrarComunidad(id);
             return RedirectToAction(nameof(Index));
         }
 

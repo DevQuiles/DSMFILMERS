@@ -6,6 +6,17 @@
     ViewData["Title"] = "Index";
 }
 
+@{
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    string nombre = "";
+    string email = "";
+    if(usuario != null)
+    {
+        nombre = usuario.Nombre;
+        email = usuario.Email;
+    }
+}
+
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -20,9 +31,152 @@
             <i class="fa fa-plus"></i>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropupMenuButton">
-            <a class="dropdown-item" href="#" id="openCreateModal">Añadir Pelicula a vista</a>
+            <a class="dropdown-item" href="#" id="openCreateModalPeliculaVista">Añadir Pelicula a vista</a>
             <a class="dropdown-item" href="#" id="openCrearPlaylist">Crear Playlist</a>
             <a class="dropdown-item" href="#" id="openCrearComunidad">Crear comunidad</a>
+        </div>
+    </div>
+</div>
+@*----------------------------------------------MODAL BUSQUEDA DE PELICULA--------------------------------------------------------------------*@
+
+<!-- Modal -->
+<div class="modal" tabindex="-1" role="dialog" id="createModalPelicualaVista">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Añadir Película a Vista</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"> <!-- Ajusta el valor de py-4 según tus necesidades -->
+                <div class="row">
+                    <div class="col-md-6 mb-2">
+                        <div class="input-group rounded">
+                            @if(usuario != null)
+                            {
+                                <!-- Input para buscar por nombre -->
+                                <input type="search" id="searchString" class="form-control rounded" placeholder="Buscar por nombre" aria-label="Search" aria-describedby="search-addon" />
+                          
+                                <div>
+                                    <a class="btn btn-primary" id="openAnyadirAVista">Añadir Película</a>
+                                </div>
+                            
+                                <!-- Desplegable para mostrar resultados de la búsqueda -->
+                                <select id="resultadoBusqueda" class="form-control mt-3" style="display: none;"></select>
+                            }
+                            else
+                            {
+                                <h3>¡Debes de iniciar sesión para agregar peliculas a vistas!</h3>
+                            }
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#openCreateModalPeliculaVista').on('click', function () {
+            // $('#createModalPelicualaVista .modal-body').load('/PeliculaVista/Create');
+            $('#createModalPelicualaVista').modal('show');
+        });
+
+        // Evento de clic en el botón de búsqueda
+        $('#searchString').on('input', function () {
+            // Obtener el valor de la barra de búsqueda
+            var searchString = $(this).val();
+
+            // Validar que la barra de búsqueda no esté vacía
+            if (searchString.trim() !== '') {
+                // Realizar la llamada AJAX al controlador para la búsqueda
+                $.ajax({
+                    url: '/Pelicula/buscaRapidoPeliculas',
+                    type: 'GET',
+                    data: { searchString: searchString },
+                    success: function (result) {
+                        // Mostrar los resultados en el desplegable
+                        mostrarResultados(result);
+                    },
+                    error: function (error) {
+                        console.error("Error al realizar la búsqueda:", error);
+                    }
+                });
+            } else {
+                // La barra de búsqueda está vacía, ocultar el desplegable
+                $('#resultadoBusqueda').hide();
+            }
+        });
+
+        // Función para mostrar los resultados en el desplegable
+        function mostrarResultados(result) {
+            // Limpiar el desplegable
+            $('#resultadoBusqueda').empty();
+
+            // Agregar opciones al desplegable
+            result.forEach(function (pelicula) {
+                var opcion = $('<option>', { value: pelicula.id }).text(pelicula.nombre);
+                $('#resultadoBusqueda').append(opcion);
+            });
+            // $('#resultadoBusqueda').removeClass('d-none').addClass('show position-absolute w-100 mt-5');
+
+            $('#resultadoBusqueda').removeClass('d-none').addClass('position-absolute w-100 mt-5').show();
+            // Mostrar el desplegable
+            // $('#resultadoBusqueda').show();
+        }
+
+
+        // Evento de clic en el botón "Añadir"
+        $('#openAnyadirAVista').on('click', function () {
+            var opcionSeleccionada = $('#resultadoBusqueda option:selected');
+            var idPelicula = opcionSeleccionada.val();
+
+            // Realizar la llamada AJAX al controlador para establecer TempData
+            $.ajax({
+                url: '/PeliculaVista/SetTempData',
+                type: 'GET',
+                data: { idPelicula: idPelicula },
+                success: function () {
+                    // Cerrar el modal actual
+                    $('#createModalPelicualaVista').modal('hide');
+                    // Cargar el contenido en el nuevo modal (ajusta la URL según sea necesario)
+                    $('#createModalAnaydirPV .modal-body').load('/PeliculaVista/Create');
+                    // Abrir el nuevo modal
+                    $('#createModalAnaydirPV').modal('show');
+                },
+                error: function (error) {
+                    console.error("Error en la solicitud AJAX:", error);
+                }
+            });
+        });
+
+    });
+</script>
+
+@*----------------------------------------------MODAL DE AÑADIR PELICULA A VISTA--------------------------------------------------------------------*@
+
+<div class="modal" tabindex="-1" role="dialog" id="createModalAnaydirPV">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Crear una nueva comunidad</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Contenido de la vista _Create se cargará aquí -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
         </div>
     </div>
 </div>
@@ -93,12 +247,41 @@
 @*----------------------------------------------Vista de la pelicula--------------------------------------------------------------------------*@
 
 <!-- Muestra las películas -->
-<h2>Películas</h2>
+<h2>Últimas peliculas</h2>
 
-<div id="carruselPeliculas" class="carousel slide carousel-fade" data-ride="carousel" data-interval ="false">
+<div class="row">
+        @foreach (var item in Model.Peliculas.Take(12))
+        {
+            <div class="col-xxl-2 col-xl-3 col-lg-4 col-sm-6 col-12">
+                <div class="card border-0">
+                    <a href="@Url.Action("Details", "Pelicula", new { id = item.Id })">
+                        <img src="@item.caratula" class="card-img-top img-fluid" alt="Carátula">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title text-center">@item.nombre</h5>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+ @{ 
+            bool iniciado = false;
+            }
+
+@if (usuario != null)
+{
+    <h2>Actividad de tus amigos</h2>
+
+        iniciado = true;
+    
+}
+@if (Model.UltimasVistas != null && Model.UltimasVistas.Any())
+{
+    <div id="carruselPeliculas" class="carousel slide carousel-fade" data-ride="carousel" data-interval ="false">
     <div class="carousel-inner">
         @{ 
-            bool esPrimerItem = true;
+           
             int contador = 0;
 
 
@@ -106,29 +289,34 @@
 
         <div class="carousel-item active">
             <div class="row">
-                @foreach (var pelicula in Model.Peliculas)
+                @foreach (var pelicula in Model.UltimasVistas)
                 {
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                    <div class="col-xxl-2 col-xl-3 col-lg-4 col-sm-6 col-12">
                         <div class="card border-0">
                             <div class="hover-overlay">
-                                <a href="@Url.Action("Details", "Pelicula", new { id = pelicula.Id })">
-                                <img src="@pelicula.caratula" class="card-img-top img-fluid" alt="Carátula">
+                                <a href="@Url.Action("Details", "Pelicula", new { id = pelicula.idPelicula })">
+                                <img src="@pelicula.fotoPeli" class="card-img-top img-fluid" alt="Carátula">
+                                 
                                 <div class="mask"></div>
                             </a>
+                            <h5 class="card-title text-center">@pelicula.nombrePeli</h5>
 
                             </div>
                             
                             
                             <div class="card-body">
-                                <h5 class="card-title text-center">@pelicula.nombre</h5>
+                               
+                                <h5 class="card-title text-center">@pelicula.nombreUsuario</h5>
+                                <h5 class="card-title text-center">@pelicula.comentario</h5>
+
                             </div>
                         </div>
                     </div>
 
                     contador++;
-                    if (contador % 8 == 0 && !Model.Peliculas.Last().Equals(pelicula))
+                    if (contador % 6 == 0 && !Model.Peliculas.Last().Equals(pelicula))
                     {
-                        esPrimerItem = false;
+                       
                         @:</div></div><div class="carousel-item"><div class="row">
                     }
                 }
@@ -136,35 +324,24 @@
 
             </div>
         </div>
-    </div>
-    <a class="carousel-control-prev" href="#carruselPeliculas" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carruselPeliculas" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div> 
-
-<!-- Muestra las últimas vistas -->
-<h2>Últimas Películas Vistas</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>ID Película</th>
-            <th>Comentario</th>
-            <!-- Agrega más columnas según sea necesario -->
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var vista in Model.UltimasVistas)
+         @if (Model.UltimasVistas.Count() % 6 != 0) 
         {
-            <tr>
-                <td>@vista.idPelicula</td>
-                <td>@vista.comentario</td>
-                <!-- Muestra más datos de la vista -->
-            </tr>
+                <a class="carousel-control-prev" href="#carruselPeliculas" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carruselPeliculas" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
         }
-    </tbody>
-</table>
+    </div>
+    </div>
+}
+else if(iniciado)
+    {
+        <div class="alert alert-info mt-2" role="alert">
+            No tienes amigos o ellos aún no han visto ninguna película.
+        </div>
+    }
+

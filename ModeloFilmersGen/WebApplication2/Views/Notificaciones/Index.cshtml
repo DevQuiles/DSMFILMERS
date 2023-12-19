@@ -4,25 +4,108 @@
     ViewData["Title"] = "Index";
 }
 
+@{
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+
+    
+
+}
+
+
+
 <h1>Mis notificaciones</h1>
 
-<p>
-    <a asp-action="Create">Crear Nueva</a>
-</p>
-
-<div class="container-fluid">
+<div class="container mt-3">
     @foreach (var item in Model)
     {
-        <div class="row">
-            <!-- Imagen -->
-            <div class="col-xl-1">
+        <div class="row mb-2">
+            <!-- Icono de la notificación -->
+            <div class="col-auto">
+                <img src="/Img/@(item.fotoUsuarioEmisor).jpeg" class="card-img-top rounded-circle img-fluid" alt="Avatar" style="width: 80px; height: 80px;">
+            </div>
+
+            <!-- Fecha y hora de la notificación -->
+            <div class="col-auto text-secondary">
                 @Html.DisplayFor(modelItem => item.Fecha)
             </div>
 
-            <!-- Contenido -->
-            <div class="col-xl-11">
+            <!-- Contenido de la notificación -->
+            <div class="col">
                 @Html.DisplayFor(modelItem => item.Contenido)
             </div>
+
+            @if (item.idPelicula != -1)
+            {
+                <div class="col-auto">
+                    <a href="@Url.Action("Details", "Pelicula", new { id = item.idPelicula })"> @item.nombrePeli </a>
+                </div>
+            }
+            else
+            {
+                // Comprobamos si ya está siguiendo al usuario
+                bool isFollowing = usuario.UsuariosSeguidos.Contains(item.IdUsuarioEmisor);
+                <div class="col-auto">
+                    @if (isFollowing)
+                    {
+                        <button type="button" data-follow-id="@item.IdUsuarioEmisor" class="btn btn-success btn-sm" onclick="followUnfollow('@usuario.Email', '@item.IdUsuarioEmisor', true)">Siguiendo</button>
+                    }
+                    else
+                    {
+                        <button type="button" data-follow-id="@item.IdUsuarioEmisor" class="btn btn-outline-primary btn-sm" onclick="followUnfollow('@usuario.Email', '@item.IdUsuarioEmisor', false)">Seguir</button>
+                    }
+                </div>
+            }
         </div>
     }
-</div>
+
+
+    @section Scripts {
+        <script>
+            function followUnfollow(userId, followedId, isFollowing) {
+                var btn = $("[data-follow-id='" + followedId + "']");
+                btn.prop('disabled', true);
+
+                var url = isFollowing ? '@Url.Action("Unfollow", "Notificaciones")' : '@Url.Action("Follow", "Notificaciones")';
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: { id: userId, idSeguido: followedId },
+                    success: function () {
+                        // Actualizar la interfaz de usuario aquí
+                        btn.prop('disabled', false);
+                        if (isFollowing) {
+                            btn.text("Seguir").removeClass("btn-success").addClass("btn-outline-primary").attr("onclick", "followUnfollow('" + userId + "', '" + followedId + "', false)");
+                        } else {
+                            btn.text("Siguiendo").removeClass("btn-outline-primary").addClass("btn-success").attr("onclick", "followUnfollow('" + userId + "', '" + followedId + "', true)");
+                        }
+                        actualizarSesion(userId);
+                    },
+                    error: function () {
+                        alert("Error al procesar la solicitud.");
+                        btn.prop('disabled', false);
+                    }
+                });
+            }
+
+
+
+            function actualizarSesion(userId) {
+                $.ajax({
+                    url: '@Url.Action("RecargarSesion", "Notificaciones")',
+                    type: 'SET',
+                    data: {idUsuario: userId},
+                    success: function () {
+                    },
+                    error: function () {
+                        alert("Error al procesar la solicitud.");
+                        btn.prop('disabled', false);
+                    }
+                });
+
+            }
+
+        </script>
+    }
+
+
+
