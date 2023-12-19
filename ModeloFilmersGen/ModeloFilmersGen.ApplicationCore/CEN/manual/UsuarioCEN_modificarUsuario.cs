@@ -17,9 +17,10 @@ public partial class UsuarioCEN
 {
 public void ModificarUsuario (string p_Usuario_OID, string p_nomUsuario, string p_nombre, Nullable<DateTime> p_fechaNac, string p_localidad, string p_pais, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum p_nivel, String p_pass, bool p_recompensaDisponible, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum p_avatarIcon)
 {
-        /*PROTECTED REGION ID(ModeloFilmersGen.ApplicationCore.CEN.Pruebadeesquemaproyecto_Usuario_modificarUsuario_customized) START*/
-
-        UsuarioEN usuarioEN = null;
+            /*PROTECTED REGION ID(ModeloFilmersGen.ApplicationCore.CEN.Pruebadeesquemaproyecto_Usuario_modificarUsuario_customized) START*/
+            
+            UsuarioEN en = _IUsuarioRepository.ReadOIDDefault(p_Usuario_OID);
+            UsuarioEN usuarioEN = null;
 
         //Initialized UsuarioEN
         usuarioEN = new UsuarioEN ();
@@ -30,7 +31,14 @@ public void ModificarUsuario (string p_Usuario_OID, string p_nomUsuario, string 
         usuarioEN.Localidad = p_localidad;
         usuarioEN.Pais = p_pais;
         usuarioEN.Nivel = p_nivel;
-        usuarioEN.Pass = Utils.Util.GetEncondeMD5 (p_pass);
+            if (p_pass == en.Pass)
+            {
+                usuarioEN.Pass = p_pass;
+            }
+            else
+            {
+                usuarioEN.Pass = Utils.Util.GetEncondeMD5(p_pass);
+            }
         usuarioEN.RecompensaDisponible = p_recompensaDisponible;
         usuarioEN.AvatarIcon = p_avatarIcon;
         //Call to UsuarioRepository

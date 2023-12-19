@@ -19,7 +19,7 @@
     <div class="col-sm-8 pb-3">
 
         <div class="row align-items-center">
-            <div class="col-2">
+            <div class="col-3">
                 <h3>@Model.NombreUsuario</h3>
             </div>
            
@@ -47,6 +47,11 @@
         </div>
     </div>
     <hr />
+    <div class="col-md-12 d-flex justify-content-center mb-2">
+        <a href="#" class="btn mx-2 btn-watchlist">Watchlist</a>
+        <a href="#" class="btn mx-2 btn-playlists">Playlists</a>
+        <a href="#" class="btn mx-2 btn-calendario">Calendario</a>
+    </div>
     <div id="vistasUsuario">
     </div>
 </div>
@@ -57,39 +62,40 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            var idUsuario = '@Model.Email'; // Reemplaza esto con tu lógica para obtener el ID del usuario
-            $.get('/Usuario/Vistas/' + idUsuario, function (data) {
-                $('#vistasUsuario').html(data);
+            var idUsuario = '@Model.Email';
+
+            // Por defecto, cargar la vista de calendario
+            loadCalendario();
+
+            // Funciones para cargar diferentes vistas
+            function loadCalendario() {
+                $.get('/Usuario/Vistas/' + idUsuario, function (data) {
+                    $('#vistasUsuario').html(data);
+                });
+            }
+
+            function loadDeseos() {
+                $.get('/Usuario/Deseos/' + idUsuario, function (data) {
+                    $('#vistasUsuario').html(data);
+                });
+            }
+
+            // Manejar clic en botones para cargar vistas
+            $('.btn-calendario').on('click', function (e) {
+                e.preventDefault();
+                loadCalendario();
+            });
+
+            $('.btn-watchlist').on('click', function (e) {
+                e.preventDefault();
+                loadDeseos();
+            });
+
+            $('.btn-playlists').on('click', function (e) {
+                // Lógica para cargar otra vista si es necesario
+                // Por ejemplo: loadPlaylists();
             });
         });
     </script>
 
-
-
-    <script>
-        function followUnfollow(userId, followedId, isFollowing) {
-            var btn = $("[data-follow-id='" + followedId + "']");
-            btn.prop('disabled', true);
-
-            var url = isFollowing ? '@Url.Action("Unfollow", "Notificaciones")' : '@Url.Action("Follow", "Notificaciones")';
-            $.ajax({
-                url: url,
-                type: 'POST',
-                data: { id: userId, idSeguido: followedId },
-                success: function () {
-                    // Actualizar la interfaz de usuario aquí
-                    btn.prop('disabled', false);
-                    if (isFollowing) {
-                        btn.text("Seguir").removeClass("btn-success").addClass("btn-outline-primary").attr("onclick", "followUnfollow('" + userId + "', '" + followedId + "', false)");
-                    } else {
-                        btn.text("Siguiendo").removeClass("btn-outline-primary").addClass("btn-success").attr("onclick", "followUnfollow('" + userId + "', '" + followedId + "', true)");
-                    }
-                },
-                error: function () {
-                    alert("Error al procesar la solicitud.");
-                    btn.prop('disabled', false);
-                }
-            });
-        }
-    </script>
 }

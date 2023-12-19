@@ -108,6 +108,32 @@ namespace WebApplication2.Controllers
             return PartialView("_VistasUsuario", listapelivistaVM);
         }
 
+        public ActionResult Deseos(string id)
+        {
+            SessionInitialize();
+            UsuarioRepository usuarioRepo = new UsuarioRepository(session);
+
+            UsuarioCEN usuCEN = new UsuarioCEN(usuarioRepo);
+            UsuarioEN usuarioEN = usuCEN.DamePorOID(id);
+
+            IList<PeliculaEN> listpelisEN = usuarioEN.Deseadas;
+            IList<PeliculaViewModel> listapeliVM = new List<PeliculaViewModel>();
+
+            foreach (var peliculaEN in listpelisEN)
+            {
+
+                // Crear un ViewModel para la película con la información necesaria (nombre, carátula, etc.)
+                PeliculaViewModel peliculaViewModel = new PeliculaAssembler().ConvertirEnToViewModel(peliculaEN);
+
+                listapeliVM.Add(peliculaViewModel);
+            }
+
+
+            SessionClose();
+
+            return PartialView("_DeseosUsuario", listapeliVM);
+        }
+
 
         // GET: UsuarioController/Details/5
         public ActionResult Details(String id)
