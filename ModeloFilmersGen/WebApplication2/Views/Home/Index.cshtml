@@ -73,7 +73,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnCerrar">Cerrar</button>
             </div>
         </div>
     </div>
@@ -85,6 +85,10 @@
         $('#openCreateModalPeliculaVista').on('click', function () {
             // $('#createModalPelicualaVista .modal-body').load('/PeliculaVista/Create');
             $('#createModalPelicualaVista').modal('show');
+        });
+
+        $('#createModalPelicualaVista .btn-secondary').on('click', function () {
+            $('#createModalPelicualaVista').modal('hide');
         });
 
         // Evento de clic en el botón de búsqueda
@@ -207,6 +211,9 @@
             $('#createModal .modal-body').load('/Comunidades/Create');
             $('#createModal').modal('show');
         });
+        $('#createModal .btn-secondary').on('click', function () {
+            $('#createModal').modal('hide');
+        });
     });
 </script>
 
@@ -237,6 +244,10 @@
         $('#openCrearPlaylist').on('click', function () {
             $('#createModalPlaylist .modal-body').load('/Playlist/Create');
             $('#createModalPlaylist').modal('show');
+        });
+
+        $('#createModalPlaylist .btn-secondary').on('click', function () {
+            $('#createModalPlaylist').modal('hide');
         });
     });
 

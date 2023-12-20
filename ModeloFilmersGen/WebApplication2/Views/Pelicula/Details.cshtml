@@ -150,7 +150,37 @@
                     <h4>¡Debes iniciar sesión para añdir peliculas a tus playlist o a vistas!</h4>              
                 </dt>
             }
-            
+            <!-- Sección para la tabla de comentarios -->
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <h3>Comentarios</h3>
+                    @if(Model.PV.Count > 0){
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID Usuario</th>
+                                    <th>Comentario</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaComentarios">
+                                @foreach (var comentario in Model.PV)
+                                {
+                                    <tr>
+                                        <td>@comentario.Usuario.Email</td>
+                                        <td>@comentario.Comentario</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <h4>No hay comentarios en esta pelicula</h4>
+                    }
+
+                </div>
+            </div>
+
         </dl>
         <div>
             
@@ -171,8 +201,13 @@
     };
 
     document.addEventListener("DOMContentLoaded", function () {
-        mostrarDesplegable(); // Mostrar el desplegable al cargar la página
 
+        $('#createModalRecomendar .btn-secondary').on('click', function () {
+            $('#createModalRecomendar').modal('hide');
+        });
+
+        mostrarDesplegable(); // Mostrar el desplegable al cargar la página
+        
         document.getElementById("btnAñadir").addEventListener("click", function () {
             // Obtener la opción seleccionada del desplegable
             var desplegable = document.getElementById("desplegable");
@@ -186,7 +221,7 @@
             // Llamar a la función y pasar ambos parámetros
             agregarPeliculaAPlaylist(idPelicula, idPlaylist);
         });
-
+ 
         function mostrarDesplegable() {
             fetch("/Playlist/PlayListByUsuario")
                 .then(response => response.json())
