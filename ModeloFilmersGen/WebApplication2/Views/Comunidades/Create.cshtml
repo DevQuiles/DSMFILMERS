@@ -1,11 +1,15 @@
-﻿@model WebApplication2.Models.ComunidadesViewModel
+@model WebApplication2.Models.ComunidadesViewModel
 
 @{
     Layout = null;
 }
 
 <div class="row">
-    <div class="col-md-4 form-container">
+
+    <div class="col-xl-3"></div>
+    <div class="col-xl-6 form-container">
+
+
         <form asp-action="Create" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -24,4 +28,8 @@
             </div>
         </form>
     </div>
+
+    <div class="col-xl-3"></div>
 </div>
+
+

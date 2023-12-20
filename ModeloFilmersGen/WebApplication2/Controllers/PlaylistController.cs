@@ -11,6 +11,7 @@ using ModeloFilmersGen.ApplicationCore.CEN.Pruebadeesquemaproyecto;
 using ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto;
 using WebApplication2.Models;
 using WebApplication2.Assemblers;
+using ModeloFilmersGen.ApplicationCore.CP.Pruebadeesquemaproyecto;
 
 namespace WebApplication2.Controllers
 {
@@ -52,6 +53,41 @@ namespace WebApplication2.Controllers
             SessionClose();
             return Json(new { success = true, redirectUrl = Url.Action("Details", new { id = idPlay }) }); ;
 
+        }
+
+        [HttpPost]
+        public IActionResult AgregarPlaylistAFavoritos(string idPlaylist, string idUsuario)
+        {
+            SessionInitialize();
+
+            int idPlay = int.Parse(idPlaylist);
+
+            PlaylistRepository playlistRepository = new PlaylistRepository();
+            PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);
+            UsuarioRepository usR = new UsuarioRepository(session);
+            UsuarioCEN usuarioCEN = new UsuarioCEN(usR);
+
+            playlistCEN.AsignarSuscriptor(idPlay, new List<string> { idUsuario });
+
+            SessionClose();
+            return Json(new { success = true });
+        }
+
+        private IDictionary<int, IList<string>> ObtenerCaratulasParaPlaylists(IList<PlaylistEN> playlists)
+        {
+            IDictionary<int, IList<string>> caratulasPorPlaylist = new Dictionary<int, IList<string>>();
+
+            foreach (var playlist in playlists)
+            {
+                IList<string> caratulasDePlaylist = new List<string>();
+                foreach (var movie in playlist.Peliculas)
+                {
+                    caratulasDePlaylist.Add(movie.Caratula);
+                }
+                caratulasPorPlaylist.Add(playlist.Id, caratulasDePlaylist); // Asume que 'Id' es un identificador único de PlaylistEN
+            }
+
+            return caratulasPorPlaylist;
         }
 
         public ActionResult PlayListByUsuario()
@@ -134,16 +170,35 @@ namespace WebApplication2.Controllers
         // GET: PlaylistController
         public ActionResult Index()
         {
+            // Inicializa la sesión
             SessionInitialize();
-            PlaylistRepository playRepository = new PlaylistRepository();
-            PlaylistCEN playCEN = new PlaylistCEN(playRepository);
 
-            IList<PlaylistEN> playEN = playCEN.DameTodos(0, -1);
-            IEnumerable<PlaylistViewModel> listPlay = playEN.Select(en => new PlaylistAssembler().ConvertirEnToViewModel(en));
+            // Creación y configuración del repositorio y del CEN de Playlist
+            PlaylistRepository playlistRepository = new PlaylistRepository(session);
+            PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);
+
+            // Obtención de todas las playlists
+            IList<PlaylistEN> playEN = playlistCEN.DameTodos(0, -1);
+
+            // Conversión de las entidades PlaylistEN a ViewModels
+            IList<PlaylistViewModel> listPlay = new PlaylistAssembler().ConvertirListEnToViewModel(playEN).ToList();
+
+            // Obtención de las carátulas para cada playlist
+            IDictionary<int, IList<string>> caratulas = ObtenerCaratulasParaPlaylists(playEN);
+
+            // Creación del ViewModel para la vista
+            var viewModel = new PlatyListyPeliculasFotosViewModel
+            {
+                Playlist = listPlay,
+                CaratulasPorPlaylist = caratulas // Asegúrate de tener esta propiedad en tu ViewModel
+            };
+
+            // Cierre de la sesión
             SessionClose();
 
-            return View(listPlay);
-            
+            // Retorna la vista con el ViewModel
+            return View(viewModel);
+
         }
 
         // GET: PlaylistController/Details/5

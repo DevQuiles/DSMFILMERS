@@ -1,101 +1,156 @@
-﻿@model IEnumerable<WebApplication2.Models.PlaylistViewModel>
+﻿@model WebApplication2.Models.PlatyListyPeliculasFotosViewModel
 
 @{
     ViewData["Title"] = "Index";
 }
 
-
-<style>
-    .playlist-container {
-        background-color: #333;
-        margin-bottom: 10px;
-        padding: 10px;
-        border-radius: 10px;
-    }
-
-    body {
-        background-color: black;
-        color: white; 
-    }
-
-    /* Estilos para los botones */
-    .btn-edit {
-        background-color: green;
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        border-radius: 5px;
-        margin-right: 5px;
-    }
-
-    .btn-details {
-        background-color: orange;
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        border-radius: 5px;
-        margin-right: 5px;
-    }
-
-    .btn-delete {
-        background-color: red;
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        border-radius: 5px;
-    }
-</style>
-
-@section scripts {
-    <script>
-        $(document).ready(function () {
-            // Agregar a favoritos
-            $('.btn-add-favorite').click(function () {
-                var playlistId = $(this).data('playlist-id');
-
-
-                // Alerta
-                alert('Playlist agregada a favoritos con ID: ' + playlistId);
-            });
-        });
-    </script>
+@{
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    string nombre = "";
+    string email = "";
+        if (usuario != null)
+        {
+            nombre = usuario.Nombre;
+            email = usuario.Email;
+        }
 }
 
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
 
 <h1>Bienvenido a las playlists</h1>
 
 <p>
-    <a asp-action="Create">Crear nueva playlist</a>
+    <a class="btn btn-primary" id="openCrearPlaylist">
+        <i class="fas fa-plus"></i> Crear nueva playlist
+    </a>
 </p>
 
 <div class="container-fluid">
-    @foreach (var item in Model)
+    @foreach (var playlist in Model.Playlist)
     {
         <div class="playlist-container">
             <div class="row">
-                <!-- Imagen -->
-                <div class="col-xl-3">
-                    <p>Imagen</p>
+                <!-- Carrusel de Imágenes -->
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                    @if (Model.CaratulasPorPlaylist.ContainsKey(playlist.Id) && Model.CaratulasPorPlaylist[playlist.Id].Any())
+                    {
+                        <div id="carousel-@playlist.Id" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                @foreach (var (caratula, index) in Model.CaratulasPorPlaylist[playlist.Id].Select((value, i) => (value, i)))
+                                {
+                                    <div class="carousel-item @(index == 0 ? "active" : "")">
+                                        <img src="@caratula" class="d-block w-100" alt="Carátula">
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
                 </div>
 
-                <!-- Nombre -->
-                <div class="col-xl-6">
-                    <p>@Html.DisplayFor(modelItem => item.nombre)</p>
-                    <p>@Html.DisplayFor(modelItem => item.IdUsuario)</p>
-                    <p>@Html.DisplayFor(modelItem => item.Descripcion)</p>
+                <!-- Columna de Nombre, Email y Descripción -->
+                <div class="col-lg-5 col-md-8 col-sm-6 col-12">
+                    <div>
+                        <p><strong>Nombre:</strong> @playlist.nombre</p>
+                    </div>
+                    <div></div>
+                    <div>
+                        <p><strong>Descripción:</strong> @playlist.Descripcion</p>
+                    </div>
                 </div>
 
-                <div class="col-xl-3">
-                    <button class="btn btn-primary btn-add-favorite" data-playlist-id="@item.Id">Agregar a Favoritos</button>
-                    <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-success" title="Edit">Editar</a>
-                    <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-warning" title="Details">Detalles</a>
-                    <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger" title="Delete">Borrar</a>
+                <!-- Columna de Botones -->
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                    <!-- Botones de acciones -->
+                    <button class="btn btn-primary btnAñadir" data-idPlaylist="@playlist.Id" aria-haspopup="true" aria-expanded="false">
+                        Añadir a favoritos
+                    </button>
+                    <a href="@Url.Action("Edit", new { id = playlist.Id })" class="btn btn-success" title="Edit"><i class="fas fa-edit"></i></a>
+                    <a href="@Url.Action("Details", new { id = playlist.Id })" class="btn btn-warning" title="Details"><i class="bi bi-ticket-detailed-fill"></i></a>
+                    <a href="@Url.Action("Delete", new { id = playlist.Id })" class="btn btn-danger" title="Delete"><i class="bi bi-trash-fill"></i></a>
                 </div>
-
-
             </div>
         </div>
     }
 </div>
 
+<div class="modal" tabindex="-1" role="dialog" id="createModalPlaylist">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Crear una nueva playlist</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Contenido de la vista _Create se cargará aquí -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+    <script>
+    var usuario = {
+        nombre: '@nombre',
+        email: '@email'
+    };
+
+        // Utiliza una clase específica para seleccionar todos los botones de añadir a favoritos
+        var botonesAñadir = document.querySelectorAll(".btnAñadir");
+
+        // Agrega un controlador de eventos a cada botón
+        botonesAñadir.forEach(function (boton) {
+            boton.addEventListener("click", function () {
+                // Obtén la Id de la playlist desde el atributo de datos
+                var idPlaylist = this.getAttribute("data-idPlaylist");
+                console.log(idPlaylist);
+
+                var idUsuario = usuario.email;
+
+                // Llama a la función para agregar a favoritos
+                agregarPlaylistAFavoritos(idPlaylist, idUsuario);
+            });
+        });
+
+        function agregarPlaylistAFavoritos(idPlaylist, idUsuario) {
+            // Realiza la llamada AJAX al controlador de Playlist para agregar a favoritos
+            $.ajax({
+                url: '/Playlist/AgregarPlaylistAFavoritos',
+                type: 'POST',
+                data: { idPlaylist: idPlaylist, idUsuario: idUsuario },
+                success: function (result) {
+                    // Maneja el éxito de la llamada AJAX
+                    // console.log(result);
+                window.location.href = '/Usuario/DetailsPerfil/' + idUsuario;
+                },
+                error: function (error) {
+                    // Maneja el error de la llamada AJAX
+                    console.error("Error al llamar al controlador:", error);
+                }
+            });
+        }
+
+    $(document).ready(function () {
+        $('#openCrearPlaylist').on('click', function () {
+            $('#createModalPlaylist .modal-body').load('/Playlist/Create');
+            $('#createModalPlaylist').modal('show');
+        });
+
+        $('#createModalPlaylist .btn-secondary').on('click', function () {
+            $('#createModalPlaylist').modal('hide');
+        });
+    });
+
+    </script>

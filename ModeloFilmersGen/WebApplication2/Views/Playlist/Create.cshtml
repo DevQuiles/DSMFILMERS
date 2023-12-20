@@ -5,47 +5,6 @@
     Layout = null;
 }
 
-<style>
-    body {
-        background-color: black;
-        color: white;
-        text-align: center;
-    }
-
-    .form-container {
-        background-color: #333; /* Negro menos oscuro */
-        padding: 20px;
-        border-radius: 10px;
-        margin-top: 20px; /* Ajusta el margen superior según tus preferencias */
-        justify-content:center;
-        align-items:center;
-    }
-
-    /* Estilos para los botones */
-    .btn-create {
-        background-color: green;
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        border-radius: 5px;
-        margin-right: 5px;
-    }
-
-    .btn-return {
-        background-color: blue;
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        border-radius: 5px;
-        margin-right: 5px;
-    }
-</style>
-
-<h1>Crea tu propia playlist </h1>
-
-<h4>PlaylistViewModel</h4>
-<hr />
-
 <div class="row">
     <div class="col-xl-3"></div>
     <div class="col-xl-6 form-container">
@@ -70,9 +29,6 @@
     <div class="col-xl-3"></div>
 </div>
 
-<div>
-    <a asp-action="Index" class="btn btn-return" title="return">Volver</a>
-</div>
 
 @section Scripts {
     @{
