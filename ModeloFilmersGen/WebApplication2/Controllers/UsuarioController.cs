@@ -30,7 +30,7 @@ namespace WebApplication2.Controllers
                 SessionClose();
                 return View();
             }
-            else 
+            else
             {
                 //SessionInitialize();
                 UsuarioEN usuEN = usuCen.DamePorOID(login.Email);
@@ -106,6 +106,49 @@ namespace WebApplication2.Controllers
             SessionClose();
 
             return PartialView("_VistasUsuario", listapelivistaVM);
+        }
+
+        public ActionResult Calendario(string id)
+        {
+            SessionInitialize();
+            UsuarioRepository usuarioRepo = new UsuarioRepository(session);
+
+            UsuarioCEN usuCEN = new UsuarioCEN(usuarioRepo);
+            UsuarioEN usuarioEN = usuCEN.DamePorOID(id);
+
+            IList<PeliculaVistaEN> listpelisEN = usuarioEN.PeliculasVistas;
+            IList<PeliculaVistaViewModel> listapelivistaVM = new List<PeliculaVistaViewModel>();
+
+            foreach (var peliculaVistaEN in listpelisEN)
+            {
+                // Suponiendo que PeliculaVistaEN tiene una propiedad Pelicula que referencia a PeliculaEN
+                PeliculaEN peliculaEN = peliculaVistaEN.Pelicula;
+
+                // Crear un ViewModel para la película con la información necesaria (nombre, carátula, etc.)
+                PeliculaVistaViewModel peliculaViewModel = new PeliculaVistaViewModel
+                {
+                    Id = peliculaVistaEN.Id,
+                    comentario = peliculaVistaEN.Comentario,
+                    valoracion = peliculaVistaEN.Valoracion,
+                    fecha = (DateTime)peliculaVistaEN.Fecha,
+                    idPelicula = peliculaEN.Id,
+                    nombrePeli = peliculaEN.Nombre,
+                    fotoPeli = peliculaEN.Caratula, // Suponiendo que 'Caratula' es la propiedad que contiene la URL de la imagen de la carátula
+                                                    // Agrega otras propiedades que necesites
+                };
+
+                listapelivistaVM.Add(peliculaViewModel);
+            }
+
+            listapelivistaVM = listapelivistaVM
+            .OrderByDescending(p => p.fecha.HasValue ? p.fecha.Value.Year : 0)
+            .ThenByDescending(p => p.fecha.HasValue ? p.fecha.Value.Month : 0)
+            .ThenBy(p => p.fecha.HasValue ? p.fecha.Value.Day : 0) 
+            .ToList();
+
+            SessionClose();
+
+            return PartialView("_CalendarioUsuario", listapelivistaVM);
         }
 
         public ActionResult Deseos(string id)
@@ -190,7 +233,7 @@ namespace WebApplication2.Controllers
                 UsuarioRepository usuRepo = new UsuarioRepository();
                 UsuarioCEN usuCen = new UsuarioCEN(usuRepo);
                 HttpContext.Session.Set<UsuarioViewModel>("usuario", usuVM);
-                usuCen.CrearUsuario(usuVM.Email, usuVM.NombreUsuario, usuVM.Nombre, usuVM.FechaNac, usuVM.Localidad, usuVM.Pais, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado , usuVM.Pass, false, usuVM.Avatar);
+                usuCen.CrearUsuario(usuVM.Email, usuVM.NombreUsuario, usuVM.Nombre, usuVM.FechaNac, usuVM.Localidad, usuVM.Pais, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, usuVM.Pass, false, usuVM.Avatar);
                 return RedirectToAction("Index", "Home");
             }
             catch
@@ -269,7 +312,7 @@ namespace WebApplication2.Controllers
                 UsuarioCEN usuCen = new UsuarioCEN(usuRep);
                 UsuarioEN usuen = usuCen.DamePorOID(id);
                 String contrasenya = ModeloFilmersGen.ApplicationCore.Utils.Util.GetEncondeMD5(pusuVM.PasswordAntigua);
-                if ( usuen.Pass == contrasenya)
+                if (usuen.Pass == contrasenya)
                 {
                     usuCen.ModificarUsuario(id, usuen.NomUsuario, usuen.Nombre, usuen.FechaNac, usuen.Localidad, usuen.Pais, usuen.Nivel, pusuVM.Password, usuen.RecompensaDisponible, usuen.AvatarIcon);
                 }
@@ -301,6 +344,22 @@ namespace WebApplication2.Controllers
             {
                 return View();
             }
+        }
+
+        public IActionResult RecargarSesion(string idUsuario)
+        {
+            SessionInitialize();
+            UsuarioRepository usuarioRepo = new UsuarioRepository(session);
+            UsuarioCEN usuCen = new UsuarioCEN(usuarioRepo);
+
+            UsuarioEN usuEN = usuCen.DamePorOID(idUsuario);
+            UsuarioViewModel usuVM = new UsuarioAssembler().ConvertirENToViewModel(usuEN);
+            HttpContext.Session.Set<UsuarioViewModel>("usuario", usuVM);
+            SessionClose();
+
+
+
+            return Ok();
         }
     }
 }

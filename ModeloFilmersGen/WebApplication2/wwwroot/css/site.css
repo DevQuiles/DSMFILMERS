@@ -23,13 +23,27 @@ body {
 }
 
 
+/*-------------------------------------NUMERO CARATULA CALENDARIO----------------------------------------------*/
 
+/*------------------------------------------------MODAL--------------------------------------------------------*/
 
+.day-badge {
+    position: absolute;
+    top: 10px; /* Ajusta la posición verticalmente */
+    left: 10px; /* Ajusta la posición horizontalmente */
+    background-color: #ccc; /* Cambia el color a gis */
+    color: black; /* Cambia el color del texto */
+    padding: 10px; /* Ajusta el tamaño del cuadrado */
+    border-radius: 0; /* Quita los bordes redondeados */
+    z-index: 1;
+    font-size: 20px; /* Ajusta el tamaño del texto */
+}
 
-
+.card-img-container {
+    position: relative;
+}
 
 /*------------------------------------------------HOME--------------------------------------------------------*/
-
 /*------------------------------------------------MODAL--------------------------------------------------------*/
 .circle-btn {
     position: fixed;
@@ -47,6 +61,23 @@ body {
     z-index: 10;
 }
 
+/* Estilos para el datalist y sus opciones */
+#resultadoBusqueda {
+    position: absolute;
+    z-index: 9999;
+    background-color: white;
+    border: 1px solid #ccc;
+    list-style-type: none;
+    padding: 5px 10px;
+    margin: 0;
+    max-height: 200px; /* Ajusta la altura máxima según sea necesario */
+    overflow-y: auto; /* Agrega scroll si el contenido excede la altura máxima */
+}
+
+#resultadoBusqueda option {
+    border-bottom: 1px solid #ccc;
+    padding: 5px 0;
+}
 
 /*------------------------------------------------CARROUSEL--------------------------------------------------------*/
 .carousel-control-prev, .carousel-control-next {
