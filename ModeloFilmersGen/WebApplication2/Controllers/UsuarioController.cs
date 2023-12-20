@@ -439,7 +439,7 @@ namespace WebApplication2.Controllers
                 String contrasenya = ModeloFilmersGen.ApplicationCore.Utils.Util.GetEncondeMD5(pusuVM.PasswordAntigua);
                 if (usuen.Pass == contrasenya)
                 {
-                    usuCen.ModificarUsuario(id, usuen.NomUsuario, usuen.Nombre, usuen.FechaNac, usuen.Localidad, usuen.Pais, usuen.Nivel, pusuVM.Password, usuen.RecompensaDisponible, usuen.AvatarIcon, null);
+                    usuCen.ModificarUsuario(id, usuen.NomUsuario, usuen.Nombre, usuen.FechaNac, usuen.Localidad, usuen.Pais, usuen.Nivel, pusuVM.Password, usuen.RecompensaDisponible, usuen.AvatarIcon, usuen.UsuarioGoogle);
                 }
                 return RedirectToAction("Edit", "Usuario", new { id = id });
 
