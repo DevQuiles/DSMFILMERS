@@ -13,6 +13,7 @@ using WebApplication2.Models;
 using WebApplication2.Assemblers;
 using ModeloFilmersGen.ApplicationCore.CP.Pruebadeesquemaproyecto;
 using Humanizer;
+using ModeloFilmersGen.Infraestructure.EN.Pruebadeesquemaproyecto;
 
 namespace WebApplication2.Controllers
 {
@@ -109,7 +110,9 @@ namespace WebApplication2.Controllers
 
                 UsuarioViewModel usuario = HttpContext.Session.Get<UsuarioViewModel>("usuario");
 
+
                 return RedirectToAction("DetailsPerfil", "Usuario", new { id = usuario.Email });
+
             }
             catch
             {
@@ -123,7 +126,8 @@ namespace WebApplication2.Controllers
             PeliculaVistaRepository peliRepository = new PeliculaVistaRepository();
             PeliculaVistaCEN peliCEN = new PeliculaVistaCEN(peliRepository);
             peliCEN.BorrarPeliculaVista(id);
-            return RedirectToAction(nameof(Index));
+            UsuarioViewModel usuario = HttpContext.Session.Get<UsuarioViewModel>("usuario");
+            return RedirectToAction("DetailsPerfil", "Usuario", new { id = usuario.Email });
         }
 
         // POST: PeliculaVistaController/Delete/5

@@ -80,7 +80,15 @@
 
 <div class="row">
     <div class="col-md-4">
-        <img src="@Html.DisplayFor(model => model.caratula)" alt="IMG" class="img-reducida" />
+        @if (Model.caratula == "https://image.tmdb.org/t/p/w500")
+        {
+            <img src="/Img/nodisponible.png" class="card-img-top img-fluid shadow p-1  bg-white rounded" alt="No Disponible">
+        }
+        else
+        {
+            <img src="@Model.caratula" class="card-img-top img-fluid shadow p-1  bg-white rounded" alt="Carátula">
+        }
+
     </div>
 
     <div class="col-md-8">

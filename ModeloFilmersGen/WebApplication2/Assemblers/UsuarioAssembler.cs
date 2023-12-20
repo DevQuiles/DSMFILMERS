@@ -35,6 +35,7 @@ namespace WebApplication2.Assemblers
             usu.Seguidores = en.Seguidores.Count();
             usu.Seguidos = en.Seguidos.Count();
             usu.PelisVistas = en.PeliculasVistas.Count();
+            usu.usuarioGoogle = en.UsuarioGoogle;
 
 
             return usu;
