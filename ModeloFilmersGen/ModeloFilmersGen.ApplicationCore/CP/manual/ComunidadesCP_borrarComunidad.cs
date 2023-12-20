@@ -30,14 +30,13 @@ public void BorrarComunidad (int p_oid)
         {
                 CPSession.SessionInitializeTransaction ();
                 comunidadesCEN = new  ComunidadesCEN (CPSession.UnitRepo.ComunidadesRepository);
-                MensajeCEN mensajeCEN = new MensajeCEN(CPSession.UnitRepo.MensajeRepository); 
+                MensajeCEN mensajeCEN = new MensajeCEN (CPSession.UnitRepo.MensajeRepository);
 
-                ComunidadesEN comEN = comunidadesCEN.DamePorOID(p_oid);
+                ComunidadesEN comEN = comunidadesCEN.DamePorOID (p_oid);
                 IList<MensajeEN> menList = comEN.Menesajes;
 
-                foreach (var item in menList)
-                {
-                    mensajeCEN.BorrarMensaje(item.Id);
+                foreach (var item in menList) {
+                        mensajeCEN.BorrarMensaje (item.Id);
                 }
 
 

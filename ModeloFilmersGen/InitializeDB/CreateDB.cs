@@ -152,7 +152,7 @@ namespace InitializeDB
                 Console.WriteLine("---------------------");
 
                 IList<PeliculaEN> peliculas = peliculacen.DameTodos(0, 6);
-                string emailUsuario1 = usuariocen.CrearUsuario("email1@gmail.com", "usuario1", "nombre1", new DateTime(2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass1", true, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_1);
+                string emailUsuario1 = usuariocen.CrearUsuario("email1@gmail.com", "usuario1", "nombre1", new DateTime(2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass1", true, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_1, "No asignado");
                 DateTime now2022 = new DateTime(2022, 11, 1);
 
                 //CREO PELICULAS VISTAS
@@ -182,7 +182,7 @@ namespace InitializeDB
                 int mesActual2 = now.Month;
 
                 IList<PeliculaEN> peliculas2 = peliculacen.DameTodos(3, 10);
-                string emailUsuario2 = usuariocen.CrearUsuario("email2@gmail.com", "usuario2", "nombre1", new DateTime(2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass2", false, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_2);
+                string emailUsuario2 = usuariocen.CrearUsuario("email2@gmail.com", "usuario2", "nombre1", new DateTime(2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass2", false, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_2, "No asignado");
 
                 foreach (var item in peliculas2)
                 {
@@ -227,7 +227,7 @@ namespace InitializeDB
 
                 //Modificar pelicula y dame por OID
                 Console.WriteLine("++++++++++++++ PELICULAS POR OID + MODIFICAR PELICULA : +++++++++++++");
-                peliculacen.ModificarPelicula(idPeli1, "Talk To Me ACTUALIZADA", peli1.Caratula, peli1.Descripcion, peli1.Fecha, peli1.Genero, peli1.Duracion, peli1.Puntuacion, peli1.Estado);
+               
                 peli1 = peliculacen.DamePorOID(idPeli1);
                 Console.WriteLine("Pelicula modificada: ");
                 Console.WriteLine("ID:" + peli1.Id);
@@ -257,11 +257,11 @@ namespace InitializeDB
                 //Creamos usuarios
                 //string emailUsuario1 = usuariocen.CrearUsuario ("email1", "usuario1", "nombre1", new DateTime (2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass1");
                 //string emailUsuario2 = usuariocen.CrearUsuario ("email2", "usuario2", "nombre2", new DateTime (2005, 07, 03), "loc2", "pais2", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Cinefago_Celestial, "pass2");
-                string emailUsuario3 = usuariocen.CrearUsuario("email3@gmail.com", "usuario3", "nombre3", new DateTime(2003, 02, 02), "loc3", "pais3", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Principiante_cinefilo, "pass3", true, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_3);
-                string emailUsuario4 = usuariocen.CrearUsuario("email4@gmail.com", "usuario4", "nombre4", new DateTime(2005, 07, 03), "loc4", "pais4", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Entusiasta_de_la_Pantalla, "pass4", true, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_4);
+                string emailUsuario3 = usuariocen.CrearUsuario("email3@gmail.com", "usuario3", "nombre3", new DateTime(2003, 02, 02), "loc3", "pais3", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Principiante_cinefilo, "pass3", true, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_3, "No asignado");
+                string emailUsuario4 = usuariocen.CrearUsuario("email4@gmail.com", "usuario4", "nombre4", new DateTime(2005, 07, 03), "loc4", "pais4", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Entusiasta_de_la_Pantalla, "pass4", true, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_4, "No asignado");
 
                 // Modificamos suario
-                usuariocen.ModificarUsuario(emailUsuario1, "UsuarioModificado", "nombre1", new DateTime(2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass1", false, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_5);
+                usuariocen.ModificarUsuario(emailUsuario1, "UsuarioModificado", "nombre1", new DateTime(2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass1", false, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_5, "No asignado");
 
                 // Dame por OID y ver que se ha modificado bien
                 UsuarioEN usuarioPorOID = usuariocen.DamePorOID(emailUsuario1);
@@ -571,9 +571,9 @@ namespace InitializeDB
                 Console.WriteLine("----------------------------------------------------------------------------------------------------------------");
                 Console.WriteLine("----------------------------------------------------------------------------------------------------------------");
                 Console.WriteLine("----------------------------------------------------------------------------------------------------------------");
-                string emailUsuario6 = usuariocen.CrearUsuario("email6@gmail.com", "usuario6", "nombre6", new DateTime(2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass6", true, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_4);
-                string emailUsuario7 = usuariocen.CrearUsuario("email7@gmail.com", "usuario7", "nombre7", new DateTime(2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass7", true, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_5);
-                string emailUsuario8 = usuariocen.CrearUsuario("email8@gmail.com", "usuario8", "nombre8", new DateTime(2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass8", true, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_5);
+                string emailUsuario6 = usuariocen.CrearUsuario("email6@gmail.com", "usuario6", "nombre6", new DateTime(2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass6", true, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_4, "No asignado");
+                string emailUsuario7 = usuariocen.CrearUsuario("email7@gmail.com", "usuario7", "nombre7", new DateTime(2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass7", true, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_5, "No asignado");
+                string emailUsuario8 = usuariocen.CrearUsuario("email8@gmail.com", "usuario8", "nombre8", new DateTime(2003, 02, 02), "loc1", "pais1", ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, "pass8", true, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum.avatar_5, "No asignado");
 
 
 
