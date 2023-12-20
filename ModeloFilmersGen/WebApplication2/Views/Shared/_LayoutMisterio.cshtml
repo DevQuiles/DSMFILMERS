@@ -21,25 +21,44 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApplication2.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 
 
 
 </head>
-<body class = "grey lighten-3">
+<body class="grey lighten-3">
     <header>
-
-        <nav id="sidebarMenu" class="d-block sidebar bg-white">
-            <div class="position-sticky">
+        <nav id="sidebarMenu" class="d-inline-block w-auto sidebar bg-white">
+            <div class="position-sticky ">
                 <div class="list-group list-group-flush mx-3 mt-4">
-                    <a class="list-group-item list-group-item-action py-2 ripple" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
-                    <a class="list-group-item list-group-item-action py-2 ripple" asp-area="" asp-controller="Usuario" asp-action="Index">Búsqueda</a>
-                    <a class="list-group-item list-group-item-action py-2 ripple" asp-area="" asp-controller="Playlist" asp-action="Index">Playlist</a>
-                    <a class="list-group-item list-group-item-action py-2 ripple" asp-area="" asp-controller="Usuario" asp-action="Login">Iniciar Sesión</a>
+
+                    <a class="list-group-item list-group-item-action py-2 ripple mb-2 mt-2" asp-area="" asp-controller="Home" asp-action="Index">
+                        <i class="bi bi-house-fill"></i>
+                        <span class="d-none d-md-inline menutext"> Inicio</span>
+                        <br>
+                    </a>
+                    <a class="list-group-item list-group-item-action py-2 ripple mb-2 mt-2" asp-area="" asp-controller="Usuario" asp-action="Index">
+                        <i class="bi bi-search"></i>
+                        <span class="d-none d-md-inline menutext"> Búsqueda</span>
+                        <br>
+                    </a>
+                    
+                    <a class="list-group-item list-group-item-action py-2 ripple mb-2 mt-2" asp-area="" asp-controller="Playlist" asp-action="Index">
+                        <i class="bi bi-film"></i>
+                        <span class="d-none d-md-inline menutext"> Playlist</span>
+                        <br>
+                    </a>
+                    
+                    <a class="list-group-item list-group-item-action py-2 ripple mb-2 mt-2" asp-area="" asp-controller="Usuario" asp-action="Login">
+                        <i class="bi bi-unlock-fill"></i>
+                        <span class="d-none d-md-inline menutext"> Iniciar Sesión</span>
+                        <br>
+                    </a>
                 </div>
             </div>
         </nav>
-
     </header>
+
     <!--Main Navigation-->
     <br />
     <main class="pt-3 mx-lg-5">

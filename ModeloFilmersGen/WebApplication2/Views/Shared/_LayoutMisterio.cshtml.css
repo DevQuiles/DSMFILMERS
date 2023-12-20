@@ -47,8 +47,16 @@ button.accept-policy {
     line-height: 60px;
 }
 
-main {
-    padding-left: 240px;
+@media (min-width: 768px) {
+    main {
+        padding-left: 240px;
+    }
+}
+
+@media (max-width: 767px) {
+    main {
+        padding-left: 100px;
+    }
 }
 
 /* Sidebar */
@@ -77,5 +85,7 @@ main {
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
 
-
+.menutext{
+    padding-left: 10px;
+}
 
