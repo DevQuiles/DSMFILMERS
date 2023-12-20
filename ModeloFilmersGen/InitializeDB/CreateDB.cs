@@ -353,6 +353,7 @@ namespace InitializeDB
                 usuariocen.AsignarPeliculaWatchList(emailUsuario2, new List<int> { idPeli2, idPeli3 });
                 Console.WriteLine("-----------------------------------------------DESASIGNAR PELICULA A WATCHLIST------------------------------------");
                 usuariocen.DesasignarPeliculaWatchList(emailUsuario2, new List<int> { idPeli2 });
+               
 
                 //---------------------------------------------- COMUNIDADES CRUDS -------------------------------------
 

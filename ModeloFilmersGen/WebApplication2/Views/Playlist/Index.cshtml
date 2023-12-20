@@ -26,12 +26,6 @@
 </head>
 
 <style>
-
-    h1 {
-        font-family: 'Inter', regular; 
-        font-size: 48px;
-        line-height: 140%;
-    }
     .playlist-container {
         background-color: #d0d0d0;
         margin-bottom: 10px;
@@ -46,9 +40,6 @@
 
     body {
         background-color: white;
-        font-family: 'Inter', regular;
-        font-size: 13px;
-        line-height: 140%;
     }
 
     /* Estilos para los botones */
@@ -163,6 +154,11 @@
 </div>
 
     <script>
+    var usuario = {
+        nombre: '@nombre',
+        email: '@email'
+    };
+
         // Utiliza una clase específica para seleccionar todos los botones de añadir a favoritos
         var botonesAñadir = document.querySelectorAll(".btnAñadir");
 
@@ -173,17 +169,14 @@
                 var idPlaylist = this.getAttribute("data-idPlaylist");
                 console.log(idPlaylist);
 
-            var usuario = {
-                nombre: '@nombre',
-                email: '@email'
-            };
+                var idUsuario = usuario.email;
 
                 // Llama a la función para agregar a favoritos
                 agregarPlaylistAFavoritos(idPlaylist, idUsuario);
             });
         });
 
-        function agregarPlaylistAFavoritos(idPlaylist) {
+        function agregarPlaylistAFavoritos(idPlaylist, idUsuario) {
             // Realiza la llamada AJAX al controlador de Playlist para agregar a favoritos
             $.ajax({
                 url: '/Playlist/AgregarPlaylistAFavoritos',
