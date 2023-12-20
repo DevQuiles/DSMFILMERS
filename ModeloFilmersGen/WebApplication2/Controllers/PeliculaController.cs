@@ -22,9 +22,6 @@ namespace WebApplication2.Controllers
             return Json(new { success = true });
         }
 
-
-
-
         public ActionResult buscaRapidoPeliculas(string searchString)
         {
             SessionInitialize();
@@ -50,8 +47,6 @@ namespace WebApplication2.Controllers
 
             return Json(listaPelis);
         }
-
-       
 
         // GET: PeliculaController
         public ActionResult Index(string searchString, string searchanyo, string searchValoracion, string searchGen)
@@ -105,9 +100,6 @@ namespace WebApplication2.Controllers
 
             return View(listPelis);
         }
-
-
-
 
         // GET: PeliculaController/Details/5
         public ActionResult Details(int id)

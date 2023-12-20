@@ -106,7 +106,10 @@ namespace WebApplication2.Controllers
                 PeliculaVistaRepository peliRepository = new PeliculaVistaRepository();
                 PeliculaVistaCEN peliCEN = new PeliculaVistaCEN(peliRepository);
                 peliCEN.ModificarPeliculaVista(id, pv.comentario, pv.valoracion, (DateTime)pv.fecha);
-                return RedirectToAction(nameof(Index));
+
+                UsuarioViewModel usuario = HttpContext.Session.Get<UsuarioViewModel>("usuario");
+
+                return RedirectToAction("DetailsPerfil", "Usuario", new { id = usuario.Email });
             }
             catch
             {
