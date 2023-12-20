@@ -147,3 +147,74 @@ body {
     padding-top: 2px;
     padding-left: 7px;
 }
+
+/*------------------------------------------------ PLAYLIST --------------------------------------------------------*/
+.btn-edit {
+    background-color: green;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.btn-details {
+    background-color: orange;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.btn-delete {
+    background-color: red;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.btn-return {
+    background-color: blue;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.carousel-inner img {
+    max-width: 150px;
+    max-height: 200px;
+}
+
+.playlist-container {
+    background-color: #d0d0d0;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.playlist-container:hover {
+    background-color: #a0a0a0;
+    cursor: pointer;
+}
+
+.form-container {
+    background-color: #d0d0d0;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px; /* Ajusta el margen superior según tus preferencias */
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-create {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
