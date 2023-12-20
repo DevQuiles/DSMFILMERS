@@ -25,7 +25,9 @@
             {
                 <div class="col-auto">
                     @{
-                        // Comprobamos si ya está siguiendo al usuario
+                        if(usuario.UsuariosSeguidos != null)
+                        {
+                            // Comprobamos si ya está siguiendo al usuario
                         bool isFollowing = usuario.UsuariosSeguidos.Contains(Model.Email);
                         @if (isFollowing)
                         {
@@ -35,6 +37,8 @@
                         {
                             <button type="button" data-follow-id="@Model.Email" class="btn btn-outline-primary btn-sm" onclick="followUnfollow('@usuario.Email', '@Model.Email', false)">Seguir</button>
                         }
+                        }
+                        
                     }
                 </div>
             }
@@ -96,6 +100,9 @@
                     } else {
                         btn.text("Siguiendo").removeClass("btn-outline-primary").addClass("btn-success").attr("onclick", "followUnfollow('" + userId + "', '" + followedId + "', true)");
                     }
+
+                    actualizarSesion(userId);
+                    location.reload();
                 },
                 error: function () {
                     alert("Error al procesar la solicitud.");
@@ -103,5 +110,20 @@
                 }
             });
         }
+
+        function actualizarSesion(userId) {
+                $.ajax({
+                    url: '@Url.Action("RecargarSesion", "Notificaciones")',
+                    type: 'SET',
+                    data: {idUsuario: userId},
+                    success: function () {
+                    },
+                    error: function () {
+                        alert("Error al procesar la solicitud.");
+                        btn.prop('disabled', false);
+                    }
+                });
+
+            }
     </script>
 }
