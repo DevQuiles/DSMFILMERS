@@ -1,0 +1,67 @@
+﻿@model IEnumerable<WebApplication2.Models.PeliculaVistaViewModel>
+@using System.Globalization
+    <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    
+
+    </head>
+
+@{
+    string mesAnterior = "";
+    string yearAnterior = "";
+}
+
+<div class="row">
+    <h3>Calendario</h3>
+    @foreach (var item in Model)
+    {
+        var currentMonth = item.fecha.HasValue ? CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(item.fecha.Value.Month) : "Fecha no disponible";
+        currentMonth = char.ToUpper(currentMonth[0]) + currentMonth.Substring(1);
+        var currentYear = item.fecha.HasValue ? item.fecha.Value.Year.ToString() : "Fecha no disponible";
+        if (currentMonth != mesAnterior || currentYear != yearAnterior)
+        {
+            <div class="col-12">
+                <h4>@currentMonth @currentYear</h4>
+            </div>
+        }
+        <div class="col-lg-2 col-md-4 col-sm-6 col-12">
+            <div class="card border-0">
+                <div class="card-img-container">
+                    <span class="day-badge">@item.fecha.Value.Day</span>
+                    <a href="@Url.Action("Details", "Pelicula", new { id = item.idPelicula })">
+                        <img src="@item.fotoPeli" class="card-img-top img-fluid" alt="Carátula">
+                    </a>
+                </div>
+
+                <div class="card-body row">
+                    <h5 class="card-title text-center">@item.nombrePeli</h5>
+                    
+                    @{
+                        int valoracionEntera = (int)item.valoracion;
+                    }
+                    <h5 class="card-title col-8">
+                        @{
+                            for (int i = 0; i < valoracionEntera; i++)
+                            {
+                                <i class="bi bi-star-fill"></i>
+                            }
+                        }
+                    </h5>
+                    <div class="text-center col-2">
+                        <a href="@Url.Action("Edit", "PeliculaVista", new { id = item.Id })" class="btn btn-outline-primary">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                    </div>
+                    <div class="text-center col-2">
+                        <a href="@Url.Action("Delete", "PeliculaVista", new { id = item.Id })" class="btn btn-outline-primary">
+                            <i class="bi bi-trash3-fill"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        mesAnterior = currentMonth;
+        yearAnterior = currentYear;
+    }
+</div>

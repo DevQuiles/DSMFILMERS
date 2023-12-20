@@ -18,6 +18,26 @@ namespace WebApplication2.Controllers
     public class PlaylistController : BasicController
     {
 
+
+        public ActionResult desAsignar(string idPelicula, string idPlaylist)
+        {
+
+            SessionInitialize();
+
+            PlaylistRepository playlistRepository = new PlaylistRepository();
+            PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);
+            playlistCEN.DesasignarPeliculas(int.Parse(idPlaylist), new List<int> { int.Parse(idPelicula) });
+
+            SessionClose();
+
+            return Json(new { success = true }); ;
+        }
+
+
+
+
+
+
         [HttpPost]
         public IActionResult AgregarPeliculaAPlaylist(string idPelicula, string idPlaylist)
         {
@@ -94,6 +114,57 @@ namespace WebApplication2.Controllers
             }
             return Json(playlistENs);
         }
+
+        public ActionResult IndexCarrusel()
+        {
+            // Inicializa la sesión
+            SessionInitialize();
+
+            // Creación y configuración del repositorio y del CEN de Playlist
+            PlaylistRepository playlistRepository = new PlaylistRepository(session);
+            PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);
+
+            // Obtención de todas las playlists
+            IList<PlaylistEN> playEN = playlistCEN.DameTodos(0, -1);
+
+            // Conversión de las entidades PlaylistEN a ViewModels
+            IList<PlaylistViewModel> listPlay = new PlaylistAssembler().ConvertirListEnToViewModel(playEN).ToList();
+
+            // Obtención de las carátulas para cada playlist
+            IDictionary<int, IList<string>> caratulas = ObtenerCaratulasParaPlaylists(playEN);
+
+            // Creación del ViewModel para la vista
+            var viewModel = new PlatyListyPeliculasFotosViewModel
+            {
+                Playlist = listPlay,
+                CaratulasPorPlaylist = caratulas // Asegúrate de tener esta propiedad en tu ViewModel
+            };
+
+            // Cierre de la sesión
+            SessionClose();
+
+            // Retorna la vista con el ViewModel
+            return View(viewModel);
+        }
+
+        private IDictionary<int, IList<string>> ObtenerCaratulasParaPlaylists(IList<PlaylistEN> playlists)
+        {
+            IDictionary<int, IList<string>> caratulasPorPlaylist = new Dictionary<int, IList<string>>();
+
+            foreach (var playlist in playlists)
+            {
+                IList<string> caratulasDePlaylist = new List<string>();
+                foreach (var movie in playlist.Peliculas)
+                {
+                    caratulasDePlaylist.Add(movie.Caratula);
+                }
+                caratulasPorPlaylist.Add(playlist.Id, caratulasDePlaylist); // Asume que 'Id' es un identificador único de PlaylistEN
+            }
+
+            return caratulasPorPlaylist;
+        }
+
+
 
 
         // GET: PlaylistController
@@ -225,17 +296,29 @@ namespace WebApplication2.Controllers
                 return View();
             }
         }
-
-
-
-
         // GET: PlaylistController/Delete/5
         public ActionResult Delete(int id)
         {
-            PlaylistRepository playlistRepository = new PlaylistRepository();
-            PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);
-            playlistCEN.BorrarPlaylist(id);
-            return RedirectToAction(nameof(Index));
+            UsuarioViewModel usuario = HttpContext.Session.Get<UsuarioViewModel>("usuario");
+            try
+            {
+                
+                PlaylistRepository playlistRepository = new PlaylistRepository(session);
+                PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);
+                PlaylistEN playlistEN = playlistCEN.DamePorOID(id);
+                int numPelis = playlistEN.Peliculas.Count;
+
+                if(numPelis == 0)
+                {
+                    playlistCEN.BorrarPlaylist(id);
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Debes de borrar las peliculas de la playlist antes de poder eliminarla";
+            }
+
+            return RedirectToAction("DetailsPerfil","Usuario", new { id = usuario.Email });
         }
 
         // POST: PlaylistController/Delete/5

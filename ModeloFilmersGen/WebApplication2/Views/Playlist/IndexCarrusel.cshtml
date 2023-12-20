@@ -1,0 +1,38 @@
+﻿@model WebApplication2.Models.PlatyListyPeliculasFotosViewModel
+
+@{
+    ViewData["Title"] = "IndexCarrusel";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Playlist</th>
+            <th>Carátulas</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var playlist in Model.Playlist)
+        {
+            <tr>
+                <td>
+                    @playlist.nombre <!-- Asegúrate de tener la propiedad Nombre en tu PlaylistViewModel -->
+                </td>
+                <td>
+                    @if (Model.CaratulasPorPlaylist.ContainsKey(playlist.Id))
+                    {
+                        @foreach (var caratula in Model.CaratulasPorPlaylist[playlist.Id])
+                        {
+                            <img src="@caratula" alt="Carátula" /> <!-- Muestra cada carátula como una imagen; ajusta según sea necesario -->
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

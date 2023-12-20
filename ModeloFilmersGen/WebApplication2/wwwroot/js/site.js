@@ -5,9 +5,3 @@
 
 
 
-$('#carruselPeliculas').carousel({
-    interval: false
-});
-
-
-

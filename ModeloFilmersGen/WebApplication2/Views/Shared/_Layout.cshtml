@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 @using Microsoft.AspNetCore.Http
@@ -18,32 +18,72 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - WebApplication2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApplication2.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">=
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
 
 
 </head>
 <body class = "grey lighten-3">
-    <header>
+        <header>
+            <nav id="sidebarMenu" class="d-inline-block w-auto sidebar bg-white">
+                <div class="position-sticky ">
+                    <div class="list-group list-group-flush mx-3 mt-4">
 
-        <nav id="sidebarMenu" class="d-block sidebar bg-white">
-            <div class="position-sticky">
-                <div class="list-group list-group-flush mx-3 mt-4">
-                    <a class="list-group-item list-group-item-action py-2 ripple" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
-                    <a class="list-group-item list-group-item-action py-2 ripple" asp-area="" asp-controller="Usuario" asp-action="Index">Búsqueda</a>
-                    <a class="list-group-item list-group-item-action py-2 ripple" asp-area="" asp-controller="Playlist" asp-action="Index">Playlist</a>
-                    <a class="list-group-item list-group-item-action py-2 ripple" asp-area="" asp-controller="Comunidades" asp-action="Index">Comunidades</a>
-                    <a class="list-group-item list-group-item-action py-2 ripple" asp-area="" asp-controller="Usuario" asp-action="DetailsPerfil" asp-route-id=@email>Perfil</a>
-                    <a class="list-group-item list-group-item-action py-2 ripple" asp-area="" asp-controller="Notificaciones" asp-action="Index">Notificaciones</a>
-                    <a class="list-group-item list-group-item-action py-2 ripple" asp-area="" asp-controller="Usuario" asp-action="Logout">Cerrar Sesión</a>
+
+                        <a class="list-group-item list-group-item-action py-2 ripple mb-2 mt-2" asp-area="" asp-controller="Home" asp-action="Index">
+                            <i class="bi bi-house-fill"></i>
+                            <span class="d-none d-md-inline menutext"> Inicio</span>
+                            <br>
+                        </a>
+                        <a class="list-group-item list-group-item-action py-2 ripple mb-2 mt-2" asp-area="" asp-controller="Usuario" asp-action="Index">
+                            <i class="bi bi-search"></i>
+                            <span class="d-none d-md-inline menutext"> Búsqueda</span>
+                            <br>
+                        </a>
+
+                        <a class="list-group-item list-group-item-action py-2 ripple mb-2 mt-2" asp-area="" asp-controller="Playlists" asp-action="Index">
+                        <i class="bi bi-film"></i>
+                            <span class="d-none d-md-inline menutext"> Playlists</span>
+                            <br>
+                        </a>
+
+                        <a class="list-group-item list-group-item-action py-2 ripple mb-2 mt-2" asp-area="" asp-controller="Comunidades" asp-action="Index">
+                        <i class="bi bi-chat-fill"></i>
+                            <span class="d-none d-md-inline menutext"> Comunidades</span>
+                            <br>
+                        </a>
+
+
+                        <a class="list-group-item list-group-item-action py-2 ripple mb-2 mt-2" asp-area="" asp-controller="Usuario" asp-action="DetailsPerfil" asp-route-id=@email>
+                            <i class="bi bi-person-fill"></i>
+                            <span class="d-none d-md-inline menutext"> Perfil </span>
+                            <br>
+                        </a>
+
+                            <a class="list-group-item list-group-item-action py-2 ripple mb-2 mt-2" asp-area="" asp-controller="Notificaciones" asp-action="Index">
+                            <i class="bi bi-bell-fill"></i>
+                            <span class="d-none d-md-inline menutext"> Notificaciones</span>
+                            <br>
+                        </a>
+
+                        <a class="list-group-item list-group-item-action py-2 ripple mb-2 mt-2" asp-area="" asp-controller="Usuario" asp-action="Logout">
+                            <i class="bi bi-lock-fill"></i>
+                            <span class="d-none d-md-inline menutext"> Cerrar Sesión</span>
+                            <br>
+                        </a>
+                    </div>
                 </div>
-            </div>
-        </nav>
-
-    </header>
+            </nav>
+        </header>
     <!--Main Navigation-->
     <br />
     <main class="pt-3 mx-lg-5">

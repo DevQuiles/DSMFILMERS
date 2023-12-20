@@ -4,56 +4,87 @@
     ViewData["Title"] = "DetailsPerfil";
     UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
 
-    if (usuario== null || usuario.Email != Model.Email)
-    {
-        <script>
-            window.location.href = '/Usuario/Index'; // Reemplaza esto con la ruta correcta a tu página de índice de usuario
-        </script>
-    }
 }
 
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+
 <div class="row align-items-center">
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
+
     <div class="col-sm-4 pb-3" style="max-width: 250px; max-height: 250px;">
         <img src="/Img/@(Model.Avatar).jpeg" alt="Avatar" class="img-fluid rounded-circle" />
+
     </div>
     <div class="col-sm-8 pb-3">
+        @if (Model.usuarioGoogle == "No asignado")
+        {
+            <!-- Botón para asociar cuenta con Google si no está asociada -->
+            <a href="@Url.Action("EnlazarCuentaConGoogle", "Usuario")" class="btn btn-primary">Enlazar con Google</a>
+        }
+        else
+        {
+            <!-- Mostrar indicador de cuenta asociada con Google -->
+            <span class="text-success">Cuenta asociada con Google ✔</span>
+        }
+    </div>
 
-        <div class="row align-items-center">
-            <div class="col-3">
-                <h3>@Model.NombreUsuario</h3>
-            </div>
-           
-                <div class="col-auto">
-                <a class="btn btn-primary mx-2" href="@Url.Action("Edit", "Usuario", new { id = Model.Email })"> Editar Perfil </a>
-                </div>
+</div>
+<div class="col-sm-8 pb-3">
+
+    <div class="row align-items-center">
+        <div class="col-3">
+            <h3>@Model.NombreUsuario</h3>
         </div>
 
-
-        <h4>@Model.Nombre</h4>
-        <br />
-        <div class="row">
-            <div class="col-sm-4 text-center">
-                <h5>@Model.Seguidores</h5>
-                <p id="Seguidores">Seguidores</p>
-            </div>
-            <div class="col-sm-4 text-center">
-                <h5>@Model.Seguidos</h5>
-                <p id="Seguidos">Seguidos</p>
-            </div>
-            <div class="col-sm-4 text-center">
-                <h5>@Model.PelisVistas</h5>
-                <p>Películas</p>
-            </div>
+        <div class="col-auto">
+            <a class="btn btn-primary mx-2" href="@Url.Action("Edit", "Usuario", new { id = Model.Email })"> Editar Perfil </a>
         </div>
     </div>
-    <hr />
-    <div class="col-md-12 d-flex justify-content-center mb-2">
-        <a href="#" class="btn mx-2 btn-watchlist">Watchlist</a>
-        <a href="#" class="btn mx-2 btn-playlists">Playlists</a>
-        <a href="#" class="btn mx-2 btn-calendario">Calendario</a>
+
+
+    <h4>@Model.Nombre</h4>
+    <br />
+    <div class="row">
+        <div class="col-sm-4 text-center">
+            <h5>@Model.Seguidores</h5>
+            <p id="Seguidores">Seguidores</p>
+        </div>
+        <div class="col-sm-4 text-center">
+            <h5>@Model.Seguidos</h5>
+            <p id="Seguidos">Seguidos</p>
+        </div>
+        <div class="col-sm-4 text-center">
+            <h5>@Model.PelisVistas</h5>
+            <p>Películas</p>
+        </div>
     </div>
-    <div id="vistasUsuario">
-    </div>
+</div>
+<hr />
+<div class="col-md-12 d-flex justify-content-center mb-2">
+    <a href="#" class="btn mx-2 btn-watchlist">Watchlist</a>
+    <a href="#" class="btn mx-2 btn-playlists">Playlists</a>
+    <a href="#" class="btn mx-2 btn-calendario">Calendario</a>
+</div>
+<div id="vistasUsuario">
+</div>
 </div>
 
 
@@ -69,7 +100,13 @@
 
             // Funciones para cargar diferentes vistas
             function loadCalendario() {
-                $.get('/Usuario/Vistas/' + idUsuario, function (data) {
+                $.get('/Usuario/Calendario/' + idUsuario, function (data) {
+                    $('#vistasUsuario').html(data);
+                });
+            }
+
+            function loadPlaylists() {
+                $.get('/Usuario/PLayList/' + idUsuario, function (data) {
                     $('#vistasUsuario').html(data);
                 });
             }
@@ -92,6 +129,8 @@
             });
 
             $('.btn-playlists').on('click', function (e) {
+                e.preventDefault();
+                loadPlaylists();
                 // Lógica para cargar otra vista si es necesario
                 // Por ejemplo: loadPlaylists();
             });
