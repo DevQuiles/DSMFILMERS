@@ -98,7 +98,7 @@
 
             // Funciones para cargar diferentes vistas
             function loadCalendario() {
-                $.get('/Usuario/Vistas/' + idUsuario, function (data) {
+                $.get('/Usuario/Calendario/' + idUsuario, function (data) {
                     $('#vistasUsuario').html(data);
                 });
             }
