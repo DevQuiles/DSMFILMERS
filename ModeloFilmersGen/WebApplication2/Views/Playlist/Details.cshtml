@@ -28,7 +28,7 @@
 
     .btn-return {
         background-color: blue;
-        color: black;
+        color: White;
         border: none;
         padding: 5px 10px;
         border-radius: 5px;
@@ -72,6 +72,10 @@
 </div>
 
 <div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Playlist.Id }) |
-    <a asp-action="Index">Back to List</a>
+    <a href="@Url.Action("Edit", new { id = Model.Playlist.Id })" class="btn btn-success btn-edit" title="Edit">
+        <i class="fas fa-edit"></i>
+    </a>
+    <a href="@Url.Action("Index")" class="btn btn-primary btn-return">
+        <i class="fas fa-arrow-left"></i> Volver
+    </a>
 </div>
