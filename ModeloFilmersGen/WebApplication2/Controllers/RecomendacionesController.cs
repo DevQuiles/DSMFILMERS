@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModeloFilmersGen.ApplicationCore.CEN.Pruebadeesquemaproyecto;
+using ModeloFilmersGen.ApplicationCore.CP.Pruebadeesquemaproyecto;
 using ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto;
+using ModeloFilmersGen.Infraestructure.CP;
 using ModeloFilmersGen.Infraestructure.Repository.Pruebadeesquemaproyecto;
 using WebApplication2.Assemblers;
 using WebApplication2.Models;
@@ -10,6 +12,20 @@ namespace WebApplication2.Controllers
 {
     public class RecomendacionesController : BasicController
     {
+
+        public ActionResult recomendarPeliculaAUsuario(string idUsuario,string selectedEmail, string idPelicula)
+        {
+
+            SessionInitialize();
+            RecomendacionesCP recCP1 = new RecomendacionesCP(new SessionCPNHibernate());
+            RecomendacionesRepository recomendacionesRepository = new RecomendacionesRepository();
+            RecomendacionesCEN recomendacionesCEN = new RecomendacionesCEN(recomendacionesRepository);
+            DateTime now = DateTime.Now;
+            RecomendacionesEN r = recCP1.CrearRecomendacion(now, idUsuario, selectedEmail, int.Parse(idPelicula));
+            return Json(new { success = true});
+        }
+
+
         // GET: RecomendacionesController
         public ActionResult Index()
         {

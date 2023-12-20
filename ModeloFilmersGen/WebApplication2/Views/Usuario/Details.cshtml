@@ -1,4 +1,4 @@
-﻿@model WebApplication2.Models.UsuarioViewModel
+@model WebApplication2.Models.UsuarioViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -25,20 +25,29 @@
             {
                 <div class="col-auto">
                     @{
+
                         if(usuario.UsuariosSeguidos != null)
                         {
                             // Comprobamos si ya está siguiendo al usuario
                         bool isFollowing = usuario.UsuariosSeguidos.Contains(Model.Email);
                         @if (isFollowing)
+
                         {
-                            <button type="button" data-follow-id="@Model.Email" class="btn btn-success btn-sm" onclick="followUnfollow('@usuario.Email', '@Model.Email', true)">Siguiendo</button>
-                        }
-                        else
-                        {
-                            <button type="button" data-follow-id="@Model.Email" class="btn btn-outline-primary btn-sm" onclick="followUnfollow('@usuario.Email', '@Model.Email', false)">Seguir</button>
-                        }
+                            // Comprobamos si ya está siguiendo al usuario
+                            bool isFollowing = usuario.UsuariosSeguidos.Contains(Model.Email);
+                            @if (isFollowing)
+                            {
+                                <button type="button" data-follow-id="@Model.Email" class="btn btn-success btn-sm" onclick="followUnfollow('@usuario.Email', '@Model.Email', true)">Siguiendo</button>
+                            }
+                            else
+                            {
+                                <button type="button" data-follow-id="@Model.Email" class="btn btn-outline-primary btn-sm" onclick="followUnfollow('@usuario.Email', '@Model.Email', false)">Seguir</button>
+                            }
+                     }
+
                         }
                         
+
                     }
                 </div>
             }

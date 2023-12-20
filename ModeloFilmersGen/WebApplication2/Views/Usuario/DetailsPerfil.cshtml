@@ -10,7 +10,16 @@
             window.location.href = '/Usuario/Index';
         </script>
     }
+
 }
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
 
 <div class="row align-items-center">
     @if (TempData["Success"] != null)
@@ -103,6 +112,12 @@
                 });
             }
 
+            function loadPlaylists() {
+                $.get('/Usuario/PLayList/' + idUsuario, function (data) {
+                    $('#vistasUsuario').html(data);
+                });
+            }
+
             function loadDeseos() {
                 $.get('/Usuario/Deseos/' + idUsuario, function (data) {
                     $('#vistasUsuario').html(data);
@@ -121,6 +136,8 @@
             });
 
             $('.btn-playlists').on('click', function (e) {
+                e.preventDefault();
+                loadPlaylists();
                 // Lógica para cargar otra vista si es necesario
                 // Por ejemplo: loadPlaylists();
             });
