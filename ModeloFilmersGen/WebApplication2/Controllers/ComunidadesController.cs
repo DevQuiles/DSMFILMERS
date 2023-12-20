@@ -17,14 +17,21 @@ namespace WebApplication2.Controllers
         // GET: HomeController1
         public ActionResult Index()
         {
+            UsuarioViewModel usuario = HttpContext.Session.Get<UsuarioViewModel>("usuario");
+            if (!UsuarioEstaAutenticado())
+            {
+                return RedirectToAction("Login", "Usuario");
+            }
+
             SessionInitialize();
             ComunidadesRepository comRepository = new ComunidadesRepository(session);
             ComunidadesCEN comCEN = new ComunidadesCEN(comRepository);
 
             IList<ComunidadesEN> listEN = comCEN.DameTodos(0, -1);
-            UsuarioViewModel usuario = HttpContext.Session.Get<UsuarioViewModel>("usuario");
+            
             UsuarioRepository usRepo = new UsuarioRepository(session);
             UsuarioCEN usuarioCEN = new UsuarioCEN(usRepo);
+
             UsuarioEN usuEn = usuarioCEN.DamePorOID(usuario.Email);
 
             //COMUNIDADES DE LAS QUE SOY EL AUTOR
@@ -138,7 +145,6 @@ namespace WebApplication2.Controllers
                 ComunidadesRepository comRepository = new ComunidadesRepository();
                 ComunidadesCEN comCEN = new ComunidadesCEN(comRepository);
                 ComunidadesEN comEN = comCEN.DamePorOID(id);
-                //TODO :  FECHA DE CREACION?
                 comCEN.ModificarComunidad(id, comVM.Nombre, comEN.FechaCreacion, comVM.Descripcion);
 
 
@@ -174,6 +180,24 @@ namespace WebApplication2.Controllers
             {
                 return View();
             }
+        }
+
+
+        public ActionResult UnirseComunidad(int id)
+        {
+            UsuarioViewModel usuario = HttpContext.Session.Get<UsuarioViewModel>("usuario");
+
+            SessionInitialize();
+
+            UsuarioRepository usRepo = new UsuarioRepository(session);
+            UsuarioCEN usuarioCEN = new UsuarioCEN(usRepo);
+            List<int> listComs = new List<int>() { id};
+
+            usuarioCEN.AsignarComunidad(usuario.Email, listComs);
+
+            SessionClose();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
