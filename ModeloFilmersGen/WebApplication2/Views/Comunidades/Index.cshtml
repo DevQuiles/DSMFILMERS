@@ -27,16 +27,18 @@
                             <p class="descripcionComunidad mb-1">@Html.DisplayFor(modelItem => item.Descripcion)</p>
                             <small class="creadorComunidad mb-1"> @Html.DisplayFor(modelItem => item.Emisor)</small>
                         </div>
-                        <button type="button" class="btn btn-outline-danger">
+                        <div>
+                        <div class="btn btn-outline-danger" id="openBorrarComunidad">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                 <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
                             </svg>
-                        </button>
-                        <button type="button" class="btn btn-outline-warning">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-                            </svg>
-                        </button>
+                        </div>
+                            <div id="openEditarComunidad" class="btn btn-outline-warning">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                                </svg>
+                            </div>
+                        </div>
 
 
                     </a>
@@ -57,13 +59,13 @@
                 }
                 <br>
             }
-            
+  
         <b>TODAS LAS COMUNIDADES</b>
         @foreach (var item in Model.todasComs)
         {
             @if (!Model.misComs.Any(mc => mc.IdCom == item.IdCom) && !Model.uniComs.Any(uc => uc.IdCom == item.IdCom))
             {
-                <a asp-area="" asp-controller="Comunidades" asp-action="Mensajes" asp-route-id="@item.IdCom" class="list-group-item list-group-item-action comunidad-item" data-id="@item.IdCom" aria-current="true">
+                <a asp-area="" asp-controller="Comunidades" asp-action="Mensajes" asp-route-id="@item.IdCom" class="list-group-item list-group-item-action comunidad-item otras" data-id="@item.IdCom" aria-current="true">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="nombreComunidad mb-1">@Html.DisplayFor(modelItem => item.Nombre)</h5>
                         <small>@Html.DisplayFor(modelItem => item.FechaCreacion)</small>
@@ -80,8 +82,8 @@
     </div>
     <input type="hidden" id="sesion" value="@usuario.NombreUsuario" />
 
-    <div class="d-flex align-items-center justify-content-center col-md-6 col-lg-7 col-xl-8 ">
-    <div class="col-md-6 col-lg-7 col-xl-8 mensajesContainer text-center">
+<div id="divSuperior" class="d-flex align-items-center justify-content-center col-md-6 col-lg-7 col-xl-8 ">
+    <div id="divInferior"  class="col-md-6 col-lg-7 col-xl-8 mensajesContainer text-center">
         <h2>Bienvenido a la sección de Comunidades</h2>
         <p>Hola, <span>@usuario.NombreUsuario</span>. ¡Es genial verte por aquí!</p>
     </div>
@@ -89,21 +91,57 @@
 
 </div>
 
-<!-- Modal -->
+<!-- Modales-->
+
+@* CREAR COMUNIDAD *@
 <div class="modal" tabindex="-1" role="dialog" id="createModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Crear una nueva comunidad</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             <div class="modal-body">
                 <!-- Contenido de la vista _Create se cargará aquí -->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* EDITAR COMUNIDAD *@
+<div class="modal" tabindex="-1" role="dialog" id="editModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar una comunidad</h5>
+            </div>
+            <div class="modal-body" id="editBody">
+                <!-- Contenido de la vista _Create se cargará aquí -->
+            </div >
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@* ELIMINAR COMUNIDAD *@
+<div class="modal" tabindex="-1" role="dialog" id="deleteModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Borrar comunidad</h5>
+            </div>
+            <div class="modal-body">
+                <h5>¿Estás seguro de que quieres borrar esta comunidad?</h5>
+                <p>Todos los mensajes se borrarán</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <a onclick="eliminarComunidad()" type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</a>
             </div>
         </div>
     </div>
@@ -125,6 +163,27 @@
             $('#createModal .modal-body').load('/Comunidades/Create');
             $('#createModal').modal('show');
         });
+        $('#openBorrarComunidad').on('click', function () {
+            $(this).closest('.list-group-item-action').addClass('borrar');                
+            abrirModalBorrarComunidad();
+        });
+        $('#openEditarComunidad').on('click', function () {
+            var comunidadId = $(this).closest('.list-group-item-action').data('id');
+
+            $('#editModal .modal-body').load('/Comunidades/Edit/'+comunidadId);
+            $('#editModal').modal('show');
+        });
+        $('#createModal .btn-secondary').on('click', function () {
+            $('#createModal').modal('hide');
+        });
+        $('#deleteModal .btn-secondary').on('click', function () {
+            $('#deleteModal').modal('hide');
+        });
+        $('#editModal .btn-secondary').on('click', function () {
+            $('#editModal').modal('hide');
+        });
+
+
     });
 
     function seleccionarComunidad(elemento) {
@@ -137,15 +196,41 @@
         // Actualizar la UI para reflejar la selección
         $('.active').removeClass('active');
         elemento.addClass('active');
+        var divSuperior = document.getElementById('divSuperior');
+        var divInferior = document.getElementById('divInferior');
 
+        if (!elemento.hasClass('otras')) {
+            if (divSuperior) {
+                divSuperior.classList.remove('align-items-center');
+            }
+            if (divInferior) {
+                divInferior.classList.remove('text-center');
+            }
+            cargarMensajes(comunidadId, nombreComunidad, descripcionComunidad, creadorComunidad);
+        }
+        else {
+            divSuperior.classList.add('d-flex','align-items-center', 'justify-content-center')
+            divInferior.classList.add('text-center')
 
+            cargarUnirte();
+        }
+        
+    }
 
-        // Cargar mensajes de la comunidad
-        cargarMensajes(comunidadId, nombreComunidad, descripcionComunidad, creadorComunidad);
+    function cargarUnirte() {
+        var mensajesContainer = $('.mensajesContainer').empty();
+        mensajesContainer.append('<h2> No perteneces a esta comunidad </h2>');
+        mensajesContainer.append('<p> Únete para poder ver sus mensajes </p>');
+        mensajesContainer.append('<a class="btn btn-primary mt-2" href= /Comunidades/UnirseComunidad/' + parseInt($('.active').data('id'),10) + ' > Unirse </a>');
+
     }
 
     function abrirModalCrearComunidad() {
         $('#createModal').load('/Comunidades/Create').modal('show');
+    }
+    function abrirModalBorrarComunidad() {
+
+        $('#deleteModal').modal('show');
     }
 
     function cargarMensajes(comunidadId, nombreComunidad, descripcionComunidad, creadorComunidad) {
@@ -176,14 +261,6 @@
         
         // Limpiar contenedor de mensajes y agregar nuevos
         var mensajesContainer = $('.mensajesContainer').empty();
-        var divSuperior = document.querySelector('.d-flex.align-items-center.justify-content-center');
-        var divInferior = document.querySelector('.text-center');
-        if (divSuperior) {
-            divSuperior.classList.remove('align-items-center');
-        }
-        if (divInferior) {
-            divInferior.classList.remove('text-center');
-        }
         
 
         var messagesDiv = $('<div>').css('max-height', maxMessagesHeight + 'px').css('overflow-y', 'auto');
@@ -235,4 +312,32 @@
             }
         });
     }
+
+    function eliminarComunidad() {
+        var comunidadId = $('.borrar').data('id');
+        console.log(comunidadId);
+        $('#deleteModal').modal('hide');
+        $.ajax({
+            url: '/Comunidades/Delete/' + comunidadId, 
+            
+            type: 'GET', 
+            success: function (response) {
+
+                console.log('Comunidad eliminada correctamente');
+                location.reload();
+
+            },
+            error: function (error) {
+                console.error('Error al intentar eliminar la comunidad', error);
+            }
+        });
+
+
+    }
+
+    function editarComunidad(){
+        var comunidadId = $('.editar').data('id');
+        window.location.href = '/Comunidades/Edit/' + comunidadId;
+    }
+
 </script>

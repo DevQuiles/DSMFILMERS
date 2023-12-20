@@ -495,6 +495,7 @@ public void AsignarComunidad (string p_Usuario_OID, System.Collections.Generic.I
 
 
                 session.Update (usuarioEN);
+                session.Flush ();
                 SessionCommit ();
         }
 
