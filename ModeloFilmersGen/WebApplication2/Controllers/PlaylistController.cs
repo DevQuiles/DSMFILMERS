@@ -17,6 +17,26 @@ namespace WebApplication2.Controllers
     public class PlaylistController : BasicController
     {
 
+
+        public ActionResult desAsignar(string idPelicula, string idPlaylist)
+        {
+
+            SessionInitialize();
+
+            PlaylistRepository playlistRepository = new PlaylistRepository();
+            PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);
+            playlistCEN.DesasignarPeliculas(int.Parse(idPlaylist), new List<int> { int.Parse(idPelicula) });
+
+            SessionClose();
+
+            return Json(new { success = true }); ;
+        }
+
+
+
+
+
+
         [HttpPost]
         public IActionResult AgregarPeliculaAPlaylist(string idPelicula, string idPlaylist)
         {
@@ -221,15 +241,29 @@ namespace WebApplication2.Controllers
                 return View();
             }
         }
-
-
         // GET: PlaylistController/Delete/5
         public ActionResult Delete(int id)
         {
-            PlaylistRepository playlistRepository = new PlaylistRepository();
-            PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);
-            playlistCEN.BorrarPlaylist(id);
-            return RedirectToAction(nameof(Index));
+            UsuarioViewModel usuario = HttpContext.Session.Get<UsuarioViewModel>("usuario");
+            try
+            {
+                
+                PlaylistRepository playlistRepository = new PlaylistRepository(session);
+                PlaylistCEN playlistCEN = new PlaylistCEN(playlistRepository);
+                PlaylistEN playlistEN = playlistCEN.DamePorOID(id);
+                int numPelis = playlistEN.Peliculas.Count;
+
+                if(numPelis == 0)
+                {
+                    playlistCEN.BorrarPlaylist(id);
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Debes de borrar las peliculas de la playlist antes de poder eliminarla";
+            }
+
+            return RedirectToAction("DetailsPerfil","Usuario", new { id = usuario.Email });
         }
 
         // POST: PlaylistController/Delete/5

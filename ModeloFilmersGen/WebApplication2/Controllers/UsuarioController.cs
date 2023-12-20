@@ -48,6 +48,24 @@ namespace WebApplication2.Controllers
             return RedirectToAction("Login", "Usuario");
         }
 
+
+        public ActionResult PLayList()
+        {
+            SessionInitialize();
+            UsuarioViewModel usuario = HttpContext.Session.Get<UsuarioViewModel>("usuario");
+            UsuarioRepository usuRepository = new UsuarioRepository(session);
+            UsuarioCEN usuCEN = new UsuarioCEN(usuRepository);
+            UsuarioEN usuarioEN = usuCEN.DamePorOID(usuario.Email);
+            IList<PlaylistEN> pc = usuarioEN.Playlistcreadas;
+            IList<PlaylistEN> pg = usuarioEN.Playlistguardadas;
+            IList<PlaylistEN> todas = pc.Concat(pg).ToList();
+            IList<PlaylistViewModel> listUsus = new PlaylistAssembler().ConvertirListEnToViewModel(todas).ToList();
+
+            SessionClose();
+
+            return View(listUsus);
+        }
+
         public ActionResult ListaSeguidos()
         {
             SessionInitialize();

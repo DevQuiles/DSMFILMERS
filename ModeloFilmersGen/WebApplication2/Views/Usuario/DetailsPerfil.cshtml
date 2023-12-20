@@ -10,7 +10,16 @@
             window.location.href = '/Usuario/Index'; // Reemplaza esto con la ruta correcta a tu página de índice de usuario
         </script>
     }
+
 }
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
 
 <div class="row align-items-center">
     <div class="col-sm-4 pb-3" style="max-width: 250px; max-height: 250px;">
@@ -74,6 +83,12 @@
                 });
             }
 
+            function loadPlaylists() {
+                $.get('/Usuario/PLayList/' + idUsuario, function (data) {
+                    $('#vistasUsuario').html(data);
+                });
+            }
+
             function loadDeseos() {
                 $.get('/Usuario/Deseos/' + idUsuario, function (data) {
                     $('#vistasUsuario').html(data);
@@ -92,6 +107,8 @@
             });
 
             $('.btn-playlists').on('click', function (e) {
+                e.preventDefault();
+                loadPlaylists();
                 // Lógica para cargar otra vista si es necesario
                 // Por ejemplo: loadPlaylists();
             });

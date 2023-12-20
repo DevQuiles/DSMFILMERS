@@ -23,7 +23,21 @@ body {
 }
 
 
+.delete-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #ccc;
+    color: black;
+    padding: 10px; 
+    border-radius: 0; 
+    z-index: 1;
+    font-size: 20px; 
+}
 
+.card-img-container {
+    position: relative;
+}
 
 
 
