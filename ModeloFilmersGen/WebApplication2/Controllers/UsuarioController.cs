@@ -360,8 +360,12 @@ namespace WebApplication2.Controllers
                     usuVM.Pass = usuen.Pass; // Mantiene la contraseña actual si el campo está vacío
                 }
 
+                if (usuVM.usuarioGoogle != "No asignado") {
+                    usuVM.usuarioGoogle = usuen.UsuarioGoogle;
+                }
+
                 // Modifica el usuario con la contraseña actualizada (o la misma si no se cambió)
-                usuCen.ModificarUsuario(id, usuVM.NombreUsuario, usuVM.Nombre, usuVM.FechaNac, usuVM.Localidad, usuVM.Pais, usuen.Nivel, usuVM.Pass, usuen.RecompensaDisponible, usuVM.Avatar, null);
+                usuCen.ModificarUsuario(id, usuVM.NombreUsuario, usuVM.Nombre, usuVM.FechaNac, usuVM.Localidad, usuVM.Pais, usuen.Nivel, usuVM.Pass, usuen.RecompensaDisponible, usuVM.Avatar, usuVM.usuarioGoogle);
                 return RedirectToAction(nameof(Index));
             }
             catch
