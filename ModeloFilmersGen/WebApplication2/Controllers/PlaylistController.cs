@@ -147,23 +147,6 @@ namespace WebApplication2.Controllers
             return View(viewModel);
         }
 
-        private IDictionary<int, IList<string>> ObtenerCaratulasParaPlaylists(IList<PlaylistEN> playlists)
-        {
-            IDictionary<int, IList<string>> caratulasPorPlaylist = new Dictionary<int, IList<string>>();
-
-            foreach (var playlist in playlists)
-            {
-                IList<string> caratulasDePlaylist = new List<string>();
-                foreach (var movie in playlist.Peliculas)
-                {
-                    caratulasDePlaylist.Add(movie.Caratula);
-                }
-                caratulasPorPlaylist.Add(playlist.Id, caratulasDePlaylist); // Asume que 'Id' es un identificador único de PlaylistEN
-            }
-
-            return caratulasPorPlaylist;
-        }
-
 
 
 

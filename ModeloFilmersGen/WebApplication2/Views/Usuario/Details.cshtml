@@ -3,12 +3,7 @@
 @{
     ViewData["Title"] = "Details";
     UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
-    @if ( usuario!= null  && usuario.Email == @Model.Email)
-    {
-        <script>
-            window.location.href = '/Usuario/DetailsPerfil/@Model.Email'; 
-        </script>
-    }
+
 }
 
 <div class="row align-items-center">
@@ -21,7 +16,7 @@
                 <div class="col-2">
                     <h3>@Model.NombreUsuario</h3>
                 </div>
-            @if (usuario != null && usuario.Email != @Model.Email)
+@if (usuario != null && usuario.Email != @Model.Email)
             {
                 <div class="col-auto">
                     @{
@@ -40,10 +35,10 @@
                             }
                      }
 
-                        }
+                        
                         
 
-                    }
+}
                 </div>
             }
         </div>
