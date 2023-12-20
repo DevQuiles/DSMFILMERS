@@ -36,6 +36,9 @@
 					<property name="AvatarIcon" > 
 						<column name="avatarIcon"  not-null="true"/>
 					</property>
+					<property name="UsuarioGoogle" type="string"> 
+						<column name="usuarioGoogle"  not-null="true"/>
+					</property>
 			
 			
 			
@@ -168,6 +171,8 @@
 			
 			
 			
+			
+					
 					
 					
 					

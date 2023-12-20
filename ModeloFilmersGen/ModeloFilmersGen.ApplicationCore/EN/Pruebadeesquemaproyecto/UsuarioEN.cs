@@ -152,6 +152,13 @@ private ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.Avat
 
 
 
+/**
+ *	Atributo usuarioGoogle
+ */
+private string usuarioGoogle;
+
+
+
 
 
 
@@ -281,6 +288,12 @@ public virtual ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyec
 
 
 
+public virtual string UsuarioGoogle {
+        get { return usuarioGoogle; } set { usuarioGoogle = value;  }
+}
+
+
+
 
 
 public UsuarioEN()
@@ -300,20 +313,20 @@ public UsuarioEN()
 
 
 
-public UsuarioEN(string email, string nomUsuario, string nombre, Nullable<DateTime> fechaNac, string localidad, string pais, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.PeliculaEN> deseadas, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.PeliculaVistaEN> peliculasVistas, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.UsuarioEN> seguidos, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.UsuarioEN> seguidores, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.PlaylistEN> playlistcreadas, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.PlaylistEN> playlistguardadas, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.RecomendacionesEN> recomendaciones_Hechas, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.RecomendacionesEN> recomendaciones_Recibidas, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.ComunidadesEN> comunidades, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.ComunidadesEN> comunidades_0, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum nivel, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.NotificacionesEN> notificaciones, String pass, bool recompensaDisponible, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum avatarIcon
+public UsuarioEN(string email, string nomUsuario, string nombre, Nullable<DateTime> fechaNac, string localidad, string pais, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.PeliculaEN> deseadas, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.PeliculaVistaEN> peliculasVistas, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.UsuarioEN> seguidos, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.UsuarioEN> seguidores, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.PlaylistEN> playlistcreadas, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.PlaylistEN> playlistguardadas, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.RecomendacionesEN> recomendaciones_Hechas, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.RecomendacionesEN> recomendaciones_Recibidas, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.ComunidadesEN> comunidades, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.ComunidadesEN> comunidades_0, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum nivel, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.NotificacionesEN> notificaciones, String pass, bool recompensaDisponible, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum avatarIcon, string usuarioGoogle
                  )
 {
-        this.init (Email, nomUsuario, nombre, fechaNac, localidad, pais, deseadas, peliculasVistas, seguidos, seguidores, playlistcreadas, playlistguardadas, recomendaciones_Hechas, recomendaciones_Recibidas, comunidades, comunidades_0, nivel, notificaciones, pass, recompensaDisponible, avatarIcon);
+        this.init (Email, nomUsuario, nombre, fechaNac, localidad, pais, deseadas, peliculasVistas, seguidos, seguidores, playlistcreadas, playlistguardadas, recomendaciones_Hechas, recomendaciones_Recibidas, comunidades, comunidades_0, nivel, notificaciones, pass, recompensaDisponible, avatarIcon, usuarioGoogle);
 }
 
 
 public UsuarioEN(UsuarioEN usuario)
 {
-        this.init (usuario.Email, usuario.NomUsuario, usuario.Nombre, usuario.FechaNac, usuario.Localidad, usuario.Pais, usuario.Deseadas, usuario.PeliculasVistas, usuario.Seguidos, usuario.Seguidores, usuario.Playlistcreadas, usuario.Playlistguardadas, usuario.Recomendaciones_Hechas, usuario.Recomendaciones_Recibidas, usuario.Comunidades, usuario.Comunidades_0, usuario.Nivel, usuario.Notificaciones, usuario.Pass, usuario.RecompensaDisponible, usuario.AvatarIcon);
+        this.init (usuario.Email, usuario.NomUsuario, usuario.Nombre, usuario.FechaNac, usuario.Localidad, usuario.Pais, usuario.Deseadas, usuario.PeliculasVistas, usuario.Seguidos, usuario.Seguidores, usuario.Playlistcreadas, usuario.Playlistguardadas, usuario.Recomendaciones_Hechas, usuario.Recomendaciones_Recibidas, usuario.Comunidades, usuario.Comunidades_0, usuario.Nivel, usuario.Notificaciones, usuario.Pass, usuario.RecompensaDisponible, usuario.AvatarIcon, usuario.UsuarioGoogle);
 }
 
 private void init (string email
-                   , string nomUsuario, string nombre, Nullable<DateTime> fechaNac, string localidad, string pais, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.PeliculaEN> deseadas, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.PeliculaVistaEN> peliculasVistas, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.UsuarioEN> seguidos, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.UsuarioEN> seguidores, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.PlaylistEN> playlistcreadas, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.PlaylistEN> playlistguardadas, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.RecomendacionesEN> recomendaciones_Hechas, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.RecomendacionesEN> recomendaciones_Recibidas, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.ComunidadesEN> comunidades, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.ComunidadesEN> comunidades_0, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum nivel, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.NotificacionesEN> notificaciones, String pass, bool recompensaDisponible, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum avatarIcon)
+                   , string nomUsuario, string nombre, Nullable<DateTime> fechaNac, string localidad, string pais, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.PeliculaEN> deseadas, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.PeliculaVistaEN> peliculasVistas, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.UsuarioEN> seguidos, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.UsuarioEN> seguidores, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.PlaylistEN> playlistcreadas, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.PlaylistEN> playlistguardadas, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.RecomendacionesEN> recomendaciones_Hechas, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.RecomendacionesEN> recomendaciones_Recibidas, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.ComunidadesEN> comunidades, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.ComunidadesEN> comunidades_0, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum nivel, System.Collections.Generic.IList<ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto.NotificacionesEN> notificaciones, String pass, bool recompensaDisponible, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum avatarIcon, string usuarioGoogle)
 {
         this.Email = email;
 
@@ -357,6 +370,8 @@ private void init (string email
         this.RecompensaDisponible = recompensaDisponible;
 
         this.AvatarIcon = avatarIcon;
+
+        this.UsuarioGoogle = usuarioGoogle;
 }
 
 public override bool Equals (object obj)
