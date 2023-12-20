@@ -37,7 +37,43 @@ namespace WebApplication2.Controllers
             return Json(listaPelis);
         }
 
-       
+        public ActionResult buscaRapidoGenero(string searchString)
+        {
+            SessionInitialize();
+            PeliculaRepository peliRepository = new PeliculaRepository(session);
+            PeliculaCEN peliCEN = new PeliculaCEN(peliRepository);
+
+            IList<PeliculaEN> todas = new List<PeliculaEN>();
+
+            todas = peliCEN.DameTodos(0, -1);
+
+            var listaGenero = new List<String>();
+
+            foreach (var i in todas) {
+                foreach (var f in i.Genero) {
+                    if (!listaGenero.Contains(f)) {
+                        listaGenero.Add(f);
+                    }
+                }
+            }
+
+            var listaGeneroFiltrada = new List<Object>();
+            foreach (var i in listaGenero)
+            {
+                if (i.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    var generos = new
+                    {
+                        genero = i
+                    };
+                    listaGeneroFiltrada.Add(generos);
+                }
+            }
+
+            return Json(listaGeneroFiltrada);
+        }
+
+
 
         // GET: PeliculaController
         public ActionResult Index(string searchString, string searchanyo, string searchValoracion, string searchGen)
