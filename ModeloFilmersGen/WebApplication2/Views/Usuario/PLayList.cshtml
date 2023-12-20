@@ -1,0 +1,35 @@
+﻿@model IEnumerable<WebApplication2.Models.PlaylistViewModel>
+
+@{
+    ViewData["Title"] = "PLayList";
+}
+
+<style>
+    .playlist-container {
+        background-color: #333;
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 10px;
+    }
+</style>
+
+
+<div class="container-fluid">
+    @foreach (var item in Model)
+    {
+        <div class="playlist-container">
+            <div class="row">
+                <div class="col-xl-8">
+                    <p>@Html.DisplayFor(modelItem => item.nombre)</p>                 
+                    <p>@Html.DisplayFor(modelItem => item.Descripcion)</p>
+                </div>
+
+                <div class="col-xl-4">
+                    <a href="@Url.Action("Edit", "Playlist", new { id = item.Id })" class="btn btn-success" title="Edit">Editar</a>
+                    <a href="@Url.Action("Details", "Playlist", new { id = item.Id })" class="btn btn-warning" title="Details">Detalles</a>
+                    <a href="@Url.Action("Delete", "Playlist", new { id = item.Id })" class="btn btn-danger" title="Delete">Borrar</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

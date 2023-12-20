@@ -1,0 +1,10 @@
+﻿@model IEnumerable<WebApplication2.Models.UsuarioViewModel>
+
+@{
+    Layout=null;
+}
+
+@foreach (var item in Model)
+{
+    <label>@Html.RadioButton("selectedEmail", item.Email) @item.Email</label> <br />
+}

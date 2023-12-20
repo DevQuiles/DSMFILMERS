@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModeloFilmersGen.ApplicationCore.EN.Pruebadeesquemaproyecto;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
@@ -53,8 +54,7 @@ namespace WebApplication2.Models
         [StringLength(maximumLength: 100, ErrorMessage = "El estado no puede tener más de 100 caracteres")]
         public string estado { get; set; }
 
-
-
+        public IList<PeliculaVistaEN> PV { get; set; }
 
     }
 }
