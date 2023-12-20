@@ -36,7 +36,7 @@
         @foreach (var item in Model)
         {
             <div class="col-lg-2 col-md-4 col-sm-6 col-12">
-                <div class="card border-0">
+                <div>
                     <a href="@Url.Action("Details", "Usuario", new { id = item.Email })">
                         <img src="/Img/@(item.Avatar).jpeg" class="card-img-top rounded-circle img-fluid" alt="Avatar" style="width: 170px; height: 170px;">
                     </a>

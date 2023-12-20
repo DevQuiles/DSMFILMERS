@@ -29,11 +29,6 @@
                         if(usuario.UsuariosSeguidos != null)
                         {
                             // Comprobamos si ya está siguiendo al usuario
-                        bool isFollowing = usuario.UsuariosSeguidos.Contains(Model.Email);
-                        @if (isFollowing)
-
-                        {
-                            // Comprobamos si ya está siguiendo al usuario
                             bool isFollowing = usuario.UsuariosSeguidos.Contains(Model.Email);
                             @if (isFollowing)
                             {

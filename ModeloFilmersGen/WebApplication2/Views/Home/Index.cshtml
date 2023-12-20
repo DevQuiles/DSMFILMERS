@@ -315,9 +315,10 @@
                         <div class="card border-0">
                             <div class="hover-overlay">
                                 <a href="@Url.Action("Details", "Pelicula", new { id = pelicula.idPelicula })">
-                                    <img src="@pelicula.fotoPeli" class="card-img-top img-fluid shadow-lg p-3 mb-5 bg-white rounded" alt="Carátula">
+                                    <img src="@pelicula.fotoPeli" class="card-img-top img-fluid shadow p-1  bg-white rounded" alt="Carátula">
                                     <div class="mask"></div>
                                 </a>
+                                
                             </div>
                             <h5 class="card-title text-center">@pelicula.nombrePeli</h5>
                             
@@ -340,7 +341,7 @@
 
 
             </div>
-        </div>
+            </div>
 @if (Model.UltimasVistas.Count() > 6) 
         {
                 <a class="carousel-control-prev" href="#carruselPeliculas" role="button" data-slide="prev">

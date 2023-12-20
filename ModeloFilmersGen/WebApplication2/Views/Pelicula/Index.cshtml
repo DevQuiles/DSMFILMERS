@@ -84,20 +84,27 @@
         {
             <div class="col-lg-2 col-md-4 col-sm-6 col-12">
                 <div class="card border-0">
-                    <a href="@Url.Action("Details", "Pelicula", new { id = item.Id })">
+                    <div class="hover-overlay">
+                        <a href="@Url.Action("Details", "Pelicula", new { id = item.Id })">
 
-                        @if (item.caratula == "https://image.tmdb.org/t/p/w500")
-                        {
-                            <img src="/Img/nodisponible.png" class="card-img-top img-fluid shadow p-1  bg-white rounded" alt="No Disponible">
-                        }
-                        else
-                        {
-                            <img src="@item.caratula" class="card-img-top img-fluid shadow p-1  bg-white rounded" alt="Carátula">
-                        }
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title text-center">@item.nombre</h5>
+                            @if (item.caratula == "https://image.tmdb.org/t/p/w500")
+                            {
+                                <img src="/Img/nodisponible.png" class="card-img-top img-fluid shadow p-1  bg-white rounded" alt="No Disponible">
+                            }
+                            else
+                            {
+                                <img src="@item.caratula" class="card-img-top img-fluid shadow p-1  bg-white rounded" alt="Carátula">
+                            }
+                           
+                        </a>
+                        <div class="mask"></div>
                     </div>
+                    
+                        
+                   
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-center">@item.nombre</h5>
                 </div>
             </div>
         }
