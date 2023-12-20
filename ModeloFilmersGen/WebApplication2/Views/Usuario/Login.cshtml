@@ -3,18 +3,78 @@
 @{
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+
+
 }
 
-<div class="container" style="margin-top: 8rem;">
+
+<div class="box-of-star1">
+    <div class="star star-position1"></div>
+    <div class="star star-position2"></div>
+    <div class="star star-position3"></div>
+    <div class="star star-position4"></div>
+    <div class="star star-position5"></div>
+    <div class="star star-position6"></div>
+    <div class="star star-position7"></div>
+</div>
+<div class="box-of-star2">
+    <div class="star star-position1"></div>
+    <div class="star star-position2"></div>
+    <div class="star star-position3"></div>
+    <div class="star star-position4"></div>
+    <div class="star star-position5"></div>
+    <div class="star star-position6"></div>
+    <div class="star star-position7"></div>
+</div>
+<div class="box-of-star3">
+    <div class="star star-position1"></div>
+    <div class="star star-position2"></div>
+    <div class="star star-position3"></div>
+    <div class="star star-position4"></div>
+    <div class="star star-position5"></div>
+    <div class="star star-position6"></div>
+    <div class="star star-position7"></div>
+</div>
+<div class="box-of-star4">
+    <div class="star star-position1"></div>
+    <div class="star star-position2"></div>
+    <div class="star star-position3"></div>
+    <div class="star star-position4"></div>
+    <div class="star star-position5"></div>
+    <div class="star star-position6"></div>
+    <div class="star star-position7"></div>
+</div>
+<div data-js="astro" class="astronaut">
+    <div class="head"></div>
+    <div class="arm arm-left"></div>
+    <div class="arm arm-right"></div>
+    <div class="body">
+        <div class="panel"></div>
+    </div>
+    <div class="leg leg-left"></div>
+    <div class="leg leg-right"></div>
+    <div class="schoolbag"></div>
+</div>
+<div class="container-form"  >
+
+
     <!-- Agregar margen superior al formulario -->
-    <div class="row justify-content-center">
-        <div class="col-md-6 bg-light p-4">
+    <div class="container-form row justify-content-center">
+        <div class="col-md-6 bg-light p-4" >
             <!-- Agregar clase bg-light para fondo gris y padding -->
             <h1 class="text-center">Bienvenidos a FILMERS</h1>
             <h4 class="text-center">Por favor, identifíquese:</h4>
             <hr />
-            <form asp-action="Login">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["Error"]
+                </div>
+            }
+
+            <form asp-action="Login" >
+                <!-- Email input -->
                 <div class="form-group">
                     <label asp-for="Email" class="control-label"></label>
                     <input asp-for="Email" class="form-control" />
@@ -25,17 +85,30 @@
                     <input asp-for="Password" class="form-control" />
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
-                <hr />
-                <div class="form-group text-center">
-                    <div class="btn-group">
-                        <input type="submit" value="Enviar" class="btn btn-primary" />
-                        <a asp-action="Create" class="btn btn-success mx-2">Registrarse</a>
-                    </div>
+
+               
+                <button type="submit" value="Enviar"  class="btn btn-primary btn-block mb-4">Iniciar sesion</button>
+
+                
+                <div class="text-center">
+                    <p>No eres miembro? <a asp-action="Create">Registrate</a></p>
+                    <p>o registrate con:</p>
+                    <a asp-controller="Usuario" asp-action="LoginConGoogle" class="btn btn-secondary btn-floating mx-1">
+                        <i class="fab fa-google"></i>
+                    </a>
+                    
                 </div>
             </form>
+            
         </div>
+
+        
     </div>
 </div>
+
+
+
+
 
 @section Scripts {
     @{

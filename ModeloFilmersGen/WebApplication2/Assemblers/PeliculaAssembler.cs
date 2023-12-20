@@ -25,8 +25,20 @@ namespace WebApplication2.Assemblers
             peli.duracion = en.Duracion;
             peli.puntuacion = en.Puntuacion;
             peli.estado = en.Estado;
-
+            peli.PV = en.PeliculasVistas;
             return peli;
+        }
+
+        public IList<string> ObtenerComentarios(PeliculaEN en)
+        {
+            // Verificar que la colección de PeliculaVista no sea nula antes de intentar extraer sus elementos
+            if (en != null && en.PeliculasVistas != null)
+            {
+                // Utilizar Select para extraer los comentarios de cada PeliculaVistaEN
+                return en.PeliculasVistas.Select(pv => pv.Comentario).ToList();
+            }
+
+            return new List<string>(); // Si la colección es nula, devolver una lista vacía
         }
 
         public List<string> ObtenerGeneros(PeliculaEN en)

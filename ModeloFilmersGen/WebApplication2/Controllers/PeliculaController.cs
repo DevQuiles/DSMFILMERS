@@ -11,6 +11,17 @@ namespace WebApplication2.Controllers
     public class PeliculaController : BasicController
     {
 
+        public ActionResult anyadirPeliculaAWatchList(string idPelicula, string idUsuario)
+        {
+            SessionInitialize();
+            int idP = int.Parse(idPelicula);
+            UsuarioRepository usuarioRepository = new UsuarioRepository();
+            UsuarioCEN usuarioCEN = new UsuarioCEN(usuarioRepository);
+            usuarioCEN.AsignarPeliculaWatchList(idUsuario, new List<int> { idP });
+            SessionClose();
+            return Json(new { success = true });
+        }
+
         public ActionResult buscaRapidoPeliculas(string searchString)
         {
             SessionInitialize();
@@ -37,7 +48,45 @@ namespace WebApplication2.Controllers
             return Json(listaPelis);
         }
 
-       
+
+        public ActionResult buscaRapidoGenero(string searchString)
+        {
+            SessionInitialize();
+            PeliculaRepository peliRepository = new PeliculaRepository(session);
+            PeliculaCEN peliCEN = new PeliculaCEN(peliRepository);
+
+            IList<PeliculaEN> todas = new List<PeliculaEN>();
+
+            todas = peliCEN.DameTodos(0, -1);
+
+            var listaGenero = new List<String>();
+
+            foreach (var i in todas) {
+                foreach (var f in i.Genero) {
+                    if (!listaGenero.Contains(f)) {
+                        listaGenero.Add(f);
+                    }
+                }
+            }
+
+            var listaGeneroFiltrada = new List<Object>();
+            foreach (var i in listaGenero)
+            {
+                if (i.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    var generos = new
+                    {
+                        genero = i
+                    };
+                    listaGeneroFiltrada.Add(generos);
+                }
+            }
+
+            return Json(listaGeneroFiltrada);
+        }
+
+
+
 
         // GET: PeliculaController
         public ActionResult Index(string searchString, string searchanyo, string searchValoracion, string searchGen)
@@ -92,9 +141,6 @@ namespace WebApplication2.Controllers
             return View(listPelis);
         }
 
-
-
-
         // GET: PeliculaController/Details/5
         public ActionResult Details(int id)
         {
@@ -104,9 +150,9 @@ namespace WebApplication2.Controllers
 
             PeliculaEN pelEN = pelCEN.DamePorOID(id);
 
-
             PeliculaViewModel pelVM = new PeliculaAssembler().ConvertirEnToViewModel(pelEN);
             List<string> generos = new PeliculaAssembler().ObtenerGeneros(pelEN);
+            IList<string> comentatios = new PeliculaAssembler().ObtenerComentarios(pelEN);
 
             SessionClose();
 

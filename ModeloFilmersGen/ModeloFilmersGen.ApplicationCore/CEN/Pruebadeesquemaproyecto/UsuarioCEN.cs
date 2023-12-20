@@ -31,7 +31,7 @@ public IUsuarioRepository get_IUsuarioRepository ()
         return this._IUsuarioRepository;
 }
 
-public string CrearUsuario (string p_email, string p_nomUsuario, string p_nombre, Nullable<DateTime> p_fechaNac, string p_localidad, string p_pais, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum p_nivel, String p_pass, bool p_recompensaDisponible, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum p_avatarIcon)
+public string CrearUsuario (string p_email, string p_nomUsuario, string p_nombre, Nullable<DateTime> p_fechaNac, string p_localidad, string p_pais, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum p_nivel, String p_pass, bool p_recompensaDisponible, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum p_avatarIcon, string p_usuarioGoogle)
 {
         UsuarioEN usuarioEN = null;
         string oid;
@@ -57,6 +57,8 @@ public string CrearUsuario (string p_email, string p_nomUsuario, string p_nombre
         usuarioEN.RecompensaDisponible = p_recompensaDisponible;
 
         usuarioEN.AvatarIcon = p_avatarIcon;
+
+        usuarioEN.UsuarioGoogle = p_usuarioGoogle;
 
 
 

@@ -4,10 +4,25 @@
     ViewData["Title"] = "Details";
 }
 
+@{
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    string nombre = "";
+    string email = "";
+    if (usuario != null)
+    {
+        nombre = usuario.Nombre;
+        email = usuario.Email;
+    }
+}
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+</head>
 
 <style>
     .img-reducida {
@@ -16,12 +31,64 @@
     }
 </style>
 
-<h1>@Html.DisplayFor(model => model.nombre)</h1>
+@*------------------------------------------MODAL PARA MOSTRAR LISTA DE AMIGOS PARA RECOMENDAR--------------------------------------------*@
+
+<div class="modal" tabindex="-1" role="dialog" id="createModalRecomendar">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Recomendar @Model.nombre</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Contenido de la vista _Create se cargará aquí -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="compartirButton">Compartir</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*-------------------------------------------------------------------------------------------------------------------------------------------*@
+
+<div class="row">
+    @if (usuario != null)
+    {
+        <div class="col-10">
+            <h1>@Html.DisplayFor(model => model.nombre)</h1>
+        </div>
+        <div class="col-2">
+            <!-- Espacio para los botones -->
+            <i class="bi bi-bookmark-plus me-1" id="btnWatchList"></i>
+            <i class="bi bi-send ms-1" id="openRecomendar"></i>
+        </div>
+    }
+    else
+    {
+        <div class="col-12">
+            <h1>@Html.DisplayFor(model => model.nombre)</h1>
+        </div>
+    }
+</div>
+
 <hr />
 
 <div class="row">
     <div class="col-md-4">
-        <img src="@Html.DisplayFor(model => model.caratula)" alt="IMG" class="img-reducida" />
+        @if (Model.caratula == "https://image.tmdb.org/t/p/w500")
+        {
+            <img src="/Img/nodisponible.png" class="card-img-top img-fluid shadow p-1  bg-white rounded" alt="No Disponible">
+        }
+        else
+        {
+            <img src="@Model.caratula" class="card-img-top img-fluid shadow p-1  bg-white rounded" alt="Carátula">
+        }
+
     </div>
 
     <div class="col-md-8">
@@ -63,24 +130,65 @@
                 @foreach (var genero in Model.genero)
                 {
                     <span>@genero</span>
-                    if (!genero.Equals(Model.genero.Last())) // Evita agregar coma después del último elemento
+                    if (!genero.Equals(Model.genero.Last()))
                     {
                         <span>, </span>
                     }
                 }
             </dd>
-            <dt class ="col-sm-8">
-                <h4>¡Añade la pelicula a una de tus playlis!</h4>
-                <hr />
-            </dt>
-            <dt class="col-sm-8">
-                <select id="desplegable" class="form-control"></select>
-            </dt>
-            <dd class="col-sm-4">
-                <button class="btn btn-primary" id="btnAñadir" aria-haspopup="true" aria-expanded="false">
-                    Añadir
-                </button>
-            </dd>
+
+            @if(usuario != null)
+            {
+                <dt class="col-sm-8">
+                    <h4>¡Añade la pelicula a una de tus playlis!</h4>
+                    <hr />
+                </dt>
+                <dt class="col-sm-8">
+                    <select id="desplegable" class="form-control"></select>
+                </dt>
+                <dd class="col-sm-4">
+                    <button class="btn btn-primary" id="btnAñadir" aria-haspopup="true" aria-expanded="false">
+                        Añadir
+                    </button>
+                </dd>
+            }
+            else
+            {
+                <dt class="col-sm-12">
+                    <h4>¡Debes iniciar sesión para añdir peliculas a tus playlist o a vistas!</h4>              
+                </dt>
+            }
+            <!-- Sección para la tabla de comentarios -->
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <h3>Comentarios</h3>
+                    @if(Model.PV.Count > 0){
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID Usuario</th>
+                                    <th>Comentario</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaComentarios">
+                                @foreach (var comentario in Model.PV)
+                                {
+                                    <tr>
+                                        <td>@comentario.Usuario.Email</td>
+                                        <td>@comentario.Comentario</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <h4>No hay comentarios en esta pelicula</h4>
+                    }
+
+                </div>
+            </div>
+
         </dl>
         <div>
             
@@ -94,9 +202,20 @@
 
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        mostrarDesplegable(); // Mostrar el desplegable al cargar la página
 
+    var usuario = {
+        nombre: '@nombre',
+        email: '@email'
+    };
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        $('#createModalRecomendar .btn-secondary').on('click', function () {
+            $('#createModalRecomendar').modal('hide');
+        });
+
+        mostrarDesplegable(); // Mostrar el desplegable al cargar la página
+        
         document.getElementById("btnAñadir").addEventListener("click", function () {
             // Obtener la opción seleccionada del desplegable
             var desplegable = document.getElementById("desplegable");
@@ -110,7 +229,7 @@
             // Llamar a la función y pasar ambos parámetros
             agregarPeliculaAPlaylist(idPelicula, idPlaylist);
         });
-
+ 
         function mostrarDesplegable() {
             fetch("/Playlist/PlayListByUsuario")
                 .then(response => response.json())
@@ -149,6 +268,78 @@
                 }
             });
         }
+
+        document.getElementById("btnWatchList").addEventListener("click", function () {
+            // Obtener el ID de la película y el ID de la playlist
+            var idPelicula = '@Model.Id';
+            var idUsuario = usuario.email;
+            anyadirPeliculaAWatchList(idPelicula, idUsuario);
+        });
+
+        function anyadirPeliculaAWatchList(idPelicula, idUsuario) {
+            // Realizar la llamada AJAX al controlador
+            $.ajax({
+                url: '/Pelicula/anyadirPeliculaAWatchList',
+                type: 'POST',
+                data: { idPelicula: idPelicula, idUsuario: idUsuario },
+                success: function (result) {
+                    // Manejar el éxito de la llamada AJAX
+                    // console.log(result);
+                    window.location.href = '/Usuario/DetailsPerfil/'+idUsuario;
+                    
+                },
+                error: function (error) {
+                    // Manejar el error de la llamada AJAX
+                    console.error("Error al llamar al controlador:", error);
+                }
+            });
+        }
+
+        @*----------------------------------------MODAL DE COMPARTIR-----------------------------------------*@
+        $(document).ready(function () {
+            $('#openRecomendar').on('click', function () {
+                $('#createModalRecomendar .modal-body').load('/Usuario/ListaSeguidos');
+                $('#createModalRecomendar').modal('show');
+            });
+
+            $('#createModalRecomendar').on('click', '#compartirButton', function () {
+                // Captura el email seleccionado cuando se hace clic en el botón "Compartir"
+                selectedEmail = $('input[name="selectedEmail"]:checked').val();
+
+                // Realiza la acción de compartir con el email seleccionado
+                if (selectedEmail) {
+                    var idPelicula = '@Model.Id';
+                    var idUsuario = usuario.email;
+
+                    recomendarPelicula(idUsuario, selectedEmail, idPelicula);
+
+                    $('#createModalRecomendar').modal('hide');
+                } else {
+                    alert('Por favor, selecciona un email antes de compartir.');
+                }
+            });
+            function recomendarPelicula(idUsuario, selectedEmail, idPelicula) {
+                // Realizar la llamada AJAX al controlador
+                $.ajax({
+                    url: '/Recomendaciones/recomendarPeliculaAUsuario',
+                    type: 'POST',
+                    data: { idUsuario: idUsuario, selectedEmail: selectedEmail, idPelicula: idPelicula },
+                    success: function (result) {
+                        // Manejar el éxito de la llamada AJAX
+                        console.log(result);
+                        window.location.href = '/Home/Index';
+
+                    },
+                    error: function (error) {
+                        // Manejar el error de la llamada AJAX
+                        console.error("Error al llamar al controlador:", error);
+                    }
+                });
+            }
+        });
+
+
+
     });
 </script>
 

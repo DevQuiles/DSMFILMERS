@@ -15,14 +15,11 @@ namespace ModeloFilmersGen.ApplicationCore.CEN.Pruebadeesquemaproyecto
 {
 public partial class UsuarioCEN
 {
-public void ModificarUsuario (string p_Usuario_OID, string p_nomUsuario, string p_nombre, Nullable<DateTime> p_fechaNac, string p_localidad, string p_pais, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum p_nivel, String p_pass, bool p_recompensaDisponible, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum p_avatarIcon)
+public void ModificarUsuario (string p_Usuario_OID, string p_nomUsuario, string p_nombre, Nullable<DateTime> p_fechaNac, string p_localidad, string p_pais, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum p_nivel, String p_pass, bool p_recompensaDisponible, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.AvatarEnum p_avatarIcon, string p_usuarioGoogle)
 {
+        /*PROTECTED REGION ID(ModeloFilmersGen.ApplicationCore.CEN.Pruebadeesquemaproyecto_Usuario_modificarUsuario_customized) START*/
 
-            /*PROTECTED REGION ID(ModeloFilmersGen.ApplicationCore.CEN.Pruebadeesquemaproyecto_Usuario_modificarUsuario_customized) START*/
-            
-            UsuarioEN en = _IUsuarioRepository.ReadOIDDefault(p_Usuario_OID);
-            UsuarioEN usuarioEN = null;
-
+        UsuarioEN usuarioEN = null;
 
         //Initialized UsuarioEN
         usuarioEN = new UsuarioEN ();
@@ -33,17 +30,10 @@ public void ModificarUsuario (string p_Usuario_OID, string p_nomUsuario, string 
         usuarioEN.Localidad = p_localidad;
         usuarioEN.Pais = p_pais;
         usuarioEN.Nivel = p_nivel;
-            if (p_pass == en.Pass)
-            {
-                usuarioEN.Pass = p_pass;
-            }
-            else
-            {
-                usuarioEN.Pass = Utils.Util.GetEncondeMD5(p_pass);
-            }
-
+        usuarioEN.Pass = Utils.Util.GetEncondeMD5 (p_pass);
         usuarioEN.RecompensaDisponible = p_recompensaDisponible;
         usuarioEN.AvatarIcon = p_avatarIcon;
+        usuarioEN.UsuarioGoogle = p_usuarioGoogle;
         //Call to UsuarioRepository
 
         _IUsuarioRepository.ModificarUsuario (usuarioEN);

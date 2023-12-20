@@ -17,6 +17,7 @@ namespace WebApplication2.Assemblers
             play.Id = en.Id;
             play.Descripcion = en.Descripcion;
             play.nombre = en.Nombre;
+
             //play.IdUsuario = en.Propietario.Email;
 
             return play;

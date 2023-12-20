@@ -134,6 +134,9 @@ public void ModifyDefault (UsuarioEN usuario)
 
                 usuarioNH.AvatarIcon = usuario.AvatarIcon;
 
+
+                usuarioNH.UsuarioGoogle = usuario.UsuarioGoogle;
+
                 session.Update (usuarioNH);
                 SessionCommit ();
         }
@@ -214,8 +217,12 @@ public void ModificarUsuario (UsuarioEN usuario)
 
                 usuarioNH.AvatarIcon = usuario.AvatarIcon;
 
+
+                usuarioNH.UsuarioGoogle = usuario.UsuarioGoogle;
+
                 session.Update (usuarioNH);
                 SessionCommit ();
+                session.Flush();
         }
 
         catch (Exception ex) {
