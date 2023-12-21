@@ -1,4 +1,4 @@
-﻿@model WebApplication2.Models.UsuarioViewModel
+@model WebApplication2.Models.UsuarioViewModel
 
 @{
     ViewData["Title"] = "DetailsPerfil";
@@ -80,15 +80,17 @@
             </div>
         </div>
     </div>
-    <hr />
-    <div class="col-md-12 d-flex justify-content-center mb-2">
-        <a href="#" class="btn mx-2 btn-watchlist">Para ver</a>
-        <a href="#" class="btn mx-2 btn-playlists">Playlists</a>
-        <a href="#" class="btn mx-2 btn-calendario">Calendario</a>
-    </div>
-    <div id="vistasUsuario">
-    </div>
 </div>
+<hr />
+  <div class="col-md-12 d-flex justify-content-center mb-2">
+      <a href="#" class="btn mx-2 btn-watchlist border-primary">Watchlist</a>
+      <a href="#" class="btn mx-2 btn-playlists border-primary">Playlists</a>
+      <a href="#" class="btn mx-2 btn-calendario border-primary">Calendario</a>
+  </div>
+<div id="vistasUsuario">
+</div>
+
+
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
