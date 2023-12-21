@@ -9,39 +9,53 @@
 <div class="container">
     <div class="row">
         <div class="mensajes" style="max-height: calc(100vh - 200px); overflow-y: auto;">
-            @foreach (var item in Model)
+
+            @if (Model.Count() != 0)
             {
-                creador = item.Usuario;
-                
-                <div class="messagend-0 chat-container" >
-                    <div class="message-content row align-items-center">
-                        <div class="col-auto"><img src="/Img/@(item.Avatar).jpeg" class="img-fluid rounded-circle " style="max-width: 55px; max-height: 55px; "> </div>
-                        <div class="col row"> 
-                            <span class="col" style="line-height: 55px;">@Html.DisplayFor(modelItem => item.Usuario)</span>
-                            <div class="message-details col-auto" style="line-height: 55px;">
-                                @if (item.Dias == 0)
-                                {
-                                    <span class="message-date">hoy</span>
-                                }
-                                else if (item.Dias == 1)
-                                {
-                                    <span class="message-date">ayer</span>
-                                }
-                                else
-                                {
-                                    <span class="message-date">
-                                        hace
-                                        @Html.DisplayFor(modelItem => item.Dias) días
-                                    </span>
-                                }
+                <div class="card mb-3">
+                    <div class="card-body">
+                    <h5>Todavía no hay mensajes en esta comunidad</h5>
+                   </div>
+                </div>
+
+            }
+            else
+            {
+                @foreach (var item in Model)
+                {
+                    creador = item.Usuario;
+
+                    <div class="messagend-0 chat-container">
+                        <div class="message-content row align-items-center">
+                            <div class="col-auto"><img src="/Img/@(item.Avatar).jpeg" class="img-fluid rounded-circle " style="max-width: 55px; max-height: 55px; "> </div>
+                            <div class="col row">
+                                <span class="col" style="line-height: 55px;">@Html.DisplayFor(modelItem => item.Usuario)</span>
+                                <div class="message-details col-auto" style="line-height: 55px;">
+                                    @if (item.Dias == 0)
+                                    {
+                                        <span class="message-date">hoy</span>
+                                    }
+                                    else if (item.Dias == 1)
+                                    {
+                                        <span class="message-date">ayer</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="message-date">
+                                            hace
+                                            @Html.DisplayFor(modelItem => item.Dias) días
+                                        </span>
+                                    }
+                                </div>
                             </div>
+
+                            <span>@Html.DisplayFor(modelItem => item.Contenido)</span>
                         </div>
 
-                        <span >@Html.DisplayFor(modelItem => item.Contenido)</span>
                     </div>
-                        
-                </div>
+                }
             }
+            
         </div>
         
     </div>
