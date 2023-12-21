@@ -13,7 +13,7 @@
 }
 
 <div class="row">
-    <h3>Calendario</h3>
+    <h5>Calendario</h5>
     @foreach (var item in Model)
     {
         var currentMonth = item.fecha.HasValue ? CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(item.fecha.Value.Month) : "Fecha no disponible";
