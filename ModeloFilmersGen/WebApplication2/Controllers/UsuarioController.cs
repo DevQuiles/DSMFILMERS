@@ -118,7 +118,7 @@ namespace WebApplication2.Controllers
                 TempData["Success"] = "Cuenta de Google enlazada correctamente.";
 
             }
-            else if(usuarioActual.Email != googleEmail)
+            else if (usuarioActual.Email != googleEmail)
             {
                 TempData["Error"] = "El email que intentas asociar no es el mismo que con el que te registraste";
             }
@@ -181,7 +181,6 @@ namespace WebApplication2.Controllers
             SessionClose();
 
             return PartialView("_PLayList", listUsus);
-
         }
 
         public ActionResult ListaSeguidos()
@@ -294,7 +293,7 @@ namespace WebApplication2.Controllers
             listapelivistaVM = listapelivistaVM
             .OrderByDescending(p => p.fecha.HasValue ? p.fecha.Value.Year : 0)
             .ThenByDescending(p => p.fecha.HasValue ? p.fecha.Value.Month : 0)
-            .ThenBy(p => p.fecha.HasValue ? p.fecha.Value.Day : 0) 
+            .ThenBy(p => p.fecha.HasValue ? p.fecha.Value.Day : 0)
             .ToList();
 
             SessionClose();
@@ -371,6 +370,33 @@ namespace WebApplication2.Controllers
                    })
                    .ToList();
 
+            for (int i = 0; i < 5; i++)
+            {
+                if (i == 0)
+                {
+                    avatares[i].Text = "Darth Vader";
+                }
+                if (i == 1)
+                {
+                    avatares[i].Text = "Harry Potter";
+                }
+
+                if (i == 2)
+                {
+                    avatares[i].Text = "katniss Everdeen";
+                }
+                if (i == 3)
+                {
+                    avatares[i].Text = "Desayuno con diamantes";
+                }
+
+                if (i == 4)
+                {
+                    avatares[i].Text = "Spider-man";
+                }
+
+            }
+
             ViewData["Avatares"] = avatares;
 
             return View();
@@ -387,7 +413,7 @@ namespace WebApplication2.Controllers
                 UsuarioCEN usuCen = new UsuarioCEN(usuRepo);
                 HttpContext.Session.Set<UsuarioViewModel>("usuario", usuVM);
 
-                usuCen.CrearUsuario(usuVM.Email, usuVM.NombreUsuario, usuVM.Nombre, usuVM.FechaNac, usuVM.Localidad, usuVM.Pais, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, usuVM.Pass, false, usuVM.Avatar,"No asignado");
+                usuCen.CrearUsuario(usuVM.Email, usuVM.NombreUsuario, usuVM.Nombre, usuVM.FechaNac, usuVM.Localidad, usuVM.Pais, ModeloFilmersGen.ApplicationCore.Enumerated.Pruebadeesquemaproyecto.NivelesEnum.Aficionado, usuVM.Pass, false, usuVM.Avatar, "No asignado");
 
                 return RedirectToAction("Index", "Home");
             }
@@ -408,6 +434,33 @@ namespace WebApplication2.Controllers
                        Value = ((int)e).ToString()
                    })
                    .ToList();
+
+            for (int i = 0; i < 5; i++)
+            {
+                if (i == 0)
+                {
+                    avatares[i].Text = "Darth Vader";
+                }
+                if (i == 1)
+                {
+                    avatares[i].Text = "Harry Potter";
+                }
+
+                if (i == 2)
+                {
+                    avatares[i].Text = "katniss Everdeen";
+                }
+                if (i == 3)
+                {
+                    avatares[i].Text = "Desayuno con diamantes";
+                }
+
+                if (i == 4)
+                {
+                    avatares[i].Text = "Spider-man";
+                }
+
+            }
 
             ViewData["Avatares"] = avatares;
 
@@ -439,8 +492,13 @@ namespace WebApplication2.Controllers
                     usuVM.Pass = usuen.Pass; // Mantiene la contraseña actual si el campo está vacío
                 }
 
+                if (usuVM.usuarioGoogle != "No asignado")
+                {
+                    usuVM.usuarioGoogle = usuen.UsuarioGoogle;
+                }
+
                 // Modifica el usuario con la contraseña actualizada (o la misma si no se cambió)
-                usuCen.ModificarUsuario(id, usuVM.NombreUsuario, usuVM.Nombre, usuVM.FechaNac, usuVM.Localidad, usuVM.Pais, usuen.Nivel, usuVM.Pass, usuen.RecompensaDisponible, usuVM.Avatar, null);
+                usuCen.ModificarUsuario(id, usuVM.NombreUsuario, usuVM.Nombre, usuVM.FechaNac, usuVM.Localidad, usuVM.Pais, usuen.Nivel, usuVM.Pass, usuen.RecompensaDisponible, usuVM.Avatar, usuVM.usuarioGoogle);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -469,7 +527,7 @@ namespace WebApplication2.Controllers
                 String contrasenya = ModeloFilmersGen.ApplicationCore.Utils.Util.GetEncondeMD5(pusuVM.PasswordAntigua);
                 if (usuen.Pass == contrasenya)
                 {
-                    usuCen.ModificarUsuario(id, usuen.NomUsuario, usuen.Nombre, usuen.FechaNac, usuen.Localidad, usuen.Pais, usuen.Nivel, pusuVM.Password, usuen.RecompensaDisponible, usuen.AvatarIcon, null);
+                    usuCen.ModificarUsuario(id, usuen.NomUsuario, usuen.Nombre, usuen.FechaNac, usuen.Localidad, usuen.Pais, usuen.Nivel, pusuVM.Password, usuen.RecompensaDisponible, usuen.AvatarIcon, usuen.UsuarioGoogle);
                 }
                 return RedirectToAction("Edit", "Usuario", new { id = id });
 
@@ -518,5 +576,4 @@ namespace WebApplication2.Controllers
         }
     }
 }
-
 
