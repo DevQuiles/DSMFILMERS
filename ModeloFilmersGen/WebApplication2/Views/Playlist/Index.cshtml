@@ -37,48 +37,63 @@
 <div class="container-fluid">
     @foreach (var playlist in Model.Playlist)
     {
-        <div class="playlist-container">
-            <div class="row">
-                <!-- Carrusel de Imágenes -->
-                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-                    @if (Model.CaratulasPorPlaylist.ContainsKey(playlist.Id) && Model.CaratulasPorPlaylist[playlist.Id].Any())
-                    {
-                        <div id="carousel-@playlist.Id" class="carousel slide" data-ride="carousel">
-                            <div class="carousel-inner">
-                                @foreach (var (caratula, index) in Model.CaratulasPorPlaylist[playlist.Id].Select((value, i) => (value, i)))
-                                {
-                                    <div class="carousel-item @(index == 0 ? "active" : "")">
-                                        <img src="@caratula" class="d-block w-100" alt="Carátula">
+    
+        <a href="@Url.Action("Details", new { id = playlist.Id })" class="col-lg-3 col-md-4 col-sm-6 col-12 text-dark" title="Details">
+            <div class="hover-overlay">
+                <div class="playlist-container">
+                    <div class="row">
+                        <!-- Carrusel de Imágenes -->
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                            @if (Model.CaratulasPorPlaylist.ContainsKey(playlist.Id) && Model.CaratulasPorPlaylist[playlist.Id].Any())
+                            {
+                                <div id="carousel-@playlist.Id" class="carousel slide" data-ride="carousel" data-interval="3000">
+                                    <div class="carousel-inner">
+                                        @foreach (var (caratula, index) in Model.CaratulasPorPlaylist[playlist.Id].Select((value, i) => (value, i)))
+                                        {
+                                            <div class="carousel-item @(index == 0 ? "active" : "")">
+                                                <img src="@caratula" class="d-block w-50 h-50" alt="Carátula">
+                                            </div>
+                                        }
                                     </div>
-                                }
+                                </div>
+                            }
+                        </div>
+
+                        <!-- Columna de Nombre, Email y Descripción -->
+                        <div class="col-lg-5 col-md-8 col-sm-6 col-12">
+                            <div>
+                                <p><strong>Nombre:</strong> @playlist.nombre</p>
+                            </div>
+                            <div></div>
+                            <div>
+                                <p><strong>Descripción:</strong> @playlist.Descripcion</p>
                             </div>
                         </div>
-                    }
-                </div>
-
-                <!-- Columna de Nombre, Email y Descripción -->
-                <div class="col-lg-5 col-md-8 col-sm-6 col-12">
-                    <div>
-                        <p><strong>Nombre:</strong> @playlist.nombre</p>
+        
+                    <!-- Columna de Botones -->
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                            <!-- Botones de acciones -->
+                            @if (usuario != null)
+                            {
+                                <button class="btn btn-primary btnAñadir" data-idPlaylist="@playlist.Id" aria-haspopup="true" aria-expanded="false">
+                                    <i class="bi bi-heart"></i>
+                                </button>
+                            }
+                   
+                    
+                        
+                    
+                    
+                    
+                        </div>
                     </div>
-                    <div></div>
-                    <div>
-                        <p><strong>Descripción:</strong> @playlist.Descripcion</p>
-                    </div>
                 </div>
-
-                <!-- Columna de Botones -->
-                <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                    <!-- Botones de acciones -->
-                    <button class="btn btn-primary btnAñadir" data-idPlaylist="@playlist.Id" aria-haspopup="true" aria-expanded="false">
-                        Añadir a favoritos
-                    </button>
-                    <a href="@Url.Action("Edit", new { id = playlist.Id })" class="btn btn-success" title="Edit"><i class="fas fa-edit"></i></a>
-                    <a href="@Url.Action("Details", new { id = playlist.Id })" class="btn btn-warning" title="Details"><i class="bi bi-ticket-detailed-fill"></i></a>
-                    <a href="@Url.Action("Delete", new { id = playlist.Id })" class="btn btn-danger" title="Delete"><i class="bi bi-trash-fill"></i></a>
-                </div>
+                    <div class="mask"></div>
             </div>
-        </div>
+        </a>
+         
+           
+    
     }
 </div>
 

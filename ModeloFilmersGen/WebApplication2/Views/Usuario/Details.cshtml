@@ -11,17 +11,16 @@
         <img src="/Img/@(Model.Avatar).jpeg" alt="Avatar" class="img-fluid rounded-circle" />
     </div>
     <div class="col-sm-8 pb-3">
-        
-            <div class="row align-items-center">
-                <div class="col-2">
-                    <h3>@Model.NombreUsuario</h3>
-                </div>
-@if (usuario != null && usuario.Email != @Model.Email)
+
+        <div class="row align-items-center">
+            <div class="col-2">
+                <h3>@Model.NombreUsuario</h3>
+            </div>
+            @if (usuario != null && usuario.Email != @Model.Email)
             {
                 <div class="col-auto">
-                    @{
-
-                        if(usuario.UsuariosSeguidos != null)
+                    
+                        @if (usuario.UsuariosSeguidos != null)
                         {
                             // Comprobamos si ya está siguiendo al usuario
                             bool isFollowing = usuario.UsuariosSeguidos.Contains(Model.Email);
@@ -33,16 +32,13 @@
                             {
                                 <button type="button" data-follow-id="@Model.Email" class="btn btn-outline-primary btn-sm" onclick="followUnfollow('@usuario.Email', '@Model.Email', false)">Seguir</button>
                             }
-                     }
+                        }
 
-                        
-                        
-
-}
+                    
                 </div>
             }
         </div>
-        
+
 
         <h4>@Model.Nombre</h4>
         <br />

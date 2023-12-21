@@ -19,7 +19,10 @@ namespace WebApplication2.Controllers
             UsuarioCEN usuarioCEN = new UsuarioCEN(usuarioRepository);
             usuarioCEN.AsignarPeliculaWatchList(idUsuario, new List<int> { idP });
             SessionClose();
+            TempData["Success"] = "Has añadido una pelicula a ver más tarde exitosamente";
             return Json(new { success = true });
+
+            
         }
 
         public ActionResult buscaRapidoPeliculas(string searchString)
