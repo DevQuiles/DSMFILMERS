@@ -28,8 +28,15 @@
 
 <h1>Bienvenido a las playlists</h1>
 
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
 <p>
-    <a class="btn btn-primary" id="openCrearPlaylist">
+    <a class="btn btn-primary text-white" id="openCrearPlaylist">
         <i class="fas fa-plus"></i> Crear nueva playlist
     </a>
 </p>
@@ -70,7 +77,10 @@
                             </div>
                         </div>
         
-                    <!-- Columna de Botones -->
+                   
+                    </div>
+                </div>
+                <!-- Columna de Botones -->
                         <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                             <!-- Botones de acciones -->
                             @if (usuario != null)
@@ -79,15 +89,8 @@
                                     <i class="bi bi-heart"></i>
                                 </button>
                             }
-                   
-                    
-                        
-                    
-                    
                     
                         </div>
-                    </div>
-                </div>
                     <div class="mask"></div>
             </div>
         </a>
@@ -132,7 +135,9 @@
                 var idUsuario = usuario.email;
 
                 // Llama a la función para agregar a favoritos
+
                 agregarPlaylistAFavoritos(idPlaylist, idUsuario);
+
             });
         });
 
@@ -145,7 +150,7 @@
                 success: function (result) {
                     // Maneja el éxito de la llamada AJAX
                     // console.log(result);
-                window.location.href = '/Usuario/DetailsPerfil/' + idUsuario;
+                    window.location.href = '/Usuario/DetailsPerfil/' + idUsuario;
                 },
                 error: function (error) {
                     // Maneja el error de la llamada AJAX

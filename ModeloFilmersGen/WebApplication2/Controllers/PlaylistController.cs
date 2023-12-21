@@ -69,7 +69,11 @@ namespace WebApplication2.Controllers
 
             playlistCEN.AsignarSuscriptor(idPlay, new List<string> { idUsuario });
 
+            TempData["Success"] = "¡La playlist ha sido añadida a favoritos!";
+
+
             SessionClose();
+
             return Json(new { success = true });
         }
 
