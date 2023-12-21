@@ -370,6 +370,31 @@ namespace WebApplication2.Controllers
                    })
                    .ToList();
 
+            for (int i = 0; i < 5; i++) {
+                if (i == 0) {
+                    avatares[i].Text = "Darth Vader";
+                }
+                if (i == 1)
+                {
+                    avatares[i].Text = "Harry Potter";
+                }
+
+                if (i == 2)
+                {
+                    avatares[i].Text = "katniss Everdeen";
+                }
+                if (i == 3)
+                {
+                    avatares[i].Text = "Desayuno con diamantes";
+                }
+
+                if (i == 4)
+                {
+                    avatares[i].Text = "Spider-man";
+                }
+
+            }
+
             ViewData["Avatares"] = avatares;
 
             return View();
@@ -407,6 +432,33 @@ namespace WebApplication2.Controllers
                        Value = ((int)e).ToString()
                    })
                    .ToList();
+
+            for (int i = 0; i < 5; i++)
+            {
+                if (i == 0)
+                {
+                    avatares[i].Text = "Darth Vader";
+                }
+                if (i == 1)
+                {
+                    avatares[i].Text = "Harry Potter";
+                }
+
+                if (i == 2)
+                {
+                    avatares[i].Text = "katniss Everdeen";
+                }
+                if (i == 3)
+                {
+                    avatares[i].Text = "Desayuno con diamantes";
+                }
+
+                if (i == 4)
+                {
+                    avatares[i].Text = "Spider-man";
+                }
+
+            }
 
             ViewData["Avatares"] = avatares;
 
