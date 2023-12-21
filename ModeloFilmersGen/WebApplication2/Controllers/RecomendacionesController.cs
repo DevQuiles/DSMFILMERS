@@ -22,6 +22,8 @@ namespace WebApplication2.Controllers
             RecomendacionesCEN recomendacionesCEN = new RecomendacionesCEN(recomendacionesRepository);
             DateTime now = DateTime.Now;
             RecomendacionesEN r = recCP1.CrearRecomendacion(now, idUsuario, selectedEmail, int.Parse(idPelicula));
+
+            TempData["Success"] = "Has compartido exitosamente con "+ selectedEmail;
             return Json(new { success = true});
         }
 
