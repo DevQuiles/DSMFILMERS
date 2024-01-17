@@ -4,13 +4,13 @@
 **FILMERS** es una aplicación web de tipología red social diseñada para amantes del cine. Permite a los usuarios llevar un control de las películas que consumen, puntuarlas, hacer comentarios, y mucho más. Desarrollada por el **Diseño de Sistemas Multimedia Grupo 2**, FILMERS es el lugar perfecto para descubrir, valorar y discutir todo sobre el mundo del cine.
 
 ## 🌟 Objetivos
-- **Login y Registro de Usuario**: Permitir a los usuarios registrarse y mantener su sesión para acceder a todas las funcionalidades.
-- **Puntuar y Comentar Películas**: Opción para valorar películas vistas y dejar comentarios.
-- **Sistema de Recomendaciones**: Recomendaciones personalizadas basadas en las preferencias de los usuarios.
-- **Funcionalidades Sociales**: Añadir amigos, ver sus valoraciones y enviar/recebir recomendaciones.
-- **Calendario Personalizado**: Registro diario de películas vistas con opciones de filtrado.
-- **Comunidades y Foros de Usuarios**: Espacios para discutir y compartir opiniones sobre distintas películas.
-- **Playlists Personalizadas de Películas**: Crear y compartir listas de películas según diferentes temáticas.
+- **Login y Registro de Usuario**: Permitir a los usuarios registrarse y mantener su sesión para acceder a todas las funcionalidades. ✅
+- **Puntuar y Comentar Películas**: Opción para valorar películas vistas y dejar comentarios. ✅
+- **Sistema de Recomendaciones**: Recomendaciones personalizadas basadas en las preferencias de los usuarios. ✅
+- **Funcionalidades Sociales**: Añadir amigos, ver sus valoraciones y enviar/recebir recomendaciones. ✅
+- **Calendario Personalizado**: Registro diario de películas vistas con opciones de filtrado. ✅
+- **Comunidades y Foros de Usuarios**: Espacios para discutir y compartir opiniones sobre distintas películas. ✅
+- **Playlists Personalizadas de Películas**: Crear y compartir listas de películas según diferentes temáticas. ✅
 
 ## 👥 Equipo
 - **Desarrolladores**:
